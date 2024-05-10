@@ -17,20 +17,20 @@
     integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 
 
-    {{--@vite(['resources/css/app.css', 'resources/js/app.js'])--}} 
+    {{--@vite(['resources/css/app.css', 'resources/js/app.js'])--}}
 <link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body class="antialiased ">
 
-  
-   
 
+
+testing
 
 <div class="container">
     <table class="table table-hover text-center">
         <thead class="table-dark">
             <tr>
-               
+
                 <th scope="col">Name</th>
                 <th scope="col"> Email</th>
                 <th scope="col"> Action</th>
@@ -40,21 +40,21 @@
         <tbody>
             @foreach($uploaded as $d)
             <tr>
-                
+
                 <td>
                 {{$d->name}}
                 </td>
                 <td>
                 {{$d->email}}
                 </td>
-                
-                
+
+
                 <td>
                 <div class="btn btn-primary">Edit</div>
                 <div class="btn btn-danger">Delete</div>
-                    
+
                 </td>
-               
+
             </tr>
             @endforeach
 
