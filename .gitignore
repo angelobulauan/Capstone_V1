@@ -19,4 +19,5 @@ yarn-error.log
 /.vscode
 public/img/wl/vb1.mp4
 compser.lock
+package-lock.json
 
