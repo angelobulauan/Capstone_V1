@@ -33,6 +33,7 @@
 
   <form action="{{route('admin.addNew')}}" method="GET">
     @csrf
+    
     <div class="container">
       <div class="" style="padding:10px;">
         <div class="card-header ">
