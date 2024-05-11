@@ -31,9 +31,9 @@
 
 <body>
 
-  <form action="{{route('admin.addNew')}}" method="GET">
-    @csrf
-    
+    <form action="{{ route('admin.addNew') }}" method="POST" enctype="multipart/form-data">
+        @csrf
+
     <div class="container">
       <div class="" style="padding:10px;">
         <div class="card-header ">
@@ -62,11 +62,11 @@
                   <option value="Sta. Ana">Casagan, Sta. Ana, Cagayan</option>
                   <option value="Sta. Ana">Casambalangan, Sta. Ana, Cagayan</option>
                   <option value="Sta. Ana">Centro, Sta. Ana, Cagayan</option>
-                  <option value="Sta. Ana">Diora-Zinungan, Sta. Ana, Cagayan</option> 
+                  <option value="Sta. Ana">Diora-Zinungan, Sta. Ana, Cagayan</option>
                   <option value="Sta. Ana">Dungeg , Sta. Ana, Cagayan</option>
-                  <option value="Sta. Ana">Kapanikian, Sta. Ana, Cagayan</option>  
+                  <option value="Sta. Ana">Kapanikian, Sta. Ana, Cagayan</option>
                   <option value="Sta. Ana">Marede, Sta. Ana, Cagayan</option>
-                  <option value="Sta. Ana">Palawig, Sta. Ana, Cagayan</option>              
+                  <option value="Sta. Ana">Palawig, Sta. Ana, Cagayan</option>
                   <option value="Sta. Ana">Patunungan, Sta. Ana, Cagayan</option>
                   <option value="Sta. Ana">Rapuli, Sta. Ana, Cagayan</option>
                   <option value="Sta. Ana">San Vicente, Sta. Ana, Cagayan</option>
@@ -74,7 +74,7 @@
                   <option value="Sta. Ana">Santa Cruz, Sta. Ana, Cagayan</option>
                   <option value="Sta. Ana">Tangatan, Sta. Ana, Cagayan</option>
                   <option value="Sta. Ana">Visitacion, Sta. Ana, Cagayan</option>
-                  
+
                 </select>
               </div>
               <div class="col">
@@ -86,15 +86,16 @@
 
             <div class="row mb-1 mt-1">
               <label for="file" class=" col-form-label">Upload File:</label>
+              <span class="text-danger small" style="">Include a maximum of 3 files/photos.</span>
               <div class="col-sm-7">
-                <input type="file" name="photo" id="" class="form-control border" required>
+                <input type="file" name="photo[]" id="" class="form-control border" required multiple>
               </div>
             </div>
             <div class="col-12">
               <br>
-              <input type="submit" value="Add now" name="save" class="btn btn-primary">
+              <button type="submit" value="Add now" class="btn btn-primary">Save</button>
 
-            </div> 
+            </div>
 
           </form>
         </div>
