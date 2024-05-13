@@ -65,8 +65,5 @@ class AddNew extends Controller
     {
         $selectedUploaded = Seaview::find($id); // Assuming Seaview is the correct model name
     return view(' admin.add.edit', ['selected_d' => $selectedUploaded]);
-
-
-    
     }
 }
