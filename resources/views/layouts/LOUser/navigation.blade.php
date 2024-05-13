@@ -6,7 +6,8 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
-                        <x-application-logo class="block h-9 w-10 fill-current text-gray-800 dark:text-gray-200" />
+                        <!-- Use bg.jpg as the application logo -->
+                        <img src="{{ asset('img/bg.jpg') }}" alt="Logo" class="block h-9 w-10" />
                     </a>
                 </div>
 
@@ -15,26 +16,22 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Home') }}
                     </x-nav-link>
-                  
 
                     <x-nav-link :href="route('user.view.index')" :active="request()->routeIs('seagrass.view')">
                         {{ __('Sea Grasses') }}
                     </x-nav-link>
 
-
                     <x-nav-link :href="route('user.map')" :active="request()->routeIs('seagrass.view')">
                         {{ __('Maps') }}
                     </x-nav-link>
-                   
-                    
+
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('home')">
                         {{ __('Contact Us') }}
                     </x-nav-link>
-
-
                 </div>
             </div>
-            
+
+
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">

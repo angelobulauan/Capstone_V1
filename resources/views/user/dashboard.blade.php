@@ -1,62 +1,66 @@
 @extends('layouts.LOUser.app')
 @section('content')
-
-
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-
-    <link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
-        integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-
-
-        {{--@vite(['resources/css/app.css', 'resources/js/app.js'])--}} 
-    <link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-
-        h3{
-            font-size: 100px;
-            font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-            padding-top: 80px;
-            margin-top: 40px;
-            color: white;
+        #dashboard {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            position: relative;
         }
-        form {
-            margin: 0 auto 20% auto;
-            width: 100% !important;
-            max-width: 500px;
-            
-          
+
+        .back-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        .transparent-card {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            background-color: rgba(255, 255, 255, 0);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 90%;
+            text-align: center; /* Center the content horizontally */
+        }
+
+        h3 {
+            font-size: 30px;
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+            color: #ffffff; /* Darker text color */
+            margin-bottom: 20px; /* Spacing below the title */
         }
 
         .input-group {
-            width: 100%;
             display: flex;
             flex-direction: row;
-            padding-top: 60px;
-         
-            
+            justify-content: center; /* Center the input and button horizontally */
+            margin-top: 20px; /* Spacing above the input group */
         }
 
         #search-input {
             flex: 1;
-            display: block;
             padding: .5rem 1rem;
             font-size: 1rem;
             border: none;
             outline: none;
             background: #e0dfdf;
             border-radius: 2rem 0 0 2rem;
-            line-height: 1rem !important;
-            
         }
 
         #search-button {
-            display: block;
-            flex: 0;
-            background:#3caebd;
+            background: #3caebd;
             color: #fff;
             font-size: 1rem;
             cursor: pointer;
@@ -66,92 +70,36 @@
             padding: .5rem 1.5rem;
         }
 
-        #search-input,
-        #search-button {
-            text-align: left;
-            margin: 0;
+        #search-button:hover {
+            background: #2b7d88; /* Darker hover color */
         }
 
-        .search-button:hover {
-            background: #ccc;
+        /* Adjustments for smaller screens */
+        @media (max-width: 576px) {
+            h3 {
+                font-size: 24px;
+            }
         }
-
-        .form-container {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-
-        nav #search-button {
-            background: #2b7d88 !important;
-            border: #2b7d88 !important;
-        }
-
-        nav #search-button:hover {
-            background: #3caebd !important;
-            border: #3caebd !important;
-        }
-
-        nav #search-input {
-            border-color: #2b7d88 !important;
-            outline: none !important;
-
-        }
-
-        nav #search-input:focus {
-            border-color: #3caebd !important;
-            outline: none !important;
-            box-shadow: none !important;
-        }
-    .back-video{
-        position: fixed;
-    }
     </style>
-    
-</head>
 
-<body class="antialiased ">
-
-  
-  
-
-    <video autoplay loop muted plays-inline class="back-video">
-      <source src="img/seagrass.mp4" type="video/mp4">
-      </video>
-    <main class="container">
-        <div class="content">
-            <div class="row justify-content-center">
-                <div class="col-md-8 form-container">
-                 
-                    <div class="text-center">
-                    <h3>Sea Grasses</h3>
+    <div class="" id="dashboard">
+        <video autoplay loop muted playsinline src="{{ asset('img/seagrass.mp4') }}" class="back-video"
+            type="video/mp4"></video>
+        <div class="transparent-card">
+            <div class="content">
+                <h3>Sea Grasses</h3>
+                <form action="{{ url('/search') }}" method="get" role="search">
+                    @csrf
+                    @method('GET')
+                    <div class="input-group">
+                        <input id="search-input" name="keyword" type="search" autocomplete="off"
+                            placeholder="Search" aria-label="Search..." required />
+                        <button id="search-button" type="submit">
+                            <i class="fas fa-search"></i>
+                        </button>
                     </div>
-    <form action=" {{ url('/search') }}" method="get" role="search">
-                        @csrf
-                        @method('GET')
-                        <div class="input-group">
-                            <input id="search-input" name="keyword" type="search"  autocomplete="off" placeholder="Search"
-                                aria-label="Search..." required />
-                            <button id="search-button" type="submit">
-                                <i class="fas fa-search"></i>
-                            </button>
-                        </div>
-                    </form>
-                </div>
+                </form>
             </div>
         </div>
-       
-    </main>
-    
-
-    
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-    
-</body>
-
-</html>
-
+    </div>
 @endsection
