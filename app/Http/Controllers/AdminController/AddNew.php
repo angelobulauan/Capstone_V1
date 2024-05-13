@@ -22,7 +22,7 @@ class AddNew extends Controller
      */
     public function create()
     {
-        
+
     }
 
     /**
@@ -44,7 +44,7 @@ class AddNew extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-  
+
     /**
      * Update the specified resource in storage.
      */
@@ -60,10 +60,13 @@ class AddNew extends Controller
     {
         //
     }
-    
+
     public function edit($id)
     {
         $selectedUploaded = Seaview::find($id); // Assuming Seaview is the correct model name
     return view(' admin.add.edit', ['selected_d' => $selectedUploaded]);
+
+
+    
     }
 }
