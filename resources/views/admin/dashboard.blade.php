@@ -8,9 +8,6 @@
     /* pre tuloy muntu lang diffre=nt tables
 
     tables ->likes, dislike, mostviewd, mostsearched,
-
-
-
     */
 @endphp
     <div class="container">
