@@ -20,4 +20,5 @@ yarn-error.log
 public/img/wl/vb1.mp4
 compser.lock
 package-lock.json
+vendor
 
