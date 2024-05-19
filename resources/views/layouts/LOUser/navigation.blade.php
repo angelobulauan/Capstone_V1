@@ -25,7 +25,7 @@
                         {{ __('Maps') }}
                     </x-nav-link>
 
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('home')">
+                    <x-nav-link :href="route('user.contact')" :active="request()->routeIs('home')">
                         {{ __('Contact Us') }}
                     </x-nav-link>
                 </div>
