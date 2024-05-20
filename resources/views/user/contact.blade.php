@@ -207,6 +207,7 @@ textarea.contact-input ~ .icon{
 </style>
 
 <body>
+    <br>
     <main>
         <section class="contact">
         <video autoplay loop muted playsinline src="{{ asset('img/wl/contact.mp4') }}" class="back-video"
@@ -217,7 +218,7 @@ textarea.contact-input ~ .icon{
                 <div class="left">
                     <div class="form-wrapper">
                         <div class="contact-heading">
-                            <h1>Let's word together <span></span></h1>
+                            <h1>Let's work together <span></span></h1>
                             <p class="text">Or reach us via: <a href="#">
                                 Seagrass@gmail.com </a></p>
                         </div>
