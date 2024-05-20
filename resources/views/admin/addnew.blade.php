@@ -1,9 +1,6 @@
 @extends('layouts.LOAdmin.app')
 @section('content')
 <style>
-  .body {
-    background-image: url('img/bg.jpg');
-  }
 
   .container input {
     border-radius: 50px;
@@ -49,34 +46,35 @@
                 <label>Location</label>
                 <select class="form-select" aria-label="Default select example " name="location">
                   <option Hidden>Select Location</option>
-                  <option value="Sta. Ana">Batu-Parada, Sta. Ana, Cagayan</option>
-                  <option value="Sta. Ana">Casagan, Sta. Ana, Cagayan</option>
-                  <option value="Sta. Ana">Casambalangan, Sta. Ana, Cagayan</option>
-                  <option value="Sta. Ana">Centro, Sta. Ana, Cagayan</option>
-                  <option value="Sta. Ana">Diora-Zinungan, Sta. Ana, Cagayan</option>
-                  <option value="Sta. Ana">Dungeg , Sta. Ana, Cagayan</option>
-                  <option value="Sta. Ana">Kapanikian, Sta. Ana, Cagayan</option>
-                  <option value="Sta. Ana">Marede, Sta. Ana, Cagayan</option>
-                  <option value="Sta. Ana">Palawig, Sta. Ana, Cagayan</option>
-                  <option value="Sta. Ana">Patunungan, Sta. Ana, Cagayan</option>
-                  <option value="Sta. Ana">Rapuli, Sta. Ana, Cagayan</option>
-                  <option value="Sta. Ana">San Vicente, Sta. Ana, Cagayan</option>
-                  <option value="Sta. Ana">Santa Clara, Sta. Ana, Cagayan</option>
-                  <option value="Sta. Ana">Santa Cruz, Sta. Ana, Cagayan</option>
-                  <option value="Sta. Ana">Tangatan, Sta. Ana, Cagayan</option>
-                  <option value="Sta. Ana">Visitacion, Sta. Ana, Cagayan</option>
+                  <option value="Batu-Parada, Sta. Ana, Cagayan">Batu-Parada, Sta. Ana, Cagayan</option>
+                  <option value="Casagan, Sta. Ana, Cagayan">Casagan, Sta. Ana, Cagayan</option>
+                  <option value="Casambalangan, Sta. Ana, Cagayan">Casambalangan, Sta. Ana, Cagayan</option>
+                  <option value="Centro, Sta. Ana, Cagayan">Centro, Sta. Ana, Cagayan</option>
+                  <option value="Diora-Zinungan, Sta. Ana, Cagayan">Diora-Zinungan, Sta. Ana, Cagayan</option>
+                  <option value="Dungeg , Sta. Ana, Cagayan">Dungeg , Sta. Ana, Cagayan</option>
+                  <option value="Kapanikian, Sta. Ana, Cagayan">Kapanikian, Sta. Ana, Cagayan</option>
+                  <option value="Marede, Sta. Ana, Cagaya">Marede, Sta. Ana, Cagayan</option>
+                  <option value="Palawig, Sta. Ana, Cagayan">Palawig, Sta. Ana, Cagayan</option>
+                  <option value="Patunungan, Sta. Ana, Cagayan">Patunungan, Sta. Ana, Cagayan</option>
+                  <option value="Rapuli, Sta. Ana, Cagayan">Rapuli, Sta. Ana, Cagayan</option>
+                  <option value="San Vicente, Sta. Ana, Cagayan">San Vicente, Sta. Ana, Cagayan</option>
+                  <option value="Santa Clara, Sta. Ana, Cagayan">Santa Clara, Sta. Ana, Cagayan</option>
+                  <option value="Santa Cruz, Sta. Ana, Cagayan">Santa Cruz, Sta. Ana, Cagayan</option>
+                  <option value="Tangatan, Sta. Ana, Cagayan">Tangatan, Sta. Ana, Cagayan</option>
+                  <option value="Visitacion, Sta. Ana, Cagayan">Visitacion, Sta. Ana, Cagayan</option>
+                  <option value="Palaui Island, Sta. Ana, Cagayan">Palaui Island, Sta. Ana, Cagayan</option>
 
                 </select>
               </div>
               <div class="col">
                 <br>
-                <label>Abundace</label>
+                <label>Abundance</label>
                 <input type="text" name="abundance" class="form-control" placeholder="Estimated Length" aria-label="">
               </div>
             </div>
 
             <div class="row mb-1 mt-1">
-              <label for="file" class=" col-form-label">Upload File:</label>
+              <label for="file" class=" col-form-label">Upload Photo:</label>
               <span class="text-danger small" style="">Include a maximum of 3 files/photos.</span>
               <div class="col-sm-7">
                 <input type="file" name="photo[]" id="" class="form-control border" required multiple>

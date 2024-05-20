@@ -21,12 +21,12 @@
 <script>
     var map = L.map('map',{
         dragging: true 
-    }).setView([18.4568, 122.1415], 13);
+    }).setView([18.4905,122.1285], 13);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
     }).addTo(map);
     
-    map.setZoom(15);
+    map.setZoom(12);
 
     var grassMarker = L.marker([18.4599,122.1396]).addTo(map);
     grassMarker.bindPopup("<b>SEA GRASS</b>", { closeButton: false });
@@ -47,28 +47,67 @@
             grassMarker.closePopup();
         });
 
+        //sample Eelgrass
+        var grassMarker = L.marker([18.5169,122.1407]).addTo(map);
+    grassMarker.bindPopup("<b>Eelgrass</b>", { closeButton: false });
+
+        // Add click event listener to the Maura marker
+        grassMarker.on('click', function() {
+            // Redirect to the specified route
+             window.open("", "_blank");
+        });
+
+        // Add mouseover event listener to the Maura marker
+        grassMarker.on('mouseover', function() {
+            grassMarker.openPopup();
+        });
+
+        // Add mouseout event listener to the Maura marker
+        grassMarker.on('mouseout', function() {
+            grassMarker.closePopup();
+        });
+
+         //sample Turtle grass
+         var grassMarker = L.marker([18.5080,122.1482]).addTo(map);
+    grassMarker.bindPopup("<b>Turtle Grass</b>", { closeButton: false });
+
+        // Add click event listener to the Maura marker
+        grassMarker.on('click', function() {
+            // Redirect to the specified route
+             window.open("", "_blank");
+        });
+
+        // Add mouseover event listener to the Maura marker
+        grassMarker.on('mouseover', function() {
+            grassMarker.openPopup();
+        });
+
+        // Add mouseout event listener to the Maura marker
+        grassMarker.on('mouseout', function() {
+            grassMarker.closePopup();
+        });
+
+ //sample Neptune grass
+ var grassMarker = L.marker([18.4594,122.1390]).addTo(map);
+    grassMarker.bindPopup("<b>Turtle Grass</b>", { closeButton: false });
+
+        // Add click event listener to the Maura marker
+        grassMarker.on('click', function() {
+            // Redirect to the specified route
+             window.open("", "_blank");
+        });
+
+        // Add mouseover event listener to the Maura marker
+        grassMarker.on('mouseover', function() {
+            grassMarker.openPopup();
+        });
+
+        // Add mouseout event listener to the Maura marker
+        grassMarker.on('mouseout', function() {
+            grassMarker.closePopup();
+        });
+
 </script>
 
-<!-- <script>
-    var map = L.map('map',{
-        dragging:true 
-    }).setView([18.4568,122.1415], 13);
 
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
-        maxZoom:15,
-    }).addTo(map);
-// L.control.zoom().addTo(map);
-
-
-//OSM Layer
-// var osm =L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-//     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-// });
-// osm.addTo(map);
-
-
-//maker
-// var singleMarker = L.marker([18.4540, 122.1380 ]);
-// singleMarker.addto(map);
-</script> -->
 @endsection

@@ -12,7 +12,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-sm-3">
-                        <img src="{{ asset('storage/' . $d->photo) }}" alt="First Photo" class="img-fluid"
+                        <img src="{{ asset('storage/' . $d->photo) }}" alt="First Photo" class="img"
                             id="imageToSelect-{{ $d->id }}">
                         <button type="button" class="btn btn-primary mt-2" data-bs-toggle="modal"
                             data-bs-target="#imageSelectionModal-{{ $d->id }}">
