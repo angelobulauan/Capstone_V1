@@ -43,13 +43,23 @@
         
     }
     .home .content h1{
-        font-size: 4em;
+        font-size: 100px;
         font-weight: 900;
         text-transform: uppercase;
         letter-spacing: 5px;
-        line-height: 75px;
-        margin-bottom: 40px;
+        line-height: 80px;
         padding-left: 30px;
+        font-family:Arial, Helvetica, sans-serif;
+        color: #DC8516;
+        
+        
+    }
+    .home .content h2{
+        font-size: 3em;
+        /* margin-bottom: 30px; */
+        padding-left: 80px;
+        letter-spacing: 5px;
+        font-weight: 900;
     }
     .home .content h1 span{
         font-size: 1.2em;
@@ -57,17 +67,23 @@
         padding-left: 50px;
     }
     .home .content p{
-        margin-bottom: 65px;
+        margin-bottom: 55px;
         padding-left: 30px;
+        font-size: 25px;
+        font-weight: 500;
+        font-family: 'Times New Roman', Times, serif;
     }
     .home .content a{
-        background: white;
+        background: #7D96BD;
         padding: 15px 35px;
-        color: blue;
+        color: white;
         font-weight: 500;
         text-decoration: none;
         border-radius: 20px;
         margin-left: 80px;
+    }
+    .home .content a:hover{
+        background-color: blue;
     }
     .home .media-icons{
         z-index: 888;
@@ -145,12 +161,11 @@
     <video  class="video-slide" src="{{asset('img/wl/vb4.mp4')}}" autoplay muted loop></video>
     <video  class="video-slide" src="{{asset('img/wl/vb5.mp4')}}" autoplay muted loop></video>
     <div class="content">
-        <h1>Sea <br> <span>Grasses</span></h1>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. At corrupti reiciendis, nemo sit
-             hic cum soluta doloremque! Sed id repudiandae maiores dolore, nisi non 
-             distinctio nostrum aliquid! Ea, possimus illo.</p>
-             <a href="{{ route('login') }}">{{ __('Login') }}</a>
-             <a href="{{ route('register') }}">{{ __('Register') }}</a>
+        <h1>Sea Grasses </h1>
+        <h2> of Sta.Ana, Cagayan <span></span></h2>
+        <p>Welcome!  Seagrasses play very important roles in marine ecosystem and we need to conserve and take care for these magestic species.</p>
+             <a href="{{ route('login') }}">{{ __('Get Started') }}</a>
+             
     </div>
     <div class="media-icons">
         <a href="#"><i class="fa fa-facebook-square" aria-hidden="true"></i></a>
