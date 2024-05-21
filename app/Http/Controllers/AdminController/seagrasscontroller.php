@@ -82,67 +82,57 @@ class seagrasscontroller extends Controller
      */
 
 
-    public function store(Request $request)
-    {
-        try {
-            // Validate the request data
-            $validatedData = $request->validate([
-                'name' => 'required|string|max:255',
-                'scientificname' => 'required|string|max:255',
-                'description' => 'required|string|max:1000',
-                'location' => 'required|string|max:255',
-                'abundance' => 'required|integer|min:0',
-                'photo.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            ]);
+     public function store(Request $request)
+     {
+         try {
+             // Validate the request data
+             $validatedData = $request->validate([
+                 'name' => 'required|string|max:255',
+                 'scientificname' => 'required|string|max:255',
+                 'description' => 'required|string|max:1000',
+                 'location' => 'required|string|max:255',
+                 'abundance' => 'required|integer|min:0',
+                 'photo.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+             ]);
 
-            // Create a new Seaview instance
-            $seaview = new Seaview();
-            $seaview->name = $request->input('name');
-            $seaview->scientificname = $request->input('scientificname');
-            $seaview->description = $request->input('description');
-            $seaview->location = $request->input('location');
-            $seaview->abundance = $request->input('abundance');
+             // Create a new Seaview instance
+             $seaview = new Seaview();
+             $seaview->name = $request->input('name');
+             $seaview->scientificname = $request->input('scientificname');
+             $seaview->description = $request->input('description');
+             $seaview->location = $request->input('location');
+             $seaview->abundance = $request->input('abundance');
 
-            // Save the `Seaview` instance to the database first
-            $seaview->save();
+             // Save the Seaview instance to the database first
+             $seaview->save();
 
-            // Handle multiple file uploads
-            if ($request->hasFile('photo')) {
-                // Assign the ID of the saved Seaview instance
-                $seaviewId = $seaview->id;
+             // Handle multiple file uploads
+             if ($request->hasFile('photo')) {
+                 $seaviewId = $seaview->id;
 
-                // Iterate through the uploaded photos
-                foreach ($request->file('photo') as $index => $file) {
-                    // Store the file in the 'public' disk under the 'seagrass' folder
-                    $filePath = $file->store('seagrass', 'public');
+                 foreach ($request->file('photo') as $index => $file) {
+                     $filePath = $file->store('seagrass', 'public');
 
-                    // Create a new `Seagrasspics` instance
-                    $seagrasspic = new Seagrasspic();
-                    $seagrasspic->sea_id = $seaviewId; // Use the Seaview ID for `sea_id`
-                    $seagrasspic->photo = $filePath;
+                     $seagrasspic = new Seagrasspic();
+                     $seagrasspic->sea_id = $seaviewId;
+                     $seagrasspic->photo = $filePath;
 
-                    // Save the `Seagrasspics` instance to the database
-                    $seagrasspic->save();
+                     $seagrasspic->save();
 
-                    // If this is the first photo, store the file path in the `Seaview`'s `photo` field
-                    if ($index === 0) {
-                        $seaview->photo = $filePath;
-                        // Save the `Seaview` instance again to update the `photo` field
-                        $seaview->save();
-                    }
-                }
-            }
+                     if ($index === 0) {
+                         $seaview->photo = $filePath;
+                         $seaview->save();
+                     }
+                 }
+             }
 
-            // Redirect with success message
-            return redirect()->route('admin.add.index')->with('success', 'Seaview data saved successfully.');
-        } catch (Exception $e) {
-            // Log the error
-            Log::error($e->getMessage());
+             return response()->json(['message' => 'Seaview data saved successfully.'], 200);
+         } catch (Exception $e) {
+             Log::error($e->getMessage());
 
-            // Redirect with error message
-            return redirect()->route('admin.add.index')->with('error', 'Failed to save Seaview data. Please try again.');
-        }
-    }
+             return response()->json(['message' => 'Failed to save Seaview data. Please try again.'], 500);
+         }
+     }
 
 
 
