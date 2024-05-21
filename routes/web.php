@@ -10,6 +10,7 @@ use App\Http\Controllers\AdminController\SeapicCtrl;
 use App\Http\Controllers\UserController\seagrassview;
 use App\Http\Controllers\UserController\usermap;
 use App\Http\Controllers\UserController\contactCtrl;
+use App\Http\Controllers\UserController\articleCtrl;
 use function PHPUnit\Framework\returnSelf;
 use Illuminate\Support\Facades\DB;
 use App\Models\Role;
@@ -39,6 +40,10 @@ Route::get('/map', function () {
 Route::get('/contact', function () {
     return view('user.contact');
 });
+Route::get('/article', function () {
+    return view('user.article');
+});
+
 
 
 
@@ -130,6 +135,8 @@ Route::namespace('App\Http\Controllers\UserController')->prefix('user')->name('u
         Route::get('/map', 'usermap@index')->name('map');
         Route::resource('contact','contactCtrl');
         Route::get('/contact', 'contactCtrl@index')->name('contact');
+        Route::resource('article','articleCtrl');
+        Route::get('/article', 'articleCtrl@index')->name('article');
 
 
 

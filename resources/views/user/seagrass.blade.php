@@ -10,7 +10,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-3">
-                    <img src="{{ asset('storage/' . $d->photo) }}" alt="First Photo" class="img-fluid"
+                    <img src="{{ asset('storage/' . $d->photo) }}" alt="First Photo" class="img"
                         id="imageToSelect-{{ $d->id }}">
                 </div>
 
@@ -31,7 +31,7 @@
                                 <div class="col-sm-6 p-1">
                                     <i class="fa fa-map-pin mr-2"></i>Abundance: {{ $d->abundance }}
                                 </div>
-                                <div class="col-sm-6 p-1">Created At: {{ $d->created_at }}</div>
+                                <!-- <div class="col-sm-6 p-1">Created At: {{ $d->created_at }}</div> -->
                                 <div class="row mt-0">
                                     <!-- <div class="text-center"> -->
                                     <div class="col-sm-12 d-flex justify-content-end align-items-center">

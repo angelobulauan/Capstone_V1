@@ -17,6 +17,10 @@
                         {{ __('Home') }}
                     </x-nav-link>
 
+                    <x-nav-link :href="route('user.article')" :active="request()->routeIs('Article')">
+                        {{ __('Article') }}
+                    </x-nav-link>
+
                     <x-nav-link :href="route('user.view.index')" :active="request()->routeIs('seagrass.view')">
                         {{ __('Sea Grasses') }}
                     </x-nav-link>
