@@ -21,7 +21,7 @@ class seagrasscontroller extends Controller
 
 
         $myEntry = DB::table('seaviews')
-            ->paginate(5); // use paginage 5 to view per 5 records
+            ->get(); // use paginage 5 to view per 5 records
 
         // dd($myEntry);
 
@@ -157,11 +157,35 @@ class seagrasscontroller extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
-        // dd($id);
-        return view('admin.edit')->with('id', $id);
+
+
+        // Retrieve the record from the database
+        $record = DB::table('seaviews')->where('id', $id)->first();
+
+        // dd($record);
+
+
+        // Check if the record exists
+        if (!$record) {
+           return response()->json(['error' => 'Record not found.'], 404);
+        } else {
+            // Update the record with new values
+            DB::table('seaviews')->where('id', $id)->update([
+                'name' => $request->input('name', $record->name),
+                'scientificname' => $request->input('scientificname', $record->scientificname),
+                'description' => $request->input('description', $record->description),
+                'location' => $request->input('location', $record->location),
+                'abundance' => $request->input('abundance', $record->abundance),
+                'updated_at' => now()
+            ]);
+
+            // Return a success response
+            return response()->json(['success' => 'Record updated successfully.']);
+        }
     }
+
 
     /**
      * Update the specified resource in storage.
@@ -175,9 +199,15 @@ class seagrasscontroller extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function delete($d_id)
+    public function destroy($id)
     {
-        $seagrass = seaview::find($d_id)->delete();
-        return view('admin.myEntries');
+        $seagrass = Seaview::find($id);
+
+        if ($seagrass) {
+            $seagrass->delete();
+            return response()->json(['success' => true, 'message' => 'Seagrass entry deleted successfully']);
+        } else {
+            return response()->json(['success' => false, 'message' => 'Seagrass entry not found']);
+        }
     }
 }
