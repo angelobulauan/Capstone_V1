@@ -102,7 +102,12 @@ Route::namespace('App\Http\Controllers\AdminController')->prefix('admin')->name(
 
     //new seagrass controller for users only UserController/seagrasscontroller jay folder na
     Route::post('addNew', 'seagrasscontroller@store')->name('addNew');
-    Route::get('/edit/{id}', 'seagrasscontroller@edit')->name('edit');
+
+    //route in editing seagrass entries
+    Route::post('/editseagrass/{id}', 'seagrasscontroller@edit')->name('editseagrass');
+
+    //route in seleting a record in seagrass entries
+    Route::get('/deleteseagrass/{id}', 'seagrasscontroller@destroy')->name('deleteseagrass');
 
     Route::resource('add','AddNew', ['except'=>['destroy']]);
 
