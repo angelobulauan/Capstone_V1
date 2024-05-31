@@ -155,10 +155,9 @@
  <body>
     <div class="container-fluid">
 <section class="home">
-    <video  class="video-slide" src="{{asset('img/wl/vb1.mp4')}}" autoplay muted loop></video>
+
     <video  class="video-slide" src="{{asset('img/wl/vb2.mp4')}}" autoplay muted loop></video>
     <video  class="video-slide" src="{{asset('img/wl/vb3.mp4')}}" autoplay muted loop></video>
-    <video  class="video-slide" src="{{asset('img/wl/vb4.mp4')}}" autoplay muted loop></video>
     <video  class="video-slide" src="{{asset('img/wl/vb5.mp4')}}" autoplay muted loop></video>
     <div class="content">
         <h1>Sea Grasses </h1>
@@ -173,9 +172,8 @@
         <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
     </div>
     <div class="slider-navigation">
+       
         <div class="nav-btn active"></div>
-        <div class="nav-btn"></div>
-        <div class="nav-btn"></div>
         <div class="nav-btn"></div>
         <div class="nav-btn"></div>
     </div>
