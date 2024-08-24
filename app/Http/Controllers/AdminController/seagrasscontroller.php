@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Log;
 
 use App\Models\Seagrasspic;
 use Exception;
+use Ramsey\Uuid\Type\Decimal;
 
 
 class seagrasscontroller extends Controller
@@ -82,57 +83,61 @@ class seagrasscontroller extends Controller
      */
 
 
-     public function store(Request $request)
-     {
-         try {
-             // Validate the request data
-             $validatedData = $request->validate([
-                 'name' => 'required|string|max:255',
-                 'scientificname' => 'required|string|max:255',
-                 'description' => 'required|string|max:1000',
-                 'location' => 'required|string|max:255',
-                 'abundance' => 'required|integer|min:0',
-                 'photo.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-             ]);
+    public function store(Request $request)
+    {
+        try {
+            // Validate the request data
+            $validatedData = $request->validate([
+                'name' => 'required|string|max:255',
+                'scientificname' => 'required|string|max:255',
+                'description' => 'required|string|max:1000',
+                'location' => 'required|string|max:255',
+                'latitude' => 'required|numeric|between:-90,90',
+                'longtitude' => 'required|numeric|between:-180,180',
+                'abundance' => 'required|integer|min:0',
+                'photo.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            ]);
 
-             // Create a new Seaview instance
-             $seaview = new Seaview();
-             $seaview->name = $request->input('name');
-             $seaview->scientificname = $request->input('scientificname');
-             $seaview->description = $request->input('description');
-             $seaview->location = $request->input('location');
-             $seaview->abundance = $request->input('abundance');
+            // Create a new Seaview instance
+            $seaview = new Seaview();
+            $seaview->name = $request->input('name');
+            $seaview->scientificname = $request->input('scientificname');
+            $seaview->description = $request->input('description');
+            $seaview->location = $request->input('location');
+            $seaview->lati = $request->input('latitude');
+            $seaview->longti = $request->input('longtitude');
+            $seaview->abundance = $request->input('abundance');
 
-             // Save the Seaview instance to the database first
-             $seaview->save();
+            // Save the Seaview instance to the database first
+            $seaview->save();
 
-             // Handle multiple file uploads
-             if ($request->hasFile('photo')) {
-                 $seaviewId = $seaview->id;
+            // Handle multiple file uploads
+            if ($request->hasFile('photo')) {
+                $seaviewId = $seaview->id;
 
-                 foreach ($request->file('photo') as $index => $file) {
-                     $filePath = $file->store('seagrass', 'public');
+                foreach ($request->file('photo') as $index => $file) {
+                    $filePath = $file->store('seagrass', 'public');
 
-                     $seagrasspic = new Seagrasspic();
-                     $seagrasspic->sea_id = $seaviewId;
-                     $seagrasspic->photo = $filePath;
+                    $seagrasspic = new Seagrasspic();
+                    $seagrasspic->sea_id = $seaviewId;
+                    $seagrasspic->photo = $filePath;
 
-                     $seagrasspic->save();
+                    $seagrasspic->save();
 
-                     if ($index === 0) {
-                         $seaview->photo = $filePath;
-                         $seaview->save();
-                     }
-                 }
-             }
+                    if ($index === 0) {
+                        $seaview->photo = $filePath;
+                        $seaview->save();
+                    }
+                }
+            }
 
-             return response()->json(['message' => 'Seaview data saved successfully.'], 200);
-         } catch (Exception $e) {
-             Log::error($e->getMessage());
+            return response()->json(['message' => 'Seaview data saved successfully.'], 200);
+        } catch (Exception $e) {
+            Log::error($e->getMessage());
 
-             return response()->json(['message' => 'Failed to save Seaview data. Please try again.'], 500);
-         }
-     }
+            return response()->json(['message' => 'Failed to save Seaview data. Please try again.'], 500);
+        }
+    }
 
 
 
@@ -159,7 +164,7 @@ class seagrasscontroller extends Controller
 
         // Check if the record exists
         if (!$record) {
-           return response()->json(['error' => 'Record not found.'], 404);
+            return response()->json(['error' => 'Record not found.'], 404);
         } else {
             // Update the record with new values
             DB::table('seaviews')->where('id', $id)->update([
