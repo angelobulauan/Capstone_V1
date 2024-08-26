@@ -104,16 +104,15 @@
     .home .media-icons a:hover{
         transform: scale(1.3);
     }
-    .home video{
-        z-index: 000;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        
-    }
+    .back-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
     .slider-navigation{
         z-index: 888;
         position: relative;
@@ -146,19 +145,19 @@
         width: 100%;
         clip-path: circle(0.3% at 0 50%);
     }
-    .video-slide.active{
+    /* .video-slide.active{
         clip-path: circle(150% at 0 50%);
         transition: 2s ease;
         transition-property:clip-path;
-    }
+    } */
   </style>
  <body>
     <div class="container-fluid">
 <section class="home">
 
-    <video  class="video-slide" src="{{asset('img/wl/vb2.mp4')}}" autoplay muted loop></video>
-    <video  class="video-slide" src="{{asset('img/wl/vb3.mp4')}}" autoplay muted loop></video>
-    <video  class="video-slide" src="{{asset('img/wl/vb5.mp4')}}" autoplay muted loop></video>
+    <!-- <video  class="video-slide" src="{{asset('img/wl/vb2.mp4')}}" autoplay muted loop></video>
+    <video  class="video-slide" src="{{asset('img/wl/vb3.mp4')}}" autoplay muted loop></video> -->
+    <video  class="back-video" src="{{asset('img/wl/vb5.mp4')}}" autoplay loop muted playsinline></video>
     <div class="content">
         <h1>Sea Grasses </h1>
         <h2> of Sta.Ana, Cagayan <span></span></h2>
@@ -173,15 +172,15 @@
     </div>
     <div class="slider-navigation">
        
+        <!-- <div class="nav-btn active"></div>
+        <div class="nav-btn"></div> -->
         <div class="nav-btn active"></div>
-        <div class="nav-btn"></div>
-        <div class="nav-btn"></div>
     </div>
 </section>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
-<script>
+<!-- <script>
 const btns = document.querySelectorAll(".nav-btn");
 const slides = document.querySelectorAll(".video-slide");
 var sliderNav = function(manual){
@@ -201,6 +200,6 @@ var sliderNav = function(manual){
 sliderNav(i);
     });
  });
-</script>
+</script> -->
   </body>
 </html>
