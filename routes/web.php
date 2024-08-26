@@ -58,22 +58,19 @@ Route::get('/article', function () {
 Route::get('/dashboard', function () {
 
     $role = DB::table('role_users')
-    ->select('*')
-    ->where('user_id',Auth::user()->id)
-    ->get();
+        ->select('*')
+        ->where('user_id', Auth::user()->id)
+        ->get();
 
 
 
-    if($role[0]->role_id === "1")
-    {
-        $totaluser= User::whereHas('roles', function ($query) {
+    if ($role[0]->role_id === "1") {
+        $totaluser = User::whereHas('roles', function ($query) {
             $query->where('name', 'user');
         })->count();
-       // return Auth::user()->roles[0]->name;
+        // return Auth::user()->roles[0]->name;
         return view('admin.dashboard')->with('totaluser', $totaluser);
-    }
-    else
-    {
+    } else {
 
         // return Auth::user()->roles[0]->name;
         return view('user.dashboard');
@@ -94,61 +91,63 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
 
 
 
 //admin
-Route::namespace('App\Http\Controllers\AdminController')->prefix('admin')->name('admin.')->group(function(){
+Route::
+        namespace('App\Http\Controllers\AdminController')->prefix('admin')->name('admin.')->group(function () {
 
-    Route::resource('seapics','SeapicCtrl');
-    Route::get('/myEntries', 'seagrasscontroller@index')->name('myEntries');
+            Route::resource('seapics', 'SeapicCtrl');
+            Route::get('/myEntries', 'seagrasscontroller@index')->name('myEntries');
 
-    //new seagrass controller for users only UserController/seagrasscontroller jay folder na
-    Route::post('addNew', 'seagrasscontroller@store')->name('addNew');
+            //new seagrass controller for users only UserController/seagrasscontroller jay folder na
+            Route::post('addNew', 'seagrasscontroller@store')->name('addNew');
 
-    //route in editing seagrass entries
-    Route::post('/editseagrass/{id}', 'seagrasscontroller@edit')->name('editseagrass');
+            //route in editing seagrass entries
+            Route::post('/editseagrass/{id}', 'seagrasscontroller@edit')->name('editseagrass');
 
-    //route in seleting a record in seagrass entries
-    Route::get('/deleteseagrass/{id}', 'seagrasscontroller@destroy')->name('deleteseagrass');
+            //route in seleting a record in seagrass entries
+            Route::get('/deleteseagrass/{id}', 'seagrasscontroller@destroy')->name('deleteseagrass');
 
-    Route::resource('add','AddNew', ['except'=>['destroy']]);
+            Route::resource('add', 'AddNew', ['except' => ['destroy']]);
 
-    // route sa pag select ng kung anong image ang idisplay
-    Route::post('/update-photo/{id}/{photo}','seagrasscontroller@updatePhoto')->name('update-photo');
-
-
-
+            // route sa pag select ng kung anong image ang idisplay
+            Route::post('/update-photo/{id}/{photo}', 'seagrasscontroller@updatePhoto')->name('update-photo');
 
 
 
 
 
-});
+
+
+
+        });
 
 
 //user
-Route::namespace('App\Http\Controllers\UserController')->prefix('user')->name('user.')->group(function(){
+Route::
+        namespace('App\Http\Controllers\UserController')->prefix('user')->name('user.')->group(function () {
 
 
-        Route::resource('view','alluserCtrl', ['except'=>['destroy']]);
-        Route::get('/seagrass/{id}', 'seagrassview@index')->name('seagrass');
-        Route::resource('view','seagrassview');
-        Route::resource('maps','usermap');
-        Route::get('/map', 'usermap@index')->name('map');
-        Route::resource('contact','contactCtrl');
-        Route::get('/contact', 'contactCtrl@index')->name('contact');
-        Route::resource('article','articleCtrl');
-        Route::get('/article', 'articleCtrl@index')->name('article');
+            Route::resource('view', 'alluserCtrl', ['except' => ['destroy']]);
+            Route::get('/seagrass/{id}', 'seagrassview@index')->name('seagrass');
+            Route::resource('view', 'seagrassview');
+            Route::resource('maps', 'usermap');
+            Route::get('/map', 'usermap@index')->name('map');
+            Route::resource('contact', 'contactCtrl');
+            Route::get('/contact', 'contactCtrl@index')->name('contact');
+            Route::resource('article', 'articleCtrl');
+            Route::get('/article', 'articleCtrl@index')->name('article');
+            Route::get('like/{id}', 'seagrassview@like')->name('like');
+            Route::get('dislike/{id}', 'seagrassview@dislike')->name('dislike');
+            Route::get('updateView/{id}', 'seagrassview@view')->name('updateView');
+        });
 
 
-
-
-
-});
- Route::delete('/delete/{d_id}', [seagrasscontroller::class, 'delete'])->name('delete.ko');
+Route::delete('/delete/{d_id}', [seagrasscontroller::class, 'delete'])->name('delete.ko');
 
 
 
