@@ -222,13 +222,13 @@ CREATE TABLE `seaviews` (
   `scientificname` varchar(255) NOT NULL,
   `description` mediumtext NOT NULL,
   `location` varchar(255) NOT NULL,
+  `lati` decimal(10,6) DEFAULT NULL,
+  `longti` decimal(10,6) DEFAULT NULL,
   `abundance` int(11) NOT NULL,
   `photo` varchar(255) DEFAULT NULL,
-  `status` varchar(50) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
 --
 -- Dumping data for table `seaviews`
 --

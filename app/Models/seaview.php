@@ -7,9 +7,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class seaview extends Model
 {
-    
+
     use HasFactory;
-    protected $fillable =[
-        'name', 'scientificname', 'description', 'location', 'abundance','photo'
+    protected $fillable = [
+        'name',
+        'scientificname',
+        'description',
+        'location',
+        'abundance',
+        'photo'
     ];
+    public function interaction()
+    {
+        return $this->hasOne(SeaGrassLikes::class);
+    }
+
 }
