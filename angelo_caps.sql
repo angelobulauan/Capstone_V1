@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 18, 2024 at 01:51 PM
+-- Generation Time: Aug 26, 2024 at 06:33 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `angelocaps`
+-- Database: `seagrass_mapping`
 --
 
 -- --------------------------------------------------------
@@ -81,7 +81,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (8, '2024_03_25_013613_create_seaviews_table', 1),
 (9, '2024_03_29_102636_create_photos_table', 2),
 (10, '2024_04_18_014633_create_seapics_table', 3),
-(11, '2024_04_18_015643_create_seagrasspics_table', 4);
+(11, '2024_04_18_015643_create_seagrasspics_table', 4),
+(12, '2024_08_25_003256_create_sea_grass_likes_table', 5);
 
 -- --------------------------------------------------------
 
@@ -168,7 +169,11 @@ CREATE TABLE `role_users` (
 
 INSERT INTO `role_users` (`id`, `user_id`, `role_id`, `created_at`, `updated_at`) VALUES
 (1, '1', '1', '2024-05-09 20:38:08', '2024-05-09 20:38:08'),
-(2, '2', '2', '2024-05-09 20:38:08', '2024-05-09 20:38:08');
+(2, '2', '2', '2024-05-09 20:38:08', '2024-05-09 20:38:08'),
+(3, '3', '2', '2024-05-21 18:14:29', '2024-05-21 18:14:29'),
+(4, '4', '2', '2024-05-30 23:04:10', '2024-05-30 23:04:10'),
+(5, '5', '2', '2024-08-24 16:24:55', '2024-08-24 16:24:55'),
+(6, '6', '2', '2024-08-24 23:40:35', '2024-08-24 23:40:35');
 
 -- --------------------------------------------------------
 
@@ -189,12 +194,21 @@ CREATE TABLE `seagrasspics` (
 --
 
 INSERT INTO `seagrasspics` (`id`, `sea_id`, `Photo`, `created_at`, `updated_at`) VALUES
-(1, 1, 'seagrass/oD7edHIG9HWrOUOeCXJoIq9hIRLlEXJmD7LFeLTx.jpg', '2024-05-10 01:07:20', '2024-05-10 01:07:20'),
-(2, 1, 'seagrass/c110II7uTL1cyIAaLWRFoi6YdOcvcktxg6a36Olq.jpg', '2024-05-10 01:07:20', '2024-05-10 01:07:20'),
-(3, 1, 'seagrass/4ryUIu04lD0GUGzPqNlih6UnBkxCrxeZs5S8r22L.jpg', '2024-05-10 01:07:20', '2024-05-10 01:07:20'),
-(4, 2, 'seagrass/Kv3peFemZBZU1nDlth3MKG9uYeEMijTeFVHebW0U.png', '2024-05-11 02:59:24', '2024-05-11 02:59:24'),
-(5, 2, 'seagrass/y7jFUVtRwS58dMnMskJfHxUjneH8iaPaJTOLlpzT.png', '2024-05-11 02:59:24', '2024-05-11 02:59:24'),
-(6, 2, 'seagrass/762EgEn2ejHBPVgl7AVbRB9SboHgaECIRfFlNWVX.jpg', '2024-05-11 02:59:24', '2024-05-11 02:59:24');
+(1, 1, 'seagrass/m5MwwtzMWaVhYzvGtAkJrmN2MwfseJ3YzjqpiOlH.jpg', '2024-08-24 06:52:37', '2024-08-24 06:52:37'),
+(2, 1, 'seagrass/TFAiM0XHXDvzMwDNBIEITKqpJuOr1iZ7q0oGvSFX.jpg', '2024-08-24 06:52:37', '2024-08-24 06:52:37'),
+(3, 1, 'seagrass/KEbOnDsP8R4lsFbPfiMVP9P8SbnGcwb3zQbxTmXG.jpg', '2024-08-24 06:52:37', '2024-08-24 06:52:37'),
+(4, 2, 'seagrass/bBX2m845GEIAYJByQaFKFQtYohnhdCFkcEQn5BUq.jpg', '2024-08-24 06:56:20', '2024-08-24 06:56:20'),
+(5, 2, 'seagrass/V2pbPSGKAWOQtM6mGjvgLKqOAkY4DfKkUj393wlY.jpg', '2024-08-24 06:56:20', '2024-08-24 06:56:20'),
+(6, 2, 'seagrass/6VLZp7IUrRsuGe7DyEVukrXm4v7W1XD89PZPd9zD.jpg', '2024-08-24 06:56:20', '2024-08-24 06:56:20'),
+(7, 3, 'seagrass/CH0TL3Vsv8loAPGII2fEI64JQepAPmjnAjgkndKZ.jpg', '2024-08-24 06:59:26', '2024-08-24 06:59:26'),
+(8, 3, 'seagrass/qaQDqHXRvQW749mtkFon8QzhoSBhhwkn2hXRUuZ5.jpg', '2024-08-24 06:59:26', '2024-08-24 06:59:26'),
+(9, 3, 'seagrass/sXTY5Jihjq47uCc8wVHRz5YjLnEYDrGNNLAiv9EH.jpg', '2024-08-24 06:59:26', '2024-08-24 06:59:26'),
+(10, 1, 'seagrass/sYRxMQf0059KXNcjShncx6UgvMLSRhHfCd74E6mx.jpg', '2024-08-24 07:08:53', '2024-08-24 07:08:53'),
+(11, 1, 'seagrass/UA4nR5BwU6KM79imWsBzgRawvXTymFHN7Wy9J07e.jpg', '2024-08-24 07:08:53', '2024-08-24 07:08:53'),
+(12, 1, 'seagrass/kM45ipFH4hxw0OKe2TihIlcl2SabB9xC9MCYrIwy.jpg', '2024-08-24 07:08:53', '2024-08-24 07:08:53'),
+(13, 2, 'seagrass/lUogpLXoDoxMr3RWH0hUl6lpQgvgJaLZzl9cR2SW.jpg', '2024-08-24 22:14:05', '2024-08-24 22:14:05'),
+(14, 2, 'seagrass/ksknquZkUAPym9YOvXfcCcrqcQbyNXfYjzDyaeJN.jpg', '2024-08-24 22:14:05', '2024-08-24 22:14:05'),
+(15, 2, 'seagrass/Wg5jm9CriKYYRxbinvyLgEFUmvRfZgAsOxjCOhv6.jpg', '2024-08-24 22:14:05', '2024-08-24 22:14:05');
 
 -- --------------------------------------------------------
 
@@ -229,13 +243,40 @@ CREATE TABLE `seaviews` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 --
 -- Dumping data for table `seaviews`
 --
 
-INSERT INTO `seaviews` (`id`, `u_id`, `name`, `scientificname`, `description`, `location`, `abundance`, `photo`, `status`, `created_at`, `updated_at`) VALUES
-(1, NULL, 'ghdhbd', 'dfgs', 'sdfg', 'Sta. Ana', 12, 'seagrass/c110II7uTL1cyIAaLWRFoi6YdOcvcktxg6a36Olq.jpg', NULL, '2024-05-10 01:07:20', '2024-05-12 19:53:23'),
-(2, NULL, 'adfswrfgr', 'tg', 'seareawrf', 'Sta. Ana', 12, 'seagrass/762EgEn2ejHBPVgl7AVbRB9SboHgaECIRfFlNWVX.jpg', NULL, '2024-05-11 02:59:24', '2024-05-12 01:11:07');
+INSERT INTO `seaviews` (`id`, `u_id`, `name`, `scientificname`, `description`, `location`, `lati`, `longti`, `abundance`, `photo`, `created_at`, `updated_at`) VALUES
+(1, NULL, 'stest', 'alsmdcal\'', 'kdsfmk', 'Casagan, Sta. Ana, Cagayan', 18.457303, 122.114742, 34, 'seagrass/sYRxMQf0059KXNcjShncx6UgvMLSRhHfCd74E6mx.jpg', '2024-08-24 07:08:53', '2024-08-24 07:08:53'),
+(2, NULL, 'dfsfsf', 'sdfsdfa', 'sfrarf', 'Casagan, Sta. Ana, Cagayan', 18.518028, 122.194793, 34, 'seagrass/ksknquZkUAPym9YOvXfcCcrqcQbyNXfYjzDyaeJN.jpg', '2024-08-24 22:14:04', '2024-08-24 22:14:18');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sea_grass_likes`
+--
+
+CREATE TABLE `sea_grass_likes` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `u_id` int(11) DEFAULT NULL,
+  `seaviews_id` int(11) DEFAULT NULL,
+  `likes` int(11) DEFAULT NULL,
+  `dislikes` int(11) DEFAULT NULL,
+  `views` int(11) NOT NULL DEFAULT 0,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `sea_grass_likes`
+--
+
+INSERT INTO `sea_grass_likes` (`id`, `u_id`, `seaviews_id`, `likes`, `dislikes`, `views`, `created_at`, `updated_at`) VALUES
+(1, 5, 1, 1, 0, 2, NULL, NULL),
+(2, 5, 2, 1, 0, 3, NULL, NULL),
+(3, 6, 1, 1, 0, 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -261,7 +302,11 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `email`, `status`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
 (1, 'Admin', 'admin@gmail.com', NULL, NULL, '$2y$12$6pi0N9p8dGlvkyMNYoDwge/kW1GXgMWY0zcVoZt8I.IL0kHV5j7FC', NULL, '2024-05-09 20:38:08', '2024-05-09 20:38:08'),
-(2, ' User', 'user@gmail.com', NULL, NULL, '$2y$12$geQ0pk36jJRaMJBAWwLOe.yqWzCeXMY4pcq9CW2ihN0/.49hUk5Je', NULL, '2024-05-09 20:38:08', '2024-05-09 20:38:08');
+(2, ' User', 'user@gmail.com', NULL, NULL, '$2y$12$geQ0pk36jJRaMJBAWwLOe.yqWzCeXMY4pcq9CW2ihN0/.49hUk5Je', NULL, '2024-05-09 20:38:08', '2024-05-09 20:38:08'),
+(3, 'Robert', 'robert@mail.com', NULL, NULL, '$2y$12$JCRtzsXatIbBnCObZD235O98nprNog08Cp82VVt8Xgn6F4kWqXn0u', NULL, '2024-05-21 18:14:29', '2024-05-21 18:14:29'),
+(4, 'angelo', 'angelo@gmail.com', NULL, NULL, '$2y$12$Rg8g4G2ZjqhvMstvtXjFgu1RAXZEbXk5tk1Je4S7BrD.8gAI8oll6', NULL, '2024-05-30 23:04:10', '2024-05-30 23:04:10'),
+(5, 'Gino Carlo Rabina', 'gino@mail.com', NULL, NULL, '$2y$12$9mecf/.d6ZIbPEB2Vz7rDu3AVSr6UU4tdxE1bCjhwGI3YM4/M8Wfi', NULL, '2024-08-24 16:24:55', '2024-08-24 16:24:55'),
+(6, 'test', 'test@mail.com', NULL, NULL, '$2y$12$c1SE3zYfTGYRi0gKwv02V./Zg9QypYvAF0thbxHViqOut1ryFJ2Be', NULL, '2024-08-24 23:40:35', '2024-08-24 23:40:35');
 
 --
 -- Indexes for dumped tables
@@ -338,6 +383,12 @@ ALTER TABLE `seaviews`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `sea_grass_likes`
+--
+ALTER TABLE `sea_grass_likes`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -364,7 +415,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -388,13 +439,13 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `role_users`
 --
 ALTER TABLE `role_users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `seagrasspics`
 --
 ALTER TABLE `seagrasspics`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `seapics`
@@ -409,10 +460,16 @@ ALTER TABLE `seaviews`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `sea_grass_likes`
+--
+ALTER TABLE `sea_grass_likes`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
