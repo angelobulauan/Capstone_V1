@@ -49,6 +49,14 @@
                                                         <th>Abundance</th>
                                                         <td>{{ $d->abundance }}</td>
                                                     </tr>
+                                                    <tr>
+                                                        <th>Latitude</th>
+                                                        <td>{{ $d->lati }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Longtitude</th>
+                                                        <td>{{ $d->longti }}</td>
+                                                    </tr>
 
                                                     <tr>
                                                         <th>Date of Entry</th>
@@ -66,7 +74,7 @@
                                                 <form action="{{ route('admin.deleteseagrass', ['id' => $d->id]) }}"
                                                     method="get" class="selec">
                                                     @csrf @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger py-0">Delete Entry</button>
+                                                    <button type="submit" class="btn btn-danger py-0">Delete</button>
                                                 </form>
                                             </div>
                                         </div>

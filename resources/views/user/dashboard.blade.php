@@ -36,7 +36,7 @@
         }
 
         h3 {
-            font-size: 30px;
+            font-size: 60px;
             font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
             color: #ffffff; /* Darker text color */
             margin-bottom: 20px; /* Spacing below the title */
