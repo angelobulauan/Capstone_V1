@@ -132,7 +132,7 @@ Route::
         namespace('App\Http\Controllers\UserController')->prefix('user')->name('user.')->group(function () {
 
 
-            Route::resource('view', 'alluserCtrl', ['except' => ['destroy']]);
+           
             Route::get('/seagrass/{id}', 'seagrassview@index')->name('seagrass');
             Route::resource('view', 'seagrassview');
             Route::resource('maps', 'usermap');
@@ -147,7 +147,6 @@ Route::
         });
 
 
-Route::delete('/delete/{d_id}', [seagrasscontroller::class, 'delete'])->name('delete.ko');
 
 
 

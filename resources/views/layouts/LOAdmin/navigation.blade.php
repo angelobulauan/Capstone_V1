@@ -20,15 +20,11 @@
                         {{ __('Sea Grasses') }}
                     </x-nav-link>
                    
-                    <x-nav-link :href="route('user.view.index')" :active="request()->routeIs('Users')">
-                        {{ __('Users') }}
-                    </x-nav-link>
+                    
                     <x-nav-link :href="route('admin.add.index')" :active="request()->routeIs('Users')">
                         {{ __('Addnew') }}
                     </x-nav-link>
-                   {{-- <x-nav-link :href="route('admin.view.index')" :active="request()->routeIs('Users')">
-                        {{ __('Maps') }}
-                    </x-nav-link>--}}
+                   
                 </div>
             </div>
             
