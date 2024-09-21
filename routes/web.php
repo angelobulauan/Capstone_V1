@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController\alluserctrl;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserCTRL;
 use App\Models\RoleUser;
@@ -118,7 +119,9 @@ Route::
             Route::post('/update-photo/{id}/{photo}', 'seagrasscontroller@updatePhoto')->name('update-photo');
 
 
-
+       
+            Route::resource('/view', 'alluserctrl');
+            Route::get('/view', 'alluserctrl@index')->name('view');
 
 
 

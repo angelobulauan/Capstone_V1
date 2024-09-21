@@ -25,6 +25,9 @@
                         {{ __('Addnew') }}
                     </x-nav-link>
                    
+                    <x-nav-link :href="route('admin.view')" :active="request()->routeIs('Users')">
+                        {{ __('Users') }}
+                    </x-nav-link>
                 </div>
             </div>
             

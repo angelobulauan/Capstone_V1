@@ -33,12 +33,13 @@
 
                 <th scope="col">Name</th>
                 <th scope="col"> Email</th>
+                <th scope="col"> Password</th>
                 <th scope="col"> Action</th>
             </tr>
         </thead>
 
         <tbody>
-            @foreach($uploaded as $d)
+            @foreach($alluser as $d)
             <tr>
 
                 <td>
@@ -47,11 +48,15 @@
                 <td>
                 {{$d->email}}
                 </td>
+                <td>
+                {{$d->password}}
+                </td>
 
 
                 <td>
-                <div class="btn btn-primary">Edit</div>
-                <div class="btn btn-danger">Delete</div>
+                
+                <button class="btn btn-danger" disabled>Delete</button>
+
 
                 </td>
 
