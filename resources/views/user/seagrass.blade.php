@@ -50,9 +50,9 @@
                                         <a href="javascript:void(0);" class="dislikeBtn" data-id="{{ $d->id }}">
                                             <i class="fas fa fa-thumbs-down fa-2x text-red-300"></i>
                                             <span
-                                                id="dislike-count-{{ $d->id }}">{{ $interaction->dislikes ?? 0 }}</span>
+                                               id="dislike-count-{{ $d->id }}">{{ $interaction->dislikes ?? 0 }}</span>
                                         </a>
-                                        <p class="text-danger pl-4 mt-4"><span>{{ $interaction->views ?? 0 }}</span> Views
+                                        <p class="text-danger pl-4 mt-4"><span>{{ $interaction->views ?? 0 }}</span> <i class="fa fa-eye" aria-hidden="true"></i>   
                                         </p>
                                     </div>
                                 </div>
