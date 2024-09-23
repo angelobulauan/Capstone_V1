@@ -84,6 +84,18 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+
+            <x-responsive-nav-link :href="route('admin.myEntries',['id' => Auth::user()->id])" :active="request()->routeIs('Sea Grasses')">
+                {{ __('Sea Grasses') }}
+            </x-responsive-nav-link>
+
+            <x-responsive-nav-link :href="route('admin.add.index')" :active="request()->routeIs('Addnew')">
+                {{ __('Addnew') }}
+            </x-responsive-nav-link>
+
+            <x-responsive-nav-link :href="route('admin.view')" :active="request()->routeIs('Users')">
+                {{ __('Users') }}
+            </x-responsive-nav-link>
         </div>
 
         <!-- Responsive Settings Options -->
