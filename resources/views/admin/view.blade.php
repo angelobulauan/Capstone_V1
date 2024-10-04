@@ -31,10 +31,22 @@
         <thead class="table-dark">
             <tr>
 
-                <th scope="col">Name</th>
-                <th scope="col"> Email</th>
-                <th scope="col"> Password</th>
-                <th scope="col"> Action</th>
+            <th scope="col">
+    <i class="fas fa-user"></i> Name
+</th>
+
+<th scope="col">
+    <i class="fas fa-envelope"></i> Email
+</th>
+
+<th scope="col">
+    <i class="fas fa-lock"></i> Password
+</th>
+
+<th scope="col">
+    <i class="fas fa-cogs"></i> Action
+</th>
+
             </tr>
         </thead>
 
@@ -55,7 +67,10 @@
 
                 <td>
                 
-                <button class="btn btn-danger" disabled>Delete</button>
+                <button class="btn btn-danger" disabled>
+    <i class="fas fa-trash-alt"></i> Delete
+</button>
+
 
 
                 </td>

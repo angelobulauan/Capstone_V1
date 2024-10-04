@@ -68,13 +68,19 @@
                                         <div class="row mt-2">
                                             <div class="col-sm-12 d-flex justify-content-end align-items-center">
 
-                                                <button class="btn btn-primary me-2 py-0" data-bs-toggle="modal"
-                                                    data-bs-target="#edit-entries-{{ $d->id }}">Edit</button>
+                                            <button class="btn btn-primary me-2 py-0" data-bs-toggle="modal"
+        data-bs-target="#edit-entries-{{ $d->id }}">
+    <i class="fas fa-edit"></i> Edit
+</button>
+
 
                                                 <form action="{{ route('admin.deleteseagrass', ['id' => $d->id]) }}"
                                                     method="get" class="selec">
                                                     @csrf @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger py-0">Delete</button>
+                                                    <button type="submit" class="btn btn-danger py-0">
+    <i class="fas fa-trash-alt"></i> Delete
+</button>
+
                                                 </form>
                                             </div>
                                         </div>
