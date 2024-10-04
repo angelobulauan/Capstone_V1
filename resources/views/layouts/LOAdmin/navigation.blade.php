@@ -12,22 +12,26 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Home') }}
-                    </x-nav-link>
+                <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+    <i class="fas fa-home"style="margin-right: 8px;"></i> {{ __('Home') }}
+</x-nav-link>
+
                    
-                    <x-nav-link :href="route('admin.myEntries',['id' => Auth::user()->id] )" :active="request()->routeIs('Sea.Grasses')">
-                        {{ __('Sea Grasses') }}
-                    </x-nav-link>
+<x-nav-link :href="route('admin.myEntries', ['id' => Auth::user()->id])" :active="request()->routeIs('Sea.Grasses')">
+    <i class="fas fa-leaf"style="margin-right: 8px;"></i> {{ __('Sea Grasses') }}
+</x-nav-link>
+
                    
                     
-                    <x-nav-link :href="route('admin.add.index')" :active="request()->routeIs('Users')">
-                        {{ __('Addnew') }}
-                    </x-nav-link>
+<x-nav-link :href="route('admin.add.index')" :active="request()->routeIs('Users')">
+    <i class="fas fa-plus"style="margin-right: 8px;"></i> {{ __('Add New') }}
+</x-nav-link>
+
                    
-                    <x-nav-link :href="route('admin.view')" :active="request()->routeIs('Users')">
-                        {{ __('Users') }}
-                    </x-nav-link>
+<x-nav-link :href="route('admin.view')" :active="request()->routeIs('Users')">
+    <i class="fas fa-users"style="margin-right: 8px;"></i> {{ __('Users') }}
+</x-nav-link>
+
                 </div>
             </div>
             
@@ -48,19 +52,20 @@
                     </x-slot>
 
                     <x-slot name="content">
-                        <x-dropdown-link :href="route('profile.edit')">
-                            {{ __('Profile') }}
-                        </x-dropdown-link>
+                    <x-dropdown-link :href="route('profile.edit')">
+    <i class="fas fa-user"></i> {{ __('Profile') }}
+</x-dropdown-link>
+
 
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
 
                             <x-dropdown-link :href="route('logout')"
-                                    onclick="event.preventDefault();
-                                                this.closest('form').submit();">
-                                {{ __('Log Out') }}
-                            </x-dropdown-link>
+                 onclick="event.preventDefault(); this.closest('form').submit();">
+    <i class="fas fa-sign-out-alt"></i> {{ __('Log Out') }}
+</x-dropdown-link>
+
                         </form>
                     </x-slot>
                 </x-dropdown>
@@ -81,22 +86,25 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
-            </x-responsive-nav-link>
+        <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+    <i class="fas fa-home"></i> {{ __('Home') }}
+</x-responsive-nav-link>
 
-            <x-responsive-nav-link :href="route('admin.myEntries',['id' => Auth::user()->id])" :active="request()->routeIs('Sea Grasses')">
-                {{ __('Sea Grasses') }}
-            </x-responsive-nav-link>
 
-            <x-responsive-nav-link :href="route('admin.add.index')" :active="request()->routeIs('Addnew')">
-                {{ __('Addnew') }}
-            </x-responsive-nav-link>
+<x-responsive-nav-link :href="route('admin.myEntries', ['id' => Auth::user()->id])" :active="request()->routeIs('Sea Grasses')">
+    <i class="fas fa-leaf"></i> {{ __('Sea Grasses') }}
+</x-responsive-nav-link>
 
-            <x-responsive-nav-link :href="route('admin.view')" :active="request()->routeIs('Users')">
-                {{ __('Users') }}
-            </x-responsive-nav-link>
-        </div>
+
+<x-responsive-nav-link :href="route('admin.add.index')" :active="request()->routeIs('Addnew')">
+    <i class="fas fa-plus"></i> {{ __('Add New') }}
+</x-responsive-nav-link>
+
+
+<x-responsive-nav-link :href="route('admin.view')" :active="request()->routeIs('Users')">
+    <i class="fas fa-users"></i> {{ __('Users') }}
+</x-responsive-nav-link>
+
 
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
@@ -106,19 +114,20 @@
             </div>
 
             <div class="mt-3 space-y-1">
-                <x-responsive-nav-link :href="route('profile.edit')">
-                    {{ __('Profile') }}
-                </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('profile.edit')">
+    <i class="fas fa-user"></i> {{ __('Profile') }}
+</x-responsive-nav-link>
+
 
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
 
                     <x-responsive-nav-link :href="route('logout')"
-                            onclick="event.preventDefault();
-                                        this.closest('form').submit();">
-                        {{ __('Log Out') }}
-                    </x-responsive-nav-link>
+                       onclick="event.preventDefault(); this.closest('form').submit();">
+    <i class="fas fa-sign-out-alt"></i> {{ __('Log Out') }}
+</x-responsive-nav-link>
+
                 </form>
             </div>
         </div>

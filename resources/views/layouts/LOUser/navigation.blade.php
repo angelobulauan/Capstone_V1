@@ -13,25 +13,61 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Home') }}
-                    </x-nav-link>
+                <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+    <i class="fas fa-home"style="margin-right: 8px;"></i> {{-- FontAwesome icon --}}
+                {{ __('Home') }}
+                </x-nav-link>
 
-                    <x-nav-link :href="route('user.article')" :active="request()->routeIs('Article')">
-                        {{ __('Article') }}
-                    </x-nav-link>
 
-                    <x-nav-link :href="route('user.view.index')" :active="request()->routeIs('seagrass.view')">
-                        {{ __('Sea Grasses') }}
-                    </x-nav-link>
+                <x-nav-link :href="route('user.article')" :active="request()->routeIs('Article')">
+    <i class="fas fa-newspaper"style="margin-right: 8px;"></i> {{-- FontAwesome icon --}}
+    {{ __('Article') }}
+</x-nav-link>
 
-                    <x-nav-link :href="route('user.map')" :active="request()->routeIs('seagrass.view')">
-                        {{ __('Maps') }}
-                    </x-nav-link>
 
-                    <x-nav-link :href="route('user.contact')" :active="request()->routeIs('home')">
-                        {{ __('Contact Us') }}
-                    </x-nav-link>
+<div class="hidden sm:flex sm:items-center sm:ms-6">
+    <x-dropdown align="right" width="48">
+        <x-slot name="trigger">
+        <button class="inline-flex items-center px-4 py-2 text-base leading-5 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
+    <i class="fas fa-leaf" style="margin-right: 8px;"></i> <!-- Main icon -->
+    {{ __('Sea Grasses') }}
+    <i class="fas fa-caret-down" style="margin-left: 8px;"></i> <!-- Dropdown indicator -->
+</button>
+
+        </x-slot>
+
+        <x-slot name="content">
+            <x-dropdown-link :href="route('user.view.index')">
+                <i class="fas fa-eye" style="margin-right: 8px;"></i> <!-- Eye icon for "View All" -->
+                {{ __('View All Sea Grasses') }}
+            </x-dropdown-link>
+            <x-dropdown-link :href="route('user.view.index')">
+                <i class="fas fa-plus" style="margin-right: 8px;"></i> <!-- Plus icon for "Add New" -->
+                {{ __('Add New Sea Grass') }}
+            </x-dropdown-link>
+            <x-dropdown-link :href="route('user.view.index')">
+    <i class="fas fa-info-circle" style="margin-right: 8px;"></i> <!-- Info icon for "Status" -->
+    {{ __('Status Sea Grass') }}
+</x-dropdown-link>
+
+        </x-slot>
+    </x-dropdown>
+</div>
+
+
+
+<x-nav-link :href="route('user.map')" :active="request()->routeIs('seagrass.view')">
+    <i class="fas fa-map-marked-alt"style="margin-right: 8px;"></i> {{-- FontAwesome icon --}}
+    {{ __('Maps') }}
+</x-nav-link>
+
+
+<x-nav-link :href="route('user.contact')" :active="request()->routeIs('home')"> 
+    <i class="fas fa-envelope" style="margin-right: 8px;"></i> {{-- FontAwesome icon with space --}}
+    {{ __('Contact Us') }}
+</x-nav-link>
+
+
                 </div>
             </div>
 
@@ -53,19 +89,20 @@
                     </x-slot>
 
                     <x-slot name="content">
-                        <x-dropdown-link :href="route('profile.edit')">
-                            {{ __('Profile') }}
-                        </x-dropdown-link>
+                    <x-dropdown-link :href="route('profile.edit')">
+    <i class="fas fa-user"></i> {{ __('Profile') }}
+</x-dropdown-link>
+
 
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
 
                             <x-dropdown-link :href="route('logout')"
-                                    onclick="event.preventDefault();
-                                                this.closest('form').submit();">
-                                {{ __('Log Out') }}
-                            </x-dropdown-link>
+                 onclick="event.preventDefault(); this.closest('form').submit();">
+    <i class="fas fa-sign-out-alt"></i> {{ __('Log Out') }}
+</x-dropdown-link>
+
                         </form>
                     </x-slot>
                 </x-dropdown>
@@ -86,25 +123,30 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                {{ __('Home') }}
-            </x-responsive-nav-link>
+        <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" class="flex items-center">
+    <i class="fas fa-home" style="margin-right: 8px;"></i> <!-- Home icon -->
+    {{ __('Home') }}
+</x-responsive-nav-link>
 
-            <x-responsive-nav-link :href="route('user.article')" :active="request()->routeIs('Article')">
-                {{ __('Article') }}
-            </x-responsive-nav-link>
 
-            <x-responsive-nav-link :href="route('user.view.index')" :active="request()->routeIs('Sea Grasses')">
-                {{ __('Sea Grasses') }}
-            </x-responsive-nav-link>
+<x-responsive-nav-link :href="route('user.article')" :active="request()->routeIs('Article')" class="flex items-center no-underline">
+    <i class="fas fa-newspaper" style="margin-right: 8px;"></i> <!-- Article icon -->
+    {{ __('Article') }}
+</x-responsive-nav-link>
 
-            <x-responsive-nav-link :href="route('user.map')" :active="request()->routeIs('Maps')">
-                {{ __('Maps') }}
-            </x-responsive-nav-link>
 
-            <x-responsive-nav-link :href="route('user.contact')" :active="request()->routeIs('Contact Us')">
-                {{ __('Contact Us') }}
-            </x-responsive-nav-link>
+<x-responsive-nav-link :href="route('user.view.index')" :active="request()->routeIs('Sea Grasses')">
+    <i class="fas fa-leaf"></i> {{ __('Sea Grasses') }} 
+</x-responsive-nav-link>
+
+
+<x-responsive-nav-link :href="route('user.map')" :active="request()->routeIs('Maps')">
+    <i class="fas fa-map"></i> {{ __('Maps') }}
+</x-responsive-nav-link>
+
+<x-responsive-nav-link :href="route('user.contact')" :active="request()->routeIs('Contact Us')">
+    <i class="fas fa-envelope"></i> {{ __('Contact Us') }}
+</x-responsive-nav-link>
 
         </div>
 
@@ -116,19 +158,19 @@
             </div>
 
             <div class="mt-3 space-y-1">
-                <x-responsive-nav-link :href="route('profile.edit')">
-                    {{ __('Profile') }}
-                </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('profile.edit')">
+    <i class="fas fa-user"></i> {{ __('Profile') }}
+</x-responsive-nav-link>
 
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
 
                     <x-responsive-nav-link :href="route('logout')"
-                            onclick="event.preventDefault();
-                                        this.closest('form').submit();">
-                        {{ __('Log Out') }}
-                    </x-responsive-nav-link>
+                       onclick="event.preventDefault(); this.closest('form').submit();">
+    <i class="fas fa-sign-out-alt"></i> {{ __('Log Out') }}
+</x-responsive-nav-link>
+
                 </form>
             </div>
         </div>

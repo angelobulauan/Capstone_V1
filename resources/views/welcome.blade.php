@@ -162,7 +162,10 @@
         <h1>Sea Grasses </h1>
         <h2> of Sta.Ana, Cagayan <span></span></h2>
         <p>Welcome!  Seagrasses play very important roles in marine ecosystem and we need to conserve and take care for these magestic species.</p>
-             <a href="{{ route('login') }}">{{ __('Get Started') }}</a>
+        <a href="{{ route('login') }}">
+    <i class="fas fa-sign-in-alt" "style="margin-right: 8px;"></i> {{ __('Get Started') }}
+</a>
+
              
     </div>
     <div class="media-icons">

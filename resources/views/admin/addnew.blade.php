@@ -62,37 +62,30 @@
                             <div class="col-md-6">
                                 <label for="name" class="form-label">Name</label>
                                 <input type="text" name="name" class="form-control" autocomplete="off"
-                                    placeholder="Name of the Sea Grass">
+                                    placeholder="Name of the Sea Grass" required>
                             </div>
                             <br>
                             <div class="col-md-6">
                                 <label for="scientificname" class="form-label">Scientific Name</label>
                                 <input type="text" name="scientificname" class="form-control" autocomplete="off"
-                                    placeholder="Scientific Name of the Sea Grass">
+                                    placeholder="Scientific Name of the Sea Grass"required>
                             </div>
                             <br>
                             <div class="col-12">
                                 <label for="description" class="form-label">Description</label>
-                                <textarea class="form-control" name="description" rows="3" placeholder="Describe the look and texture"></textarea>
+                                <textarea class="form-control" name="description" rows="3" autocomplete="off" placeholder="Describe the look and texture" required></textarea>
                             </div>
                             <div class="row">
                                 <div class="col">
                                     <br>
-                                    <label>Location</label>
-                                    <select class="form-select" name="location">
-                                        <option hidden>Select Location</option>
-                                        <!-- Options here -->
-                                        <option value="Batu-Parada, Sta. Ana, Cagayan">Batu-Parada, Sta. Ana, Cagayan
-                                        </option>
-                                        <option value="Casagan, Sta. Ana, Cagayan">Casagan, Sta. Ana, Cagayan</option>
-                                        <!-- Add the rest of the options -->
-                                    </select>
+                                    <label>Barangay, Town, Province</label>
+                                    <input type="text"  name="location"   class="form-control" autocomplete="off" placeholder="Enter the Location"required>
                                 </div>
                                 <div class="col">
                                     <br>
                                     <label>Abundance</label>
                                     <input type="text" name="abundance" class="form-control"
-                                        placeholder="Estimated Length">
+                                    autocomplete="off" placeholder="Estimated Length" required>
                                 </div>
                             </div>
 
@@ -100,12 +93,12 @@
                                 <div class="col-5">
                                     <label for="latitude" class="form-label">Latitude</label>
                                     <input type="text" class="form-control" name="latitude" id="latitude"
-                                        placeholder="Enter latitude" required>
+                                    autocomplete="off"  placeholder="Enter latitude" required>
                                 </div>
                                 <div class="col-6">
                                     <label for="longtitude" class="form-label">Longtitude</label>
                                     <input type="text" class="form-control" name="longtitude" id="longtitude"
-                                        placeholder="Enter longtitude" required>
+                                    autocomplete="off" placeholder="Enter longtitude" required>
                                 </div>
                                 <div class="col-1 d-flex align-items-center mt-4">
                                     <button id="openModal" type="button" class="btn btn-primary">
@@ -128,7 +121,10 @@
                             </div>
                             <div class="col-12">
                                 <br>
-                                <button type="submit" class="btn btn-primary">Save</button>
+                                <button type="submit" class="btn btn-primary">
+    <i class="fas fa-save"></i> Save
+</button>
+
                             </div>
                         </div>
                     </div>
