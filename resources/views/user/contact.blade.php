@@ -19,7 +19,7 @@
 
 .contact .container{
     height: 100vh;
-    min-height: 700px;
+    min-height: 300px;
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr;
@@ -29,33 +29,39 @@
     max-width: 80rem;
     margin: 0 auto;
     /* background-color: white; */
-    padding-bottom: 150px;
+    padding-bottom: 250px;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     align-items: center;
     z-index: 3;
     justify-content: center;
     border-radius: 60px;
+    text-align: center;
 }
-.contact-heading h1{
-font-weight: 600;
-color: var(--text color);
-font-size: 3.5rem;
-line-height: 0.9;
-white-space: nowrap;
-position: relative;
-margin-bottom: 1.2rem;
+.contact-heading h1 {
+    font-weight: 600;
+    color: white;
+    font-size: 3.5rem;
+    line-height: 0.9;
+    white-space: nowrap;
+    position: relative;
+    margin-bottom: 1.2rem;
 }
-.contact-heading h1 span{
-    color: var(--main color);
+
+.contact-heading h1 span {
+    display: inline-block;
+    border-right: 2px solid; /* Simulate cursor */
+    white-space: nowrap; /* Prevent text from wrapping */
+    overflow: hidden; /* Hide text initially */
 }
 .text{
-    color: grey;
+    color: white;
     line-height: 1.1;
     font-size: 1rem;
 }
 .text a{
-    text-decoration: none;
+    text-decoration: underline;
+    font-weight: 700;
 }
  
 .form-wrapper{
@@ -63,7 +69,7 @@ margin-bottom: 1.2rem;
 }
 .contact-form{
     display: grid;
-    margin-top: 2.55rem;
+    margin-top: 1.55rem;
     grid-template-columns: repeat(2, 1fr);
     column-gap:2rem;
     row-gap: 1rem;
@@ -180,7 +186,7 @@ textarea.contact-input ~ .icon{
     cursor: pointer;
     opacity: 0;
 }
-.back-video {
+.back-img {
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -189,36 +195,22 @@ textarea.contact-input ~ .icon{
             left: 0;
             z-index: 1;
         }
-        .transparent-card {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 2;
-            background-color: rgba(255, 255, 255, 0);
-            padding: 120px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            max-width: 600px;
-            width: 100%;
-            text-align: center; /* Center the content horizontally */
-        }
-
+       
 </style>
 
 <body>
-    <br>
-    <main>
+ 
+   
         <section class="contact">
-        <video autoplay loop muted playsinline src="{{ asset('img/wl/contact.mp4') }}" class="back-video"
-            type="video/mp4"></video>
+        <img  src="{{ asset('img//contact.png') }}" class="back-img"></img>
         
             <div class="container">
-            <div class="transparent-card">
+           
                 <div class="left">
                     <div class="form-wrapper">
-                        <div class="contact-heading">
-                            <h1>Let's work together <span></span></h1>
+                    <div class="contact-heading">
+                    <div class="contact-heading">
+    <h1> <span id="typing-text">Let's work together!</span></h1>
                             <p class="text">Or reach us via: <a href="#">
                                 Seagrass@gmail.com </a></p>
                         </div>
@@ -258,10 +250,10 @@ textarea.contact-input ~ .icon{
                         </form>
                     </div>
                 </div>
-            </div>
+           
         </div>
         </section>
-    </main>
+    
 </body>
 <script>
     const inputs = document.querySelectorAll(".contact-input");
@@ -280,5 +272,8 @@ textarea.contact-input ~ .icon{
         });
      
     });
+    
+
+
 </script>
 @endsection

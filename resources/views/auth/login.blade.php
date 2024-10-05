@@ -116,7 +116,7 @@
             <div class="auth-container">
                 
                 <form method="POST" action="{{ route('login') }}">
-                    <img src="{{ asset('img/bg.jpg') }}" alt="Default Icon" loading="lazy" />
+                    <img src="{{ asset('img/bg.png') }}" alt="Default Icon" loading="lazy" />
                     <h1>LOGIN</h1>
                     @csrf
                     <div class="input-group mb-3">

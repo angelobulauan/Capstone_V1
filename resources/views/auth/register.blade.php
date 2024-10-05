@@ -68,7 +68,7 @@
             display: flex;
             flex-direction: column;
             box-shadow: 0 0 10px #00000033;
-            padding: 3rem 3rem;
+            padding: 1em 2rem;
             border-radius: .5rem;
             background: white;
             
@@ -88,9 +88,9 @@
             max-width: 400px;
             margin-inline: auto;
             padding: 0 .5rem 3rem .5rem;
-            text-transform: uppercase;
-            font-family:Verdana, Geneva, Tahoma, sans-serif;
+            font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
             color: white;
+            font-size: 25px;
         }
         .auth-container h1{
             color: black;
@@ -118,7 +118,7 @@
             <div class="auth-container">
 
                 <form method="POST" action="{{ route('register') }}">
-                    <img src="{{ asset('img/bg.jpg') }}" alt="Default Icon" loading="lazy" />
+                    <img src="{{ asset('img/bg.png') }}" alt="Default Icon" loading="lazy" />
                     <h1>Register</h1>
                     @csrf
                     <div class="input-group mb-3">

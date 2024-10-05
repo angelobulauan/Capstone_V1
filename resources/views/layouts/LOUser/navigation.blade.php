@@ -7,7 +7,7 @@
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
                         <!-- Use bg.jpg as the application logo -->
-                        <img src="{{ asset('img/bg.jpg') }}" alt="Logo" class="block h-9 w-10" />
+                        <img src="{{ asset('img/bg1.png') }}" alt="Logo" class="block h-9 w-10" />
                     </a>
                 </div>
 
@@ -20,8 +20,8 @@
 
 
                 <x-nav-link :href="route('user.article')" :active="request()->routeIs('Article')">
-    <i class="fas fa-newspaper"style="margin-right: 8px;"></i> {{-- FontAwesome icon --}}
-    {{ __('Article') }}
+    <i class="fas fa-info"style="margin-right: 8px;"></i> {{-- FontAwesome icon --}}
+    {{ __('About') }}
 </x-nav-link>
 
 
@@ -38,16 +38,16 @@
 
         <x-slot name="content">
             <x-dropdown-link :href="route('user.view.index')">
-                <i class="fas fa-eye" style="margin-right: 8px;"></i> <!-- Eye icon for "View All" -->
+                <i class="fas fa-eye" ></i> <!-- Eye icon for "View All" -->
                 {{ __('View All Sea Grasses') }}
             </x-dropdown-link>
             <x-dropdown-link :href="route('user.view.index')">
-                <i class="fas fa-plus" style="margin-right: 8px;"></i> <!-- Plus icon for "Add New" -->
+                <i class="fas fa-plus" ></i> <!-- Plus icon for "Add New" -->
                 {{ __('Add New Sea Grass') }}
             </x-dropdown-link>
             <x-dropdown-link :href="route('user.view.index')">
-    <i class="fas fa-info-circle" style="margin-right: 8px;"></i> <!-- Info icon for "Status" -->
-    {{ __('Status Sea Grass') }}
+    <i class="fas fa-info-circle" ></i> <!-- Info icon for "Status" -->
+    {{ __('Status Uploaded') }}
 </x-dropdown-link>
 
         </x-slot>
