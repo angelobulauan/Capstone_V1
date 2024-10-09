@@ -73,19 +73,21 @@
                             <br>
                             <div class="col-12">
                                 <label for="description" class="form-label">Description</label>
-                                <textarea class="form-control" name="description" rows="3" autocomplete="off" placeholder="Describe the look and texture" required></textarea>
+                                <textarea class="form-control" name="description" rows="3" autocomplete="off"
+                                    placeholder="Describe the look and texture" required></textarea>
                             </div>
                             <div class="row">
                                 <div class="col">
                                     <br>
                                     <label>Barangay, Town, Province</label>
-                                    <input type="text"  name="location"   class="form-control" autocomplete="off" placeholder="Enter the Location"required>
+                                    <input type="text" name="location" class="form-control" autocomplete="off"
+                                        placeholder="Enter the Location"required>
                                 </div>
                                 <div class="col">
                                     <br>
                                     <label>Abundance</label>
-                                    <input type="text" name="abundance" class="form-control"
-                                    autocomplete="off" placeholder="Estimated Length" required>
+                                    <input type="text" name="abundance" class="form-control" autocomplete="off"
+                                        placeholder="Estimated Length" required>
                                 </div>
                             </div>
 
@@ -93,12 +95,12 @@
                                 <div class="col-5">
                                     <label for="latitude" class="form-label">Latitude</label>
                                     <input type="text" class="form-control" name="latitude" id="latitude"
-                                    autocomplete="off"  placeholder="Enter latitude" required>
+                                        autocomplete="off" placeholder="Enter latitude" required>
                                 </div>
                                 <div class="col-6">
                                     <label for="longtitude" class="form-label">Longtitude</label>
                                     <input type="text" class="form-control" name="longtitude" id="longtitude"
-                                    autocomplete="off" placeholder="Enter longtitude" required>
+                                        autocomplete="off" placeholder="Enter longtitude" required>
                                 </div>
                                 <div class="col-1 d-flex align-items-center mt-4">
                                     <button id="openModal" type="button" class="btn btn-primary">
@@ -122,8 +124,8 @@
                             <div class="col-12">
                                 <br>
                                 <button type="submit" class="btn btn-primary">
-    <i class="fas fa-save"></i> Save
-</button>
+                                    <i class="fas fa-save"></i> Save
+                                </button>
 
                             </div>
                         </div>
@@ -153,108 +155,78 @@
 
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_API_KEY') }}"></script>
         <script>
             $(document).ready(function() {
-                // for the modal
                 let map;
                 let marker;
 
-                const locations = {
-                    "Batu-Parada, Sta. Ana, Cagayan": {
-                        lat: 18.4650,
-                        lng: 122.1450
+                map = new google.maps.Map(document.getElementById('map'), {
+                    center: {
+                        lat: 18.4816,
+                        lng: 122.1557
                     },
-                    "Casagan, Sta. Ana, Cagayan": {
-                        lat: 18.4595,
-                        lng: 122.1300
-                    }
-                };
+                    zoom: 13
+                });
 
-                // Initialize the map
-                map = L.map('map').setView([18.4816, 122.1557], 13);
-
-                // Add a tile layer to the map (using OpenStreetMap)
-                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                    maxZoom: 19,
-                }).addTo(map);
-
-                // Initialize the marker and add it to the map
-                marker = L.marker([18.4816, 122.1557], {
+                marker = new google.maps.Marker({
+                    position: {
+                        lat: 18.4816,
+                        lng: 122.1557
+                    },
+                    map: map,
                     draggable: true
-                }).addTo(map);
+                });
 
-                // Open the modal and invalidate the map size
                 $('#openModal').on('click', function() {
                     $('#exampleModal').fadeIn();
                     setTimeout(function() {
-                        map.invalidateSize();
+                        google.maps.event.trigger(map, 'resize');
+                        map.setCenter(marker.getPosition());
                     }, 100);
                 });
 
-                // Close the modal
                 $('.close, #closeModal').on('click', function() {
                     $('#exampleModal').fadeOut();
                 });
 
-                // Close the modal when clicking outside the modal content
-                $(window).on('click', function(event) {
-                    if ($(event.target).is('#exampleModal')) {
-                        $('#exampleModal').fadeOut();
-                    }
-                });
-
-                // Save the selected coordinates when "Save Location" is clicked
                 $('#saveLocation').on('click', function() {
-                    const lat = marker.getLatLng().lat.toFixed(6);
-                    const lng = marker.getLatLng().lng.toFixed(6);
-                    $('input[name="latitude"]').val(lat);
-                    $('input[name="longtitude"]').val(lng);
+                    const lat = marker.getPosition().lat();
+                    const lng = marker.getPosition().lng();
+                    $('input[name="latitude"]').val(lat.toFixed(6));
+                    $('input[name="longtitude"]').val(lng.toFixed(6));
                     $('#exampleModal').fadeOut();
                 });
 
-                // Update map when a location is selected
-                $('select[name="location"]').on('change', function() {
-                    const selectedLocation = $(this).val();
-                    const coordinates = locations[selectedLocation];
+                // for the submission
+                $('#seagrassForm').on('submit', function(e) {
+                    e.preventDefault();
 
-                    if (coordinates) {
-                        map.setView([coordinates.lat, coordinates.lng], 13);
-                        marker.setLatLng([coordinates.lat, coordinates.lng]);
-                        $('input[name="latitude"]').val(coordinates.lat.toFixed(6));
-                        $('input[name="longtitude"]').val(coordinates.lng.toFixed(6));
-                    }
-                });
-            });
+                    let formData = new FormData(this);
 
-
-            // for the submission
-            $('#seagrassForm').on('submit', function(e) {
-                e.preventDefault();
-
-                let formData = new FormData(this);
-
-                $.ajax({
-                    url: "{{ route('admin.addNew') }}",
-                    method: "POST",
-                    data: formData,
-                    contentType: false,
-                    processData: false,
-                    success: function(response) {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Success',
-                            text: response.message,
-                        }).then(function() {
-                            window.location.href = "{{ route('admin.add.index') }}";
-                        });
-                    },
-                    error: function(response) {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Error',
-                            text: response.responseJSON.message,
-                        });
-                    }
+                    $.ajax({
+                        url: "{{ route('admin.addNew') }}",
+                        method: "POST",
+                        data: formData,
+                        contentType: false,
+                        processData: false,
+                        success: function(response) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Success',
+                                text: response.message,
+                            }).then(function() {
+                                window.location.href = "{{ route('admin.add.index') }}";
+                            });
+                        },
+                        error: function(response) {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error',
+                                text: response.responseJSON.message,
+                            });
+                        }
+                    });
                 });
             });
         </script>
