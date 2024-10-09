@@ -52,7 +52,7 @@
                                             <span
                                                id="dislike-count-{{ $d->id }}">{{ $interaction->dislikes ?? 0 }}</span>
                                         </a>
-                                        <p class="text-danger pl-4 mt-4"><span>{{ $interaction->views ?? 0 }}</span> <i class="fa fa-eye" aria-hidden="true"></i>   
+                                        <p class="text-danger pl-4 mt-4"><span>{{ $interaction->views ?? 0 }}</span> <i class="fa fa-eye" aria-hidden="true"></i>
                                         </p>
                                     </div>
                                 </div>
@@ -87,7 +87,7 @@
             </div>
         </div>
     @endforeach
-
+    <script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_API_KEY') }}"></script>
     <script>
         $(document).ready(function() {
             // Show map and initialize it on button click
@@ -122,23 +122,23 @@
 
             // Map initialization function
             function initializeMap(id) {
-                var map = L.map('map-' + id).setView([0, 0], 2);
-
-                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                    maxZoom: 18,
-                    attribution: '© OpenStreetMap'
-                }).addTo(map);
+                var map = new google.maps.Map(document.getElementById('map-' + id), {
+                    center: {lat: 0, lng: 0},
+                    zoom: 2
+                });
 
                 // Find the data for the current ID
                 @foreach ($myEntry as $d)
                     if ({{ $d->id }} == id) {
-                        L.marker([{{ $d->lati }}, {{ $d->longti }}])
-                            .addTo(map)
-                            .bindPopup("Location: {{ $d->lati }}, {{ $d->longti }}")
-                            .openPopup();
+                        var marker = new google.maps.Marker({
+                            position: {lat: {{ $d->lati }}, lng: {{ $d->longti }}},
+                            map: map,
+                            title: "{{ $d->name }}"
+                        });
 
                         // Center map on the marker
-                        map.setView([{{ $d->lati }}, {{ $d->longti }}], 13);
+                        map.setCenter({lat: {{ $d->lati }}, lng: {{ $d->longti }}});
+                        map.setZoom(13);
                     }
                 @endforeach
             }
