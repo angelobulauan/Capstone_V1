@@ -38,6 +38,14 @@ class seagrasscontroller extends Controller
         $seaview->status = 'approved';
         $seaview->save();
 
+        DB::table('request_notifs')->insert([
+            'req_id' => $seaview->id,
+            'u_id' => $seaview->u_id,
+            'message' => 'Your Request has been Approved',
+            'status' => 'Approved',
+            'archive' => 0
+        ]);
+
         return redirect()->back()->with('success', 'Seagrass entry approved successfully');
     } else {
         return redirect()->back()->with('error', 'Seagrass entry status cannot be changed');
@@ -50,6 +58,14 @@ class seagrasscontroller extends Controller
         $seaview = Seaview::find($id);
         $seaview->status = 'rejected';
         $seaview->delete();
+
+        DB::table('request_notifs')->insert([
+            'req_id' => $seaview->id,
+            'u_id' => $seaview->u_id,
+            'message' => 'Your Request has been Rejected',
+            'status' => 'Rejected',
+            'archive' => 0
+        ]);
 
         return redirect()->back()->with('success', 'Seagrass entry rejected successfully');
     }

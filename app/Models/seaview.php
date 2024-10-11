@@ -15,7 +15,11 @@ class seaview extends Model
         'description',
         'location',
         'abundance',
-        'photo'
+        'photo',
+        'u_id',
+        'status',
+        'req_id'
+
     ];
     public function interaction()
     {

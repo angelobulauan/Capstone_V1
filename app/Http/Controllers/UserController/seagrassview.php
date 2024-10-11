@@ -70,6 +70,12 @@ class seagrassview extends Controller
             $seaview->u_id = Auth::user()->id;
             $seaview->status = 'pending';
 
+            // Get the latest req_id
+            $latestReqId = Seaview::latest('req_id')->first()->req_id ?? 0;
+
+            // Increment the req_id
+            $seaview->req_id = $latestReqId + 1;
+
             // Save the Seaview instance to the database first
             $seaview->save();
 
@@ -100,7 +106,6 @@ class seagrassview extends Controller
             return response()->json(['message' => 'Failed to save data. Please try again.'], 500);
         }
     }
-
     /**
      * Display the specified resource.
      */

@@ -13,23 +13,20 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        <i class="fas fa-home"style="margin-right: 8px;"></i> {{-- FontAwesome icon --}}
-                        {{ __('Home') }}
+                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" class="flex items-center text-black dark:text-white">
+                        <i class="fas fa-home" style="margin-right: 8px;">Home</i>
                     </x-nav-link>
 
-
-                    <x-nav-link :href="route('user.article')" :active="request()->routeIs('Article')">
+                    <x-nav-link :href="route('user.article')" :active="request()->routeIs('Article')" class="flex items-center text-black dark:text-white">
                         <i class="fas fa-info"style="margin-right: 8px;"></i> {{-- FontAwesome icon --}}
                         {{ __('About') }}
                     </x-nav-link>
-
 
                     <div class="hidden sm:flex sm:items-center sm:ms-6">
                         <x-dropdown align="right" width="48">
                             <x-slot name="trigger">
                                 <button
-                                    class="inline-flex items-center px-4 py-2 text-base leading-5 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
+                                    class="inline-flex items-center px-4 py-2 text-base leading-5 font-medium rounded-md text-black dark:text-white hover:bg-blue-800 hover:text-white">
                                     <i class="fas fa-leaf" style="margin-right: 8px;"></i> <!-- Main icon -->
                                     {{ __('Sea Grasses') }}
                                     <i class="fas fa-caret-down" style="margin-left: 8px;"></i>
@@ -39,35 +36,105 @@
                             </x-slot>
 
                             <x-slot name="content">
-                                <x-dropdown-link :href="route('user.view.index')">
+                                <x-dropdown-link :href="route('user.view.index')" class="flex items-center text-black dark:text-white hover:bg-blue-800 hover:text-white">
                                     <i class="fas fa-eye"></i> <!-- Eye icon for "View All" -->
                                     {{ __('View All Sea Grasses') }}
                                 </x-dropdown-link>
-                                <x-dropdown-link :href="route('user.addnew')">
+                                <x-dropdown-link :href="route('user.addnew')" class="flex items-center text-black dark:text-white hover:bg-blue-800 hover:text-white">
                                     <i class="fas fa-plus"></i> <!-- Plus icon for "Add New" -->
                                     {{ __('Add New Sea Grass') }}
                                 </x-dropdown-link>
-                                <x-dropdown-link :href="route('user.view.index')">
+                                {{-- <x-dropdown-link :href="route('user.view.index')">
                                     <i class="fas fa-info-circle"></i> <!-- Info icon for "Status" -->
                                     {{ __('Status Uploaded') }}
-                                </x-dropdown-link>
+                                </x-dropdown-link> --}}
 
                             </x-slot>
                         </x-dropdown>
                     </div>
 
 
-
-                    <x-nav-link :href="route('user.map')" :active="request()->routeIs('seagrass.view')">
+                    <x-nav-link :href="route('user.map')" :active="request()->routeIs('seagrass.view')" class="flex items-center text-black dark:text-white">
                         <i class="fas fa-map-marked-alt"style="margin-right: 8px;"></i> {{-- FontAwesome icon --}}
                         {{ __('Maps') }}
                     </x-nav-link>
 
 
-                    <x-nav-link :href="route('user.contact')" :active="request()->routeIs('home')">
+                    <x-nav-link :href="route('user.contact')" :active="request()->routeIs('home')" class="flex items-center text-black dark:text-white">
                         <i class="fas fa-envelope" style="margin-right: 8px;"></i> {{-- FontAwesome icon with space --}}
                         {{ __('Contact Us') }}
                     </x-nav-link>
+
+                    @php
+                                    // Get messages and their corresponding IDs
+                                    $messages = DB::table('request_notifs')
+                                        ->where('u_id', Auth::id())
+                                        ->where('archive', 0) // Only fetch non-archived messages
+                                        ->get(); // Get all columns, including ID
+                                @endphp
+                    <div class="relative" style="float:right;padding-left: 50px; padding-top: 20px">
+                        <x-dropdown align="right" width="48">
+                            <x-slot name="trigger">
+                                <i class="fas fa-bell" style="font-size: 1.5rem; cursor: pointer;"></i>
+                                <span class="badge rounded-pill bg-danger text-white">{{ $messages->count() }}</span>
+                            </x-slot>
+                            <x-slot name="content">
+                                <!-- Fetch messages from the request_notif table -->
+
+
+                                <!-- Display the messages -->
+                                @if ($messages->isNotEmpty())
+                                    @foreach ($messages as $message)
+                                        <div
+                                            class="notification-box px-4 py-2 flex justify-between items-center mb-2 border">
+                                            <p class="text-gray-800">{{ $message->message }}</p>
+                                            <button class="text-red-500 ml-2 hover:text-red-700"
+                                                onclick="archiveMessage({{ $message->id }})" type="button"
+                                                title="Archive this message">
+                                                <i class="fas fa-times"></i> <!-- Using 'X' icon -->
+                                            </button>
+                                        </div>
+                                    @endforeach
+                                @else
+                                    <div class="px-4 py-2">
+                                        <p>You Have No Notifications!</p>
+                                    </div>
+                                @endif
+                            </x-slot>
+                        </x-dropdown>
+
+                        <script>
+                            function archiveMessage(id) {
+                                // Send a request to archive the message
+                                fetch(`/request/request/${id}/archive`, {
+                                        method: 'POST',
+                                        headers: {
+                                            'X-CSRF-TOKEN': '{{ csrf_token() }}', // Add CSRF token for security
+                                            'Content-Type': 'application/json',
+                                        },
+                                        body: JSON.stringify({
+                                            archive: 1
+                                        }) // Data to send
+                                    })
+                                    .then(response => response.json())
+                                    .then(data => {
+                                        if (data.success) {
+                                            // Optionally, you can refresh the dropdown or remove the message from the UI
+                                            location.reload(); // Reloads the page to see updated messages
+                                        } else {
+                                            alert('Failed to archive the message.'); // Handle errors
+                                        }
+                                    });
+                            }
+                        </script>
+                    </div>
+
+                    <style>
+                        .notification-box {
+                            background-color: white;
+                            padding: 10px;
+                        }
+                    </style>
 
 
                 </div>
@@ -97,6 +164,11 @@
                     <x-slot name="content">
                         <x-dropdown-link :href="route('profile.edit')">
                             <i class="fas fa-user"></i> {{ __('Profile') }}
+                        </x-dropdown-link>
+
+                        <x-dropdown-link :href="route('request.requests.index')">
+                            <i class="fas fa-bell"></i> {{ __('Requests') }}
+                            ({{ DB::table('seaviews')->where('u_id', auth()->user()->id)->where('status', 'pending')->count() }})
                         </x-dropdown-link>
 
 

@@ -155,7 +155,12 @@ Route::
             Route::post('/addnew', 'seagrassview@store')->name('addnew.store');
         });
 
+//request
+Route::
+        namespace('App\Http\Controllers\UserController')->prefix('request')->name('request.')->group(function () {
+            Route::get('/', 'requestCtrl@index')->name('requests.index');
+            Route::resource('/request', 'requestCtrl');
+            // Route::get('/show/{id}', 'requestCtrl@show')->name('requests.show');
+            Route::post('/request/{id}/archive', 'requestCtrl@archiveMessage')->name('requests.archive');
 
-
-
-
+        });
