@@ -1,22 +1,40 @@
-@extends('layouts.LOUser.app')
+@extends('layouts.LOadmin.app')
 
 @section('content')
-    @foreach ($myEntry as $d)
     @php
-    $interactions = DB::table('sea_grass_likes')
-        ->select(
-            'seaviews_id',
-            DB::raw('SUM(likes) as total_likes'),
-            DB::raw('SUM(dislikes) as total_dislikes'),
-            DB::raw('SUM(views) as total_views'),
-        )
-        ->groupBy('seaviews_id')
-        ->get();
-@endphp
+        $myEntry = DB::table('seaviews')->where('status', 'pending')->orderBy('created_at', 'desc')->get();
+    @endphp
+
+    @php
+        $interactions = DB::table('sea_grass_likes')
+            ->select(
+                'seaviews_id',
+                DB::raw('SUM(likes) as total_likes'),
+                DB::raw('SUM(dislikes) as total_dislikes'),
+                DB::raw('SUM(views) as total_views'),
+            )
+            ->groupBy('seaviews_id')
+            ->get();
+    @endphp
+
+@if($myEntry->isEmpty())
+    <div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
+        <div class="row justify-content-center">
+            <div class="col-sm-12 text-center">
+                <h2>No Pending Approval to be approved</h2>
+            </div>
+        </div>
+    </div>
+@else
+    @foreach ($myEntry as $d)
+        @php
+            $interaction = $interactions->firstWhere('seaviews_id', $d->id);
+        @endphp
         <div class="container">
             <div class="row mt-3">
                 <div class="col-sm-3">
-                    <img src="{{ asset('storage/' . $d->photo) }}" alt="First Photo" class="img" id="imageToSelect-{{ $d->id }}">
+                    <img src="{{ asset('storage/' . $d->photo) }}" alt="First Photo" class="img"
+                        id="imageToSelect-{{ $d->id }}">
                 </div>
 
                 <div class="col-sm-8">
@@ -37,23 +55,24 @@
 
                                 <div class="row mt-0">
                                     <div class="col-sm-3 d-flex justify-content-start align-items-center">
-                                        <button type="button" class="btn btn-primary viewMapBtn" data-id="{{ $d->id }}">
+                                        <button type="button" class="btn btn-primary viewMapBtn"
+                                            data-id="{{ $d->id }}">
                                             View Location
                                         </button>
                                     </div>
                                     <div class="col-sm-9 d-flex justify-content-end align-items-center">
-                                        <a href="javascript:void(0);" class="p-4 likeBtn" data-id="{{ $d->id }}">
-                                            <i class="fas fa fa-thumbs-up fa-2x text-black-300"></i>
-                                            <span id="like-count-{{ $d->id }}">{{ $interaction->total_likes ?? 0 }}</span>
-                                        </a>
-                                        <a href="javascript:void(0);" class="dislikeBtn" data-id="{{ $d->id }}">
-                                            <i class="fas fa fa-thumbs-down fa-2x text-red-300"></i>
-                                            <span id="dislike-count-{{ $d->id }}">{{ $interaction->total_dislikes ?? 0 }}</span>
-                                        </a>
-                                        <p class="text-danger pl-4 mt-4">
-                                            <span id="view-count-{{ $d->id }}">{{ $interaction->total_views ?? 0 }}</span>
-                                            <i class="fa fa-eye" aria-hidden="true"></i>
-                                        </p>
+                                        <form action="{{ route('admin.admin.approve', $d->id) }}" method="post">
+                                            @csrf
+                                            @method('PUT')
+                                            <input type="hidden" name="action" value="approve">
+                                            <button type="submit" class="btn btn-primary">Approve</button>
+                                        </form>
+                                        <form action="{{ route('admin.admin.reject', $d->id) }}" method="post">
+                                            @csrf
+                                            @method('PUT')
+                                            <input type="hidden" name="action" value="reject">
+                                            <button type="submit" class="btn btn-danger">Reject</button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -64,13 +83,13 @@
             <hr>
         </div>
 
-        <!-- Map Modal -->
         <div class="modal mapCont" id="mapModal-{{ $d->id }}" tabindex="-1" role="dialog" style="display:none;">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title">Map Location</h5>
-                        <button type="button" class="close closeMapModalBtn" data-id="{{ $d->id }}" aria-label="Close">
+                        <button type="button" class="close closeMapModalBtn" data-id="{{ $d->id }}"
+                            aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
@@ -78,18 +97,14 @@
                         <div id="map-{{ $d->id }}" style="height: 400px;"></div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary closeMapModalBtn" data-id="{{ $d->id }}">Close</button>
+                        <button type="button" class="btn btn-secondary closeMapModalBtn"
+                            data-id="{{ $d->id }}">Close</button>
                     </div>
                 </div>
             </div>
         </div>
     @endforeach
-
-    <!-- Pagination Links -->
-    <div class="d-flex justify-content-center mt-4">
-        {{ $myEntry->links() }} <!-- Pagination Links -->
-    </div>
-
+    @endif
     <script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_API_KEY') }}"></script>
     <script>
         $(document).ready(function() {
@@ -97,11 +112,17 @@
                 var seaviewId = $(this).data('id');
 
                 $.ajax({
-                    url: '/user/updateView/' + seaviewId,
+                    url: '/user/updateView/' +
+                        seaviewId,
                     type: 'GET',
                     success: function(response) {
+                        console.log('Response received:', response);
+
                         if (response && response.views !== undefined) {
                             $('#view-count-' + seaviewId).text(response.views);
+                            console.log('View count updated. Total views: ' + response.views);
+                        } else {
+                            console.log('Unexpected response format:', response);
                         }
                     },
                     error: function(xhr) {
@@ -120,40 +141,32 @@
 
             function initializeMap(id) {
                 var map = new google.maps.Map(document.getElementById('map-' + id), {
-                    center: { lat: 0, lng: 0 },
+                    center: {
+                        lat: 0,
+                        lng: 0
+                    },
                     zoom: 2
                 });
 
                 @foreach ($myEntry as $d)
                     if ({{ $d->id }} == id) {
                         var marker = new google.maps.Marker({
-                            position: { lat: {{ $d->lati }}, lng: {{ $d->longti }} },
+                            position: {
+                                lat: {{ $d->lati }},
+                                lng: {{ $d->longti }}
+                            },
                             map: map,
                             title: "{{ $d->name }}"
                         });
-                        map.setCenter({ lat: {{ $d->lati }}, lng: {{ $d->longti }} });
+
+                        map.setCenter({
+                            lat: {{ $d->lati }},
+                            lng: {{ $d->longti }}
+                        });
                         map.setZoom(13);
                     }
                 @endforeach
             }
-
-            $(document).on('click', '.likeBtn', function(e) {
-                e.preventDefault();
-                var seaviewId = $(this).data('id');
-                $.ajax({
-                    url: '/user/like/' + seaviewId,
-                    type: 'GET',
-                });
-            });
-
-            $(document).on('click', '.dislikeBtn', function(e) {
-                e.preventDefault();
-                var seaviewId = $(this).data('id');
-                $.ajax({
-                    url: '/user/dislike/' + seaviewId,
-                    type: 'GET',
-                });
-            });
         });
     </script>
 @endsection

@@ -12,6 +12,7 @@ use App\Http\Controllers\UserController\seagrassview;
 use App\Http\Controllers\UserController\usermap;
 use App\Http\Controllers\UserController\contactCtrl;
 use App\Http\Controllers\UserController\articleCtrl;
+use App\Http\Controllers\ContactController;
 use function PHPUnit\Framework\returnSelf;
 use Illuminate\Support\Facades\DB;
 use App\Models\Role;
@@ -118,8 +119,11 @@ Route::
             // route sa pag select ng kung anong image ang idisplay
             Route::post('/update-photo/{id}/{photo}', 'seagrasscontroller@updatePhoto')->name('update-photo');
 
+            Route::get('/pendingapproval', 'seagrasscontroller@pendingapproval')->name('admin.pendingapproval');
 
-       
+            Route::put('/approve/{id}', 'seagrasscontroller@approve')->name('admin.approve');
+            Route::put('/reject/{id}', 'seagrasscontroller@reject')->name('admin.reject');
+
             Route::resource('/view', 'alluserctrl');
             Route::get('/view', 'alluserctrl@index')->name('view');
 
@@ -135,7 +139,7 @@ Route::
         namespace('App\Http\Controllers\UserController')->prefix('user')->name('user.')->group(function () {
 
 
-           
+
             Route::get('/seagrass/{id}', 'seagrassview@index')->name('seagrass');
             Route::resource('view', 'seagrassview');
             Route::resource('maps', 'usermap');
@@ -147,13 +151,16 @@ Route::
             Route::get('like/{id}', 'seagrassview@like')->name('like');
             Route::get('dislike/{id}', 'seagrassview@dislike')->name('dislike');
             Route::get('updateView/{id}', 'seagrassview@view')->name('updateView');
+            Route::get('/addnew', 'seagrassview@addnew')->name('addnew');
+            Route::post('/addnew', 'seagrassview@store')->name('addnew.store');
         });
 
+//request
+Route::
+        namespace('App\Http\Controllers\UserController')->prefix('request')->name('request.')->group(function () {
+            Route::get('/', 'requestCtrl@index')->name('requests.index');
+            Route::resource('/request', 'requestCtrl');
+            // Route::get('/show/{id}', 'requestCtrl@show')->name('requests.show');
+            Route::post('/request/{id}/archive', 'requestCtrl@archiveMessage')->name('requests.archive');
 
-
-
-
-
-
-
-
+        });

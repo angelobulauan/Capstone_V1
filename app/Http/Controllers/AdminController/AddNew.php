@@ -67,6 +67,6 @@ class AddNew extends Controller
     return view(' admin.add.edit', ['selected_d' => $selectedUploaded]);
 
 
-    
+
     }
 }
