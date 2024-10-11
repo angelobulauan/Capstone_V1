@@ -51,7 +51,7 @@
                                 </div>
                                 <div class="col">
                                     <h3 class="display-4">{{ $seagrassCount }}</h3>
-                                    <a href="{{ route('admin.myEntries') }}">
+                                    <a href="{{ route('admin.myEntries') }}" class="text-decoration-none text-white">
                                     <h6 class="text-uppercase mb-1">Sea Grass</h6>
                                     </a>
                                 </div>
@@ -167,19 +167,19 @@
                     <div class="card-header bg-light text-black">
                         <div class="row  align-items-center">
                             <div class="col">
-                                <i class="fas fa fa-envelope fa-4x text-black-300"></i> <!-- Grass icon -->
+                                <i class="fas fa-hourglass-half fa-4x text-black-300"></i> <!-- Grass icon -->
 
                             </div>
                             <div class="col">
-                                <h3 class="display-4">{{ $pendingApproval }}</h3>
-                                <a href="{{ route('admin.admin.pendingapproval') }}">
-                                    <h6 class="text-uppercase mb-1">Pending Approval</h6>
-                                </a>
-                            </div>
+    <h3 class="display-4">{{ $pendingApproval }}</h3>
+    <a href="{{ route('admin.admin.pendingapproval') }}" class="text-decoration-none text-black">
+        <h6 class="text-uppercase mb-1">Pending</h6>
+    </a>
+</div>
+
                         </div>
                     </div>
                     <div class="card-footer">
-
                     </div>
                 </div>
 
