@@ -16,8 +16,8 @@
     </div>
 
     <!-- If no results found -->
-    @if($myEntry->isEmpty())
-        <p class="text-center">No results found for your query.</p>
+    @if ($myEntry->isEmpty())
+        <p class="text-center">No Data Entry Published!</p>
     @else
         @foreach ($myEntry as $d)
             @php
