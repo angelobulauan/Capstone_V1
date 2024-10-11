@@ -153,6 +153,7 @@ Route::
             Route::get('updateView/{id}', 'seagrassview@view')->name('updateView');
             Route::get('/addnew', 'seagrassview@addnew')->name('addnew');
             Route::post('/addnew', 'seagrassview@store')->name('addnew.store');
+            Route::get('/search', 'seagrassview@search')->name('seagrass.search');
         });
 
 //request
