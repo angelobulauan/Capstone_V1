@@ -28,7 +28,7 @@
                     </x-nav-link>
 
                     <x-nav-link :href="route('admin.admin.pendingapproval')" :active="request()->routeIs('Users')">
-                        <i class="fas fa-plus" style="margin-right: 8px;"></i> {{ __('Pending Approval') }}
+                        <i class="fas fa-hourglass-half" style="margin-right: 8px;"></i> {{ __('Pending Approval') }}
                         @php
                             $pendingCount = DB::table('seaviews')->where('status', 'pending')->count();
                         @endphp
