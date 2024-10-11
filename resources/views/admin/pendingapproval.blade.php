@@ -61,19 +61,26 @@
                                         </button>
                                     </div>
                                     <div class="col-sm-9 d-flex justify-content-end align-items-center">
-                                        <form action="{{ route('admin.admin.approve', $d->id) }}" method="post">
-                                            @csrf
-                                            @method('PUT')
-                                            <input type="hidden" name="action" value="approve">
-                                            <button type="submit" class="btn btn-primary">Approve</button>
-                                        </form>
-                                        <form action="{{ route('admin.admin.reject', $d->id) }}" method="post">
-                                            @csrf
-                                            @method('PUT')
-                                            <input type="hidden" name="action" value="reject">
-                                            <button type="submit" class="btn btn-danger">Reject</button>
-                                        </form>
-                                    </div>
+    <form action="{{ route('admin.admin.approve', $d->id) }}" method="post">
+        @csrf
+        @method('PUT')
+        <input type="hidden" name="action" value="approve">
+        <button type="submit" class="btn btn-primary">
+    <i class="fas fa-check"></i> Approve
+</button>
+
+    </form>
+    <form action="{{ route('admin.admin.reject', $d->id) }}" method="post" class="ms-2">
+        @csrf
+        @method('PUT')
+        <input type="hidden" name="action" value="reject">
+        <button type="submit" class="btn btn-danger">
+    <i class="fas fa-times"></i> Reject
+</button>
+
+    </form>
+</div>
+
                                 </div>
                             </div>
                         </div>
