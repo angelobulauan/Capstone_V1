@@ -1,5 +1,11 @@
-@extends('layouts.LOUser.app')
-@section('content')
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Homepage</title>
     <style>
         #dashboard {
             margin: 0;
@@ -32,21 +38,26 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             max-width: 400px;
             width: 90%;
-            text-align: center; /* Center the content horizontally */
+            text-align: center;
+            /* Center the content horizontally */
         }
 
         h3 {
             font-size: 60px;
             font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-            color: #ffffff; /* Darker text color */
-            margin-bottom: 20px; /* Spacing below the title */
+            color: #ffffff;
+            /* Darker text color */
+            margin-bottom: 20px;
+            /* Spacing below the title */
         }
 
         .input-group {
             display: flex;
             flex-direction: row;
-            justify-content: center; /* Center the input and button horizontally */
-            margin-top: 20px; /* Spacing above the input group */
+            justify-content: center;
+            /* Center the input and button horizontally */
+            margin-top: 20px;
+            /* Spacing above the input group */
         }
 
         #search-input {
@@ -71,7 +82,8 @@
         }
 
         #search-button:hover {
-            background: #2b7d88; /* Darker hover color */
+            background: #2b7d88;
+            /* Darker hover color */
         }
 
         /* Adjustments for smaller screens */
@@ -81,25 +93,32 @@
             }
         }
     </style>
+</head>
 
-    <div class="" id="dashboard">
-        <video autoplay loop muted playsinline src="{{ asset('img/seagrass.mp4') }}" class="back-video"
-            type="video/mp4"></video>
-        <div class="transparent-card">
-            <div class="content">
-                <h3>Sea Grasses</h3>
-                <form action="{{ url('/search') }}" method="get" role="search">
-                    @csrf
-                    @method('GET')
-                    <div class="input-group">
-                        <input id="search-input" name="keyword" type="search" autocomplete="off"
-                            placeholder="Search" aria-label="Search..." required />
-                        <button id="search-button" type="submit">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </div>
-                </form>
+<body>
+    @extends('layouts.LOUser.app')
+    @section('content')
+        <div class="" id="dashboard">
+            <video autoplay loop muted playsinline src="{{ asset('img/seagrass.mp4') }}" class="back-video"
+                type="video/mp4"></video>
+            <div class="transparent-card">
+                <div class="content">
+                    <h3>Sea Grasses</h3>
+                    <form action="{{ url('/search') }}" method="get" role="search">
+                        @csrf
+                        @method('GET')
+                        <div class="input-group">
+                            <input id="search-input" name="keyword" type="search" autocomplete="off" placeholder="Search"
+                                aria-label="Search..." required />
+                            <button id="search-button" type="submit">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
-@endsection
+    @endsection
+</body>
+
+</html>
