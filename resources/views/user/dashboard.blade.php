@@ -7,13 +7,19 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Homepage</title>
     <style>
-        #dashboard {
+        html,
+        body {
             margin: 0;
             padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        #dashboard {
             height: 100vh;
             width: 100vw;
-            overflow: hidden;
             position: relative;
+            overflow: hidden;
         }
 
         .back-video {
@@ -39,25 +45,20 @@
             max-width: 400px;
             width: 90%;
             text-align: center;
-            /* Center the content horizontally */
         }
 
-        h3 {
-            font-size: 60px;
+        h1 {
+            font-size: 80px;
             font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
             color: #ffffff;
-            /* Darker text color */
             margin-bottom: 20px;
-            /* Spacing below the title */
         }
 
         .input-group {
             display: flex;
             flex-direction: row;
             justify-content: center;
-            /* Center the input and button horizontally */
             margin-top: 20px;
-            /* Spacing above the input group */
         }
 
         #search-input {
@@ -83,14 +84,19 @@
 
         #search-button:hover {
             background: #2b7d88;
-            /* Darker hover color */
         }
 
-        /* Adjustments for smaller screens */
         @media (max-width: 576px) {
-            h3 {
+            h1 {
                 font-size: 24px;
             }
+        }
+
+        .logo {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto;
+            margin-bottom: 20px;
         }
     </style>
 </head>
@@ -98,23 +104,52 @@
 <body>
     @extends('layouts.LOUser.app')
     @section('content')
-        <div class="" id="dashboard">
-            <video autoplay loop muted playsinline src="{{ asset('img/seagrass.mp4') }}" class="back-video"
+        <div id="dashboard">
+            <video autoplay loop muted playsinline src="{{ asset('seagrass_v2.mp4') }}" class="back-video"
                 type="video/mp4"></video>
             <div class="transparent-card">
+                <img src="{{ asset('img/bg1.png') }}" alt="logo" class="logo">
                 <div class="content">
-                    <h3>Sea Grasses</h3>
-                    <form action="{{ url('/search') }}" method="get" role="search">
-                        @csrf
-                        @method('GET')
-                        <div class="input-group">
-                            <input id="search-input" name="keyword" type="search" autocomplete="off" placeholder="Search"
-                                aria-label="Search..." required />
-                            <button id="search-button" type="submit">
-                                <i class="fas fa-search"></i>
-                            </button>
-                        </div>
-                    </form>
+                    <h1 class="typing" style="animation-delay: 2s; animation-duration: 2s;"></h1>
+                    <script>
+                        const h1Element = document.querySelector('h1');
+                        const text = 'SEA GRASSES';
+
+                        function typeText() {
+                            if (!h1Element.textContent) {
+                                h1Element.textContent = '';
+                            }
+
+                            if (h1Element.textContent.length < text.length) {
+                                h1Element.textContent += text.charAt(h1Element.textContent.length);
+                                setTimeout(typeText, 100); // Typing speed
+                            } else {
+                                setTimeout(removeText, 5000); // Wait 5 seconds before removing and typing again
+                            }
+                        }
+
+                        function removeText() {
+                            if (h1Element.textContent.length > 0) {
+                                h1Element.textContent = h1Element.textContent.substring(0, h1Element.textContent.length - 1);
+                                setTimeout(removeText, 100); // Remove per letter not fast
+                            } else {
+                                typeText(); // Start typing again
+                            }
+                        }
+
+                        typeText(); // Start the typing animation
+                    </script>
+                    <div class="flex justify-center space-x-4">
+                        <a href="{{ route('user.article') }}" style="text-decoration: none;"
+                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+                            Read More
+                        </a>
+                        <a href="{{ route('user.contact') }}" style="text-decoration: none;"
+                            class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full">
+                            Contact Us
+                        </a>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -122,3 +157,4 @@
 </body>
 
 </html>
+

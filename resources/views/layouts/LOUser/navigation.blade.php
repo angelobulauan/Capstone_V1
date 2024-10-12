@@ -4,10 +4,10 @@
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
-                <div class="shrink-0 flex items-center float-left">
+                <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
                         <!-- Use bg.jpg as the application logo -->
-                        <img src="{{ asset('img/bg1.png') }}" alt="Logo" class="block h-12 w-14" />
+                        <img src="{{ asset('img/bg1.png') }}" alt="Logo" class="block h-9 w-10" />
                     </a>
                 </div>
 
@@ -18,8 +18,8 @@
                     </x-nav-link>
 
                     <x-nav-link :href="route('user.article')" :active="request()->routeIs('Article')" class="flex items-center text-black dark:text-white">
-                        <i class="fas fa-newspaper"style="margin-right: 8px;"></i> {{-- FontAwesome icon --}}
-                        {{ __('Article') }}
+                        <i class="fas fa-info"style="margin-right: 8px;"></i> {{-- FontAwesome icon --}}
+                        {{ __('About') }}
                     </x-nav-link>
 
                     <div class="hidden sm:flex sm:items-center sm:ms-6">
@@ -147,7 +147,7 @@
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button
-                            class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-black dark:text-white bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
+                            class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
                             <div>{{ Auth::user()->name }}</div>
 
                             <div class="ms-1">
@@ -162,11 +162,11 @@
                     </x-slot>
 
                     <x-slot name="content">
-                        <x-dropdown-link :href="route('profile.edit')" class="text-black dark:text-white">
+                        <x-dropdown-link :href="route('profile.edit')">
                             <i class="fas fa-user"></i> {{ __('Profile') }}
                         </x-dropdown-link>
 
-                        <x-dropdown-link :href="route('request.requests.index')" class="text-black dark:text-white">
+                        <x-dropdown-link :href="route('request.requests.index')">
                             <i class="fas fa-bell"></i> {{ __('Requests') }}
                             ({{ DB::table('seaviews')->where('u_id', auth()->user()->id)->where('status', 'pending')->count() }})
                         </x-dropdown-link>
@@ -177,7 +177,7 @@
                             @csrf
 
                             <x-dropdown-link :href="route('logout')"
-                                onclick="event.preventDefault(); this.closest('form').submit();" class="text-black dark:text-white">
+                                onclick="event.preventDefault(); this.closest('form').submit();">
                                 <i class="fas fa-sign-out-alt"></i> {{ __('Log Out') }}
                             </x-dropdown-link>
 
