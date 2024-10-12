@@ -1,121 +1,124 @@
-@extends('layouts.LOUser.app')
-@section('content')
-<style>
-    #dashboard {
-        margin: 0;
-        padding: 0;
-        height: 100vh;
-        width: 100vw;
-        overflow: hidden;
-        position: relative;
-    }
+<!DOCTYPE html>
+<html lang="en">
 
-    .back-video {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        position: absolute;
-        top: 0;
-        left: 0;
-        z-index: 1;
-    }
-
-    .transparent-card {
-        position: absolute;
-        top: 40%;
-        /* Adjusted to move higher on the page */
-        left: 50%;
-        transform: translate(-50%, -50%);
-        z-index: 2;
-        background-color: rgba(255, 255, 255, 0);
-        padding: 40px;
-        border-radius: 10px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        max-width: 600px;
-        width: 90%;
-        text-align: center;
-        /* Center the content horizontally */
-    }
-
-    h3 {
-        font-size: 80px;
-        /* Adjusted to a smaller size */
-        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-        color: #ffffff;
-        /* Text color */
-        margin-bottom: 20px;
-        /* Spacing below the title */
-    }
-
-    .input-group {
-        display: flex;
-        justify-content: center;
-        /* Center the buttons horizontally */
-        margin-top: 20px;
-        /* Spacing above the input group */
-        gap: 20px;
-        /* Add space between the buttons */
-    }
-
-    .btn-link {
-        display: inline-flex;
-        align-items: center;
-        /* Vertically center icon and text */
-        background-color: green;
-        /* Button background color */
-        padding: 15px 35px;
-        /* Padding inside the button */
-        color: white;
-        /* Text and icon color */
-        font-weight: 500;
-        text-decoration: none;
-        /* Remove underline */
-        border-radius: 20px;
-        /* More pronounced rounded corners */
-        transition: background-color 0.3s ease;
-    }
-
-    .btn-link i {
-        margin-right: 8px;
-        /* Space between the icon and text */
-    }
-
-    .btn-link:hover {
-        background-color: #6A84A3;
-        /* Slightly darker background on hover */
-    }
-
-    /* Adjustments for smaller screens */
-    @media (max-width: 576px) {
-        h3 {
-            font-size: 24px;
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Homepage</title>
+    <style>
+        #dashboard {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            position: relative;
         }
-    }
-</style>
 
-<div class="" id="dashboard">
-    <video autoplay loop muted playsinline src="{{ asset('img/seagrass.mp4') }}" class="back-video"
-        type="video/mp4"></video>
-    <div class="transparent-card">
-        <div class="content">
-            <h3>Sea Grasses</h3>
-            <div class="input-group">
-                <a href="{{ route('user.article') }}" class="btn-link">
-                    <i class="fas fa-book-open" style="margin-right: 8px;"></i> <!-- Updated Font Awesome icon -->
-                    {{ __('Read More') }}
-                </a>
+        .back-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
 
-                <a href="{{ route('user.contact') }}" class="btn-link">
-                    <i class="fas fa-phone" style="margin-right: 10px;"></i> <!-- Example using phone icon -->
-                    {{ __('Contact Us') }}
-                </a>
+        .transparent-card {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            background-color: rgba(255, 255, 255, 0);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            /* Center the content horizontally */
+        }
 
+        h3 {
+            font-size: 60px;
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+            color: #ffffff;
+            /* Darker text color */
+            margin-bottom: 20px;
+            /* Spacing below the title */
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            /* Center the input and button horizontally */
+            margin-top: 20px;
+            /* Spacing above the input group */
+        }
+
+        #search-input {
+            flex: 1;
+            padding: .5rem 1rem;
+            font-size: 1rem;
+            border: none;
+            outline: none;
+            background: #e0dfdf;
+            border-radius: 2rem 0 0 2rem;
+        }
+
+        #search-button {
+            background: #3caebd;
+            color: #fff;
+            font-size: 1rem;
+            cursor: pointer;
+            border: none;
+            outline: none;
+            border-radius: 0 2rem 2rem 0;
+            padding: .5rem 1.5rem;
+        }
+
+        #search-button:hover {
+            background: #2b7d88;
+            /* Darker hover color */
+        }
+
+        /* Adjustments for smaller screens */
+        @media (max-width: 576px) {
+            h3 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    @extends('layouts.LOUser.app')
+    @section('content')
+        <div class="" id="dashboard">
+            <video autoplay loop muted playsinline src="{{ asset('img/seagrass.mp4') }}" class="back-video"
+                type="video/mp4"></video>
+            <div class="transparent-card">
+                <div class="content">
+                    <h3>Sea Grasses</h3>
+                    <form action="{{ url('/search') }}" method="get" role="search">
+                        @csrf
+                        @method('GET')
+                        <div class="input-group">
+                            <input id="search-input" name="keyword" type="search" autocomplete="off" placeholder="Search"
+                                aria-label="Search..." required />
+                            <button id="search-button" type="submit">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </div>
-
-
-
-            </form>
         </div>
-    </div>
-</div>
-@endsection
+    @endsection
+</body>
+
+</html>

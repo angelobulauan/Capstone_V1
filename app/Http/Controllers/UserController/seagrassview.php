@@ -18,6 +18,7 @@ class seagrassview extends Controller
     public function index()
     {
         $myEntry = DB::table('seaviews')
+            ->where('status', '=', 'approved')
             // ->where('u_id', '=', Auth::user()->id)
             ->paginate(5); //this will retrive all your user entries regardless of the status
 
@@ -26,6 +27,7 @@ class seagrassview extends Controller
         //then we return to the newly created blade file with the data we retrieved
         return view('User.seagrass')->with('myEntry', $myEntry);
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -244,4 +246,18 @@ class seagrassview extends Controller
 
         return response()->json(['message' => $message, 'views' => $viewStatus]);
     }
+
+    public function search(Request $request)
+{
+    $query = $request->input('query');
+
+    // Modify this to search your database for relevant entries
+    $myEntry = DB::table('seaviews')
+        ->where('name', 'like', '%' . $query . '%')
+        ->orWhere('location', 'like', '%' . $query . '%')
+        ->paginate(10);
+
+        return view('user.seagrass', compact('myEntry'));
+}
+
 }
