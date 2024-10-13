@@ -11,11 +11,11 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
         integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 
-    
+
 
     <style>
         body {
-            background-image: url(img/bg2.jpg);
+            background-image: url(img/seagrass_image1.jpeg);
             background-size: cover;
             min-height: 100vh;
             height: 100%;
@@ -23,7 +23,7 @@
             align-items: center;
             justify-content: center;
             flex-direction: column;
-            
+
         }
 
         .img-container {
@@ -48,7 +48,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-           
+
         }
 
         .auth-container form {
@@ -60,7 +60,7 @@
             padding: 3rem 2rem;
             border-radius: .5rem;
             background: white;
-            
+
         }
 
         .auth-container img {
@@ -81,10 +81,10 @@
           text-align: center;
           font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
         }
-        
+
     </style>
 
-{{--@vite(['resources/css/app.css', 'resources/js/app.js'])--}} 
+{{--@vite(['resources/css/app.css', 'resources/js/app.js'])--}}
 
 </head>
 
@@ -94,7 +94,7 @@
         <div class="d-block d-lg-flex w-100">
             <div class="img-container">
                 <div class="logo mb-3">
-             
+
                         <img src="{{ asset('img/logo.png') }}" alt="ASSET Logo" >
                     </a>
                 </div>
@@ -114,9 +114,9 @@
                 </div>
             </div>
             <div class="auth-container">
-                
+
                 <form method="POST" action="{{ route('login') }}">
-                    <img src="{{ asset('img/bg.png') }}" alt="Default Icon" loading="lazy" />
+                    <img src="{{ asset('img/bg1.png') }}" alt="Default Icon" loading="lazy" width="100" height="100" />
                     <h1>LOGIN</h1>
                     @csrf
                     <div class="input-group mb-3">
@@ -125,7 +125,7 @@
                                 <i class="fa fa-envelope"></i>
                             </span>
                         </div>
-                        
+
                         <input id="email" type="email" placeholder="Email"
                             class="form-control @error('email') is-invalid @enderror" name="email"
                             value="{{ old('email') }}" required autocomplete="email" autofocus >
@@ -154,13 +154,13 @@
 
                     <div class="form-check mb-1" style="text-align:right;">
                     @if (Route::has('password.request'))
-                        
+
                         <a class="btn btn-link" href="{{ route('password.request') }}">
                             <small>{{ __('Forgot Your Password?') }}</small>
                         </a>
-                        
+
                     @endif
-                    </div> 
+                    </div>
 
                     <button type="submit" class="btn btn-info btn-block">
                         <i class="fa fa-sign-in-alt mr-1"></i>
@@ -193,7 +193,7 @@
             © 2024 Copyright.
             <a class="text-dark">All right reserved</a>
         </small>
-     
+
     </footer>
 </body>
 

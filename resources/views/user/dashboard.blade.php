@@ -39,10 +39,10 @@
             transform: translate(-50%, -50%);
             z-index: 2;
             background-color: rgba(255, 255, 255, 0);
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            max-width: 400px;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
             width: 90%;
             text-align: center;
         }
@@ -113,7 +113,7 @@
                     <h1 class="typing" style="animation-delay: 2s; animation-duration: 2s;"></h1>
                     <script>
                         const h1Element = document.querySelector('h1');
-                        const text = 'SEA GRASSES';
+                        const text = 'SEA GRASSES OF NORTHERN CAGAYAN';
 
                         function typeText() {
                             if (!h1Element.textContent) {
@@ -125,15 +125,6 @@
                                 setTimeout(typeText, 100); // Typing speed
                             } else {
                                 setTimeout(removeText, 5000); // Wait 5 seconds before removing and typing again
-                            }
-                        }
-
-                        function removeText() {
-                            if (h1Element.textContent.length > 0) {
-                                h1Element.textContent = h1Element.textContent.substring(0, h1Element.textContent.length - 1);
-                                setTimeout(removeText, 100); // Remove per letter not fast
-                            } else {
-                                typeText(); // Start typing again
                             }
                         }
 

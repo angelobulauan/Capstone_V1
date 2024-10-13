@@ -251,13 +251,23 @@ class seagrassview extends Controller
 {
     $query = $request->input('query');
 
-    // Modify this to search your database for relevant entries
+    // Start building the query
     $myEntry = DB::table('seaviews')
-        ->where('name', 'like', '%' . $query . '%')
-        ->orWhere('location', 'like', '%' . $query . '%')
-        ->paginate(10);
+        ->where('status', '=', 'approved');
 
-        return view('user.seagrass', compact('myEntry'));
+    // Add additional conditions only if the search query is not empty
+    if (!empty($query)) {
+        $myEntry = $myEntry->where(function ($q) use ($query) {
+            $q->where('name', 'like', '%' . $query . '%')
+              ->orWhere('location', 'like', '%' . $query . '%');
+        });
+    }
+
+    // Paginate the results
+    $myEntry = $myEntry->paginate(10);
+
+    return view('user.seagrass', compact('myEntry'));
 }
+
 
 }

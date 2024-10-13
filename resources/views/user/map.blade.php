@@ -23,8 +23,9 @@
 
         <style>
             #map {
-                height: 100vh;
+                height: 90vh;
                 width: 100%;
+
             }
 
             .popup-image {
@@ -35,7 +36,7 @@
             }
         </style>
 
-        <div class="container-fluid">
+        <div class="container-fluid mt-3">
             <div id="map"></div>
         </div>
 
