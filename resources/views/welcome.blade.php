@@ -192,8 +192,11 @@
             showSlide(currentSlide);
         }
 
-        setInterval(nextSlide, 3000); // Change slide every 3 seconds
+        setInterval(() => {
+            requestAnimationFrame(nextSlide);
+        }, 3000); // Change slide every 3 seconds
     </script>
 </body>
 
 </html>
+

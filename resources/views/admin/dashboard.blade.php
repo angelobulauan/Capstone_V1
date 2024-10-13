@@ -20,94 +20,124 @@
 
             <div class="col-xl-3 col-md-6 mb-4x">
 
-                    <div class="card text-center">
-                        <div class="card-header bg-primary text-white">
+                <div class="card text-center" style="transition: all 0.3s ease-in-out;">
+                    <a href="{{ route('admin.view') }}" style="text-decoration: none;">
+                        <div class="card-header bg-secondary text-white">
                             <div class="row align-items-center">
                                 <div class="col ">
-                                    <i class="fas fa-user fa-4x text-black-300"></i>
+                                    <i class="fas fa-user fa-4x text-black-300 wobble-on-hover"></i>
                                 </div>
                                 <div class="col-auto">
                                     <h3 class="display-4">{{ $totaluser }}</h3>
-                                    <a href="{{ route('admin.view') }}">
+
                                     <h6 class="text-uppercase mb-1" style="color: white;">Users</h6>
-                                    </a>
+
                                 </div>
                             </div>
                         </div>
-                        <div class="card-footer">
+                    </a>
+                </div>
 
-                        </div>
-                    </div>
+                <style>
+                    .card:hover {
+                        transform: scale(1.1);
+                    }
+                </style>
+
             </div>
 
 
             <div class="col-xl-3 col-md-6 mb-4">
-                    <div class="card text-center">
-                        <div class="card-header bg-info text-white">
+                <div class="card text-center" style="transition: all 0.3s ease-in-out;">
+                    <a href="{{ route('admin.myEntries') }}" style="text-decoration: none;">
+                        <div class="card-header bg-success text-white">
                             <div class="row align-items-center">
                                 <div class="col">
-                                    <i class="fas fa-seedling fa-4x text-black-300"></i> <!-- Grass icon -->
+                                    <i class="fas fa-seedling fa-4x text-black-300 wobble-on-hover"></i> <!-- Grass icon -->
 
                                 </div>
                                 <div class="col">
                                     <h3 class="display-4">{{ $seagrassCount }}</h3>
-                                    <a href="{{ route('admin.myEntries') }}" class="text-decoration-none text-white">
+
                                     <h6 class="text-uppercase mb-1">Sea Grass</h6>
-                                    </a>
+
                                 </div>
                             </div>
                         </div>
-                        <div class="card-footer">
-                        </div>
-                    </div>
+                    </a>
+                </div>
+
+                <style>
+                    .card:hover {
+                        transform: scale(1.1);
+                    }
+                </style>
+
             </div>
 
-            {{-- <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card text-center">
-                    <div class="card-header bg-secondary text-white">
-                        <div class="row align-items-center">
-                            <div class="col">
-                            <i class="fas fa-chart-line fa-4x text-black-300"></i>
+            <style>
+                .wobble-on-hover:hover {
+                    animation: wobble 0.5s ease-in-out;
+                }
 
-                            </div>
-                            <div class="col">
-                                <h3 class="display-4">{{$seagrassCount}}</h3>
-                                <h6> Most Visited</h6>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-footer">
+                @keyframes wobble {
+                    0% {
+                        transform: rotate(0deg);
+                    }
 
-                    </div>
-                </div>
-            </div> --}}
+                    25% {
+                        transform: rotate(-5deg);
+                    }
 
-            {{-- <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card text-center">
-                    <div class="card-header bg-success text-white">
-                        <div class="row align-items-center">
-                            <div class="col">
-                                <i class="fas fa fa-search fa-4x text-black-300"></i>
+                    50% {
+                        transform: rotate(0deg);
+                    }
 
-                            </div>
-                            <div class="col">
-                                <h3 class="display-4">{{ $seagrassCount }}</h3>
-                                <h6>Most Search</h6>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-footer">
+                    75% {
+                        transform: rotate(5deg);
+                    }
 
-                    </div>
-                </div>
-            </div> --}}
+                    100% {
+                        transform: rotate(0deg);
+                    }
+                }
+            </style>
 
             <div class="col-xl-3 col-md-6 mb-4 ">
-                <div class="card text-center">
-                    <div class="card-header bg-danger text-white">
+                <div class="card text-center" style="transition: all 0.3s ease-in-out;">
+                    <a href="{{ route('admin.admin.pendingapproval') }}" style="text-decoration: none;">
+                        <div class="card-header bg-info text-white">
+                            <div class="row  align-items-center">
+                                <div class="col">
+                                    <i class="fas fa-hourglass-half fa-4x text-black-300 wobble-on-hover"></i> <!-- Grass icon -->
+
+                                </div>
+                                <div class="col">
+                                    <h3 class="display-4">{{ $pendingApproval }}</h3>
+
+                                    <h6 class="text-uppercase mb-1">Pending</h6>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <style>
+                    .card:hover {
+                        transform: scale(1.1);
+                    }
+                </style>
+
+            </div>
+
+            <div class="col-xl-3 col-md-6 mb-4 ">
+                <div class="card text-center" style="transition: all 0.3s ease-in-out;">
+                    <div class="card-header bg-primary text-white">
                         <div class="row  align-items-center">
                             <div class="col">
-                                <i class="fas fa fa-thumbs-up fa-4x text-black-300"></i> <!-- Grass icon -->
+                                <i class="fas fa fa-thumbs-up fa-4x text-black-300 wobble-on-hover"></i> <!-- Grass icon -->
 
                             </div>
                             <div class="col">
@@ -116,18 +146,23 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card-footer">
 
-                    </div>
                 </div>
+
+                <style>
+                    .card:hover {
+                        transform: scale(1.1);
+                    }
+                </style>
+
             </div>
 
             <div class="col-md-3">
-                <div class="card text-center">
-                    <div class="card-header bg-dark text-white">
+                <div class="card text-center" style="transition: all 0.3s ease-in-out;">
+                    <div class="card-header bg-danger text-white">
                         <div class="row align-items-center">
                             <div class="col">
-                                <i class="fas fa fa-thumbs-down  fa-4x text-black-300"></i> <!-- Grass icon -->
+                                <i class="fas fa fa-thumbs-down  fa-4x text-black-300 wobble-on-hover"></i> <!-- Grass icon -->
 
                             </div>
                             <div class="col">
@@ -136,18 +171,23 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card-footer">
 
-                    </div>
                 </div>
+
+                <style>
+                    .card:hover {
+                        transform: scale(1.1);
+                    }
+                </style>
+
             </div>
 
             <div class="col-xl-3 col-md-6 mb-4 ">
-                <div class="card text-center">
+                <div class="card text-center" style="transition: all 0.3s ease-in-out;">
                     <div class="card-header bg-warning text-white">
                         <div class="row  align-items-center">
                             <div class="col">
-                                <i class="fas fa fa-eye fa-4x text-black-300"></i> <!-- Grass icon -->
+                                <i class="fas fa fa-eye fa-4x text-black-300 wobble-on-hover"></i> <!-- Grass icon -->
 
                             </div>
                             <div class="col">
@@ -156,34 +196,17 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card-footer">
 
-                    </div>
                 </div>
-            </div>
 
-            <div class="col-xl-3 col-md-6 mb-4 ">
-                <div class="card text-center">
-                    <div class="card-header bg-light text-black">
-                        <div class="row  align-items-center">
-                            <div class="col">
-                                <i class="fas fa-hourglass-half fa-4x text-black-300"></i> <!-- Grass icon -->
-
-                            </div>
-                            <div class="col">
-    <h3 class="display-4">{{ $pendingApproval }}</h3>
-    <a href="{{ route('admin.admin.pendingapproval') }}" class="text-decoration-none text-black">
-        <h6 class="text-uppercase mb-1">Pending</h6>
-    </a>
-</div>
-
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                    </div>
-                </div>
+                <style>
+                    .card:hover {
+                        transform: scale(1.1);
+                    }
+                </style>
 
             </div>
         </div>
     </div>
 @endsection
+

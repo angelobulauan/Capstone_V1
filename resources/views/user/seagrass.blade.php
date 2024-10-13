@@ -77,14 +77,14 @@
                                             </div>
                                             <div class="col-sm-9 d-flex justify-content-end align-items-center">
                                                 <a href="javascript:void(0);" class="p-4 likeBtn"
-                                                    data-id="{{ $d->id }}">
-                                                    <i class="fas fa fa-thumbs-up fa-2x text-black-300"></i>
+                                                    data-id="{{ $d->id }}" style="text-decoration: none;">
+                                                    <i class="fas fa fa-thumbs-up fa-2x text-blue-500"></i>
                                                     <span
                                                         id="like-count-{{ $d->id }}">{{ $interactions->firstWhere('seaviews_id', $d->id)->total_likes ?? 0 }}</span>
                                                 </a>
                                                 <a href="javascript:void(0);" class="dislikeBtn"
-                                                    data-id="{{ $d->id }}">
-                                                    <i class="fas fa fa-thumbs-down fa-2x text-red-300"></i>
+                                                    data-id="{{ $d->id }}" style="text-decoration: none;">
+                                                    <i class="fas fa fa-thumbs-down fa-2x text-red-500"></i>
                                                     <span
                                                         id="dislike-count-{{ $d->id }}">{{ $interactions->firstWhere('seaviews_id', $d->id)->total_dislikes ?? 0 }}</span>
                                                 </a>
