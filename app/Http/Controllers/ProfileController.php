@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Storage;
+
 
 class ProfileController extends Controller
 {
@@ -36,6 +38,46 @@ class ProfileController extends Controller
 
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
+
+
+    /**
+     * Update the user's profile ID.
+     */
+    public function IDupdate(Request $request): RedirectResponse
+{
+    // Validate the request
+    $request->validateWithBag('updateID', [
+        'id_img' => ['required', 'image', 'mimes:png,jpg,jpeg', 'max:5120'],
+    ]);
+
+    // Get the authenticated user
+    $user = $request->user();
+
+    // Check if there is an existing image
+    if ($user->id_img) {
+        // Delete the old image from storage
+        Storage::disk('public')->delete($user->id_img);
+    }
+
+    // Check if a new file is uploaded
+    if ($request->hasFile('id_img')) {
+        $path = $request->file('id_img')->store('id_image', 'public');
+
+        // Check if the path is generated
+        if ($path) {
+            // Update the user's id_img column with the new path
+            $user->fill(['id_img' => $path]);
+            $user->save();
+
+            return Redirect::route('profile.edit')->with('status', 'profile-updated');
+        }
+    }
+
+    return Redirect::back()->withErrors(['id_img' => 'Failed to upload image.']);
+}
+
+
+
 
     /**
      * Delete the user's account.

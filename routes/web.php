@@ -64,17 +64,14 @@ Route::get('/dashboard', function () {
         ->where('user_id', Auth::user()->id)
         ->get();
 
-
-
-    if ($role[0]->role_id === "1") {
+    if ($role[0]->role_id === "2") {
         $totaluser = User::whereHas('roles', function ($query) {
             $query->where('name', 'user');
         })->count();
-        // return Auth::user()->roles[0]->name;
         return view('admin.dashboard')->with('totaluser', $totaluser);
+    } else if ($role[0]->role_id === "1") {
+        return view('superadmin.dashboard');
     } else {
-
-        // return Auth::user()->roles[0]->name;
         return view('user.dashboard');
     }
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -91,6 +88,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::post('/profile-ID', [ProfileController::class, 'IDupdate'])->name('profile.IDupdate');
+
 });
 
 require __DIR__ . '/auth.php';
@@ -165,3 +164,14 @@ Route::
             Route::post('/request/{id}/archive', 'requestCtrl@archiveMessage')->name('requests.archive');
 
         });
+
+
+        Route::
+        namespace('App\Http\Controllers\SuperadminController')->prefix('superadmin')->name('superadmin.')->group(function () {
+
+            Route::get('/verify', 'UserVerifyCtrl@index')->name('verify');
+            Route::put('/verify/{id}/reject', 'UserVerifyCtrl@reject')->name('reject');
+            Route::put('/verify/{id}/verified', 'UserVerifyCtrl@verified')->name('verified');
+
+        });
+

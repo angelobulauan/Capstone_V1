@@ -1,3 +1,9 @@
+@if (Auth::user()->involvement != 'uploader')
+    @php
+        header("Location: " . URL::route('dashboard'));
+        exit;
+    @endphp
+@endif
 <!DOCTYPE html>
 <html lang="en">
 
@@ -60,6 +66,7 @@
 <body>
     @extends('layouts.LOUser.app')
     @section('content')
+    @if (auth()->user()->involvement == 'uploader' && auth()->user()->is_verified == 1)
         <form id="seagrassForm" enctype="multipart/form-data" method="post">
             @csrf
 
@@ -238,6 +245,22 @@
                 });
             });
         </script>
+        @else
+        <div class="container h-screen flex justify-center items-center">
+            <div class="w-1/2 bg-white rounded-lg shadow-lg p-8">
+                <div class="flex items-center justify-center">
+                    <i class="fas fa-lock text-red-500" style="font-size: 3rem;"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-center">ACCESS LOCKED</h2>
+                <p class="text-gray-600 text-center">PLEASE WAIT FOR AN ADMINISTRATOR TO VERIFY YOUR IDENTITY</p>
+                <p class="text-gray-600 text-center"><i>Note: Please update your profile information to provide a valid Identification</i></p>
+                <div class="flex items-center justify-center">
+                    <a href="{{ route('profile.edit') }}" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded mt-4 no-underline">
+                        <i class="fas fa-arrow-circle-right"></i> Go to Profile
+                    </a>
+                </div>
+            </div>
+        @endif
     @endsection
 
 </body>

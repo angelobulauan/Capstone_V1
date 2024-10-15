@@ -15,7 +15,7 @@ use Illuminate\View\View;
 
 
 use App\Models\RoleUser;
-    
+
 class RegisteredUserController extends Controller
 {
     /**
@@ -37,13 +37,17 @@ class RegisteredUserController extends Controller
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'involvement' => ['required', 'string', 'max:255'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+
         ]);
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
+            'involvement' => $request->involvement,
             'password' => Hash::make($request->password),
+            'is_verified' => 0,
         ]);
 
         event(new Registered($user));
@@ -53,7 +57,7 @@ class RegisteredUserController extends Controller
 
         RoleUser::create([
             'user_id' => Auth::user()->id,
-            'role_id' => '2',
+            'role_id' => '3',
         ]);
 
 

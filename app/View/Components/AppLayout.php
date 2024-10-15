@@ -23,19 +23,18 @@ class AppLayout extends Component
         ->select('*')
         ->where('user_id',Auth::user()->id)
         ->get();
-      
+
         if ($role[0]->role_id === "1")
         {
-           
+            return view('layouts.LOSuperAdmin.app');
+        }
+        else if ($role[0]->role_id === "2")
+        {
             return view('layouts.LOAdmin.app');
         }
         else
         {
-         
             return view('layouts.LOUser.app');
         }
-
-     
-        
     }
 }

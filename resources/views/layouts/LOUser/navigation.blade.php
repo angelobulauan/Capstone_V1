@@ -40,10 +40,12 @@
                                     <i class="fas fa-eye"></i> <!-- Eye icon for "View All" -->
                                     {{ __('View All Sea Grasses') }}
                                 </x-dropdown-link>
-                                <x-dropdown-link :href="route('user.addnew')" class="flex items-center text-black dark:text-white hover:bg-blue-800 hover:text-white">
-                                    <i class="fas fa-plus"></i> <!-- Plus icon for "Add New" -->
-                                    {{ __('Add New Sea Grass') }}
-                                </x-dropdown-link>
+                                @if (Auth::user()->involvement == 'uploader')
+                                    <x-dropdown-link :href="route('user.addnew')" class="flex items-center text-black dark:text-white hover:bg-blue-800 hover:text-white">
+                                        <i class="fas fa-plus"></i> <!-- Plus icon for "Add New" -->
+                                        {{ __('Add New Sea Grass') }}
+                                    </x-dropdown-link>
+                                @endif
                                 {{-- <x-dropdown-link :href="route('user.view.index')">
                                     <i class="fas fa-info-circle"></i> <!-- Info icon for "Status" -->
                                     {{ __('Status Uploaded') }}
@@ -258,3 +260,4 @@
         </div>
     </div>
 </nav>
+

@@ -23,6 +23,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'involvement',
+        'is_verified',
+        'id_img',
     ];
 
     /**
