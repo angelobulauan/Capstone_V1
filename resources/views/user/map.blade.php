@@ -102,10 +102,11 @@
                         "</button>" +
                         "</div>" +
                         "<div class='modal-body'>" +
+                            "<img src='" + entry.photo_url + "' class='popup-image' />" +
                         "<p><strong>Scientific Name:</strong> " + entry.scientificname + "</p>" +
                         "<p><strong>Location:</strong> " + entry.location + "</p>" +
                         "<p><strong>Abundance:</strong> " + entry.abundance + "</p>" +
-                        "<img src='" + entry.photo_url + "' class='popup-image' />" +
+
                         "</div>" +
                         "</div>";
 
