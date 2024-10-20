@@ -4,6 +4,9 @@ namespace App\Http\Controllers\UserController;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\seaview;
+use App\Models\Seagrasspic;
+use Illuminate\Support\Facades\DB;
 
 class usermap extends Controller
 {
@@ -12,7 +15,11 @@ class usermap extends Controller
      */
     public function index()
     {
-        return view('user.map');
+        $myEntry = DB::table('seaviews')
+            ->where('status', '=', 'approved')
+            ->get();
+
+        return view('user.map', compact('myEntry'));
     }
 
     /**
@@ -36,7 +43,7 @@ class usermap extends Controller
      */
     public function show(string $id)
     {
-      
+
     }
 
     /**

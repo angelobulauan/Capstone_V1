@@ -15,6 +15,7 @@
     @section('content')
         @php
             $myEntry = DB::table('seaviews')
+                ->where('status', 'approved')
                 ->orderBy('created_at', 'desc')
                 ->get()
                 ->map(function ($d) {
