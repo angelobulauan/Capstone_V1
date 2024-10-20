@@ -71,7 +71,8 @@
                                         <div class="row mt-2">
                                             <div class="col-sm-3 d-flex justify-content-start align-items-center">
                                                 <button type="button" class="btn btn-primary viewMapBtn"
-                                                    data-id="{{ $d->id }}">
+                                                    data-id="{{ $d->id }}"
+                                                    data-coordinates="{{ $d->polygon_coordinates }}">
                                                     View Location
                                                 </button>
                                             </div>
@@ -129,23 +130,26 @@
 
             <!-- Pagination Links -->
             <div class="d-flex justify-content-center mt-4">
-                {{ $myEntry->links() }} <!-- Pagination Links -->
+                {{ $myEntry->links() }}
             </div>
         @endif
 
         <script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_API_KEY') }}"></script>
         <script>
-            $(document).ready(function() {
-                // View map location
-                $(document).on('click', '.viewMapBtn', function() {
-                    var seaviewId = $(this).data('id');
+            document.querySelectorAll('.viewMapBtn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const entryId = this.dataset.id;
+                    const coordinates = JSON.parse(this.dataset.coordinates);
+                    const mapModal = document.getElementById('mapModal-' + entryId);
+                    mapModal.style.display = 'block';
 
+                    // Update the view count via AJAX
                     $.ajax({
-                        url: '/user/updateView/' + seaviewId,
+                        url: '/user/updateView/' + entryId,
                         type: 'GET',
                         success: function(response) {
                             if (response && response.views !== undefined) {
-                                $('#view-count-' + seaviewId).text(response.views);
+                                $('#view-count-' + entryId).text(response.views);
                             }
                         },
                         error: function(xhr) {
@@ -153,67 +157,61 @@
                         }
                     });
 
-                    $("#mapModal-" + seaviewId).fadeIn();
-                    initializeMap(seaviewId);
+                    const mapElement = document.getElementById('map-' + entryId);
+
+                    // Check if the map is already initialized
+                    if (!mapElement.dataset.initialized) {
+                        const map = new google.maps.Map(mapElement, {
+                            zoom: 12,
+                            center: coordinates[0] // Center map on the first coordinate
+                        });
+
+                        // Draw the polygon
+                        const polygon = new google.maps.Polygon({
+                            paths: coordinates,
+                            strokeColor: '#FF0000',
+                            strokeOpacity: 0.8,
+                            strokeWeight: 2,
+                            fillColor: '#FF0000',
+                            fillOpacity: 0.35
+                        });
+                        polygon.setMap(map);
+
+                        // Mark the map as initialized
+                        mapElement.dataset.initialized = 'true';
+                    }
                 });
+            });
 
-                // Close map modal
-                $(document).on('click', '.closeMapModalBtn', function() {
-                    var id = $(this).data('id');
-                    $("#mapModal-" + id).fadeOut();
+
+            document.querySelectorAll('.closeMapModalBtn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const entryId = this.dataset.id;
+                    const mapModal = document.getElementById('mapModal-' + entryId);
+                    mapModal.style.display = 'none';
                 });
+            });
 
-                function initializeMap(id) {
-                    var map = new google.maps.Map(document.getElementById('map-' + id), {
-                        center: {
-                            lat: 0,
-                            lng: 0
-                        },
-                        zoom: 2
-                    });
-
-                    @foreach ($myEntry as $d)
-                        if ({{ $d->id }} == id) {
-                            var marker = new google.maps.Marker({
-                                position: {
-                                    lat: {{ $d->lati }},
-                                    lng: {{ $d->longti }}
-                                },
-                                map: map,
-                                title: "{{ $d->name }}"
-                            });
-                            map.setCenter({
-                                lat: {{ $d->lati }},
-                                lng: {{ $d->longti }}
-                            });
-                            map.setZoom(13);
-                        }
-                    @endforeach
-                }
-
-                // Like button
-                $(document).on('click', '.likeBtn', function(e) {
-                    e.preventDefault();
-                    var seaviewId = $(this).data('id');
-                    $.ajax({
-                        url: '/user/like/' + seaviewId,
-                        type: 'GET',
-                    });
+            $(document).on('click', '.likeBtn', function(e) {
+                e.preventDefault();
+                var seaviewId = $(this).data('id');
+                $.ajax({
+                    url: '/user/like/' + seaviewId,
+                    type: 'GET',
                 });
+            });
 
-                // Dislike button
-                $(document).on('click', '.dislikeBtn', function(e) {
-                    e.preventDefault();
-                    var seaviewId = $(this).data('id');
-                    $.ajax({
-                        url: '/user/dislike/' + seaviewId,
-                        type: 'GET',
-                    });
+            // Dislike button
+            $(document).on('click', '.dislikeBtn', function(e) {
+                e.preventDefault();
+                var seaviewId = $(this).data('id');
+                $.ajax({
+                    url: '/user/dislike/' + seaviewId,
+                    type: 'GET',
                 });
             });
         </script>
     @endsection
-
 
 </body>
 

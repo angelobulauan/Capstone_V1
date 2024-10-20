@@ -54,10 +54,10 @@ class seagrassview extends Controller
                 'scientificname' => 'required|string|max:255',
                 'description' => 'required|string|max:1000',
                 'location' => 'required|string|max:255',
-                'latitude' => 'required|numeric|between:-90,90',
-                'longtitude' => 'required|numeric|between:-180,180',
                 'abundance' => 'required|integer|min:0',
                 'photo.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+                'polygon_coordinates' => 'required|json',
+                'color' => 'required|string|max:255',
             ]);
 
             // Create a new Seaview instance
@@ -66,9 +66,9 @@ class seagrassview extends Controller
             $seaview->scientificname = $request->input('scientificname');
             $seaview->description = $request->input('description');
             $seaview->location = $request->input('location');
-            $seaview->lati = $request->input('latitude');
-            $seaview->longti = $request->input('longtitude');
             $seaview->abundance = $request->input('abundance');
+            $seaview->color = $validatedData['color']; // Updated line
+            $seaview->polygon_coordinates = $validatedData['polygon_coordinates'];
             $seaview->u_id = Auth::user()->id;
             $seaview->status = 'pending';
 

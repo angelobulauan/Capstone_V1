@@ -18,7 +18,9 @@ class seaview extends Model
         'photo',
         'u_id',
         'status',
-        'req_id'
+        'req_id',
+        'polygon_coordinates',
+        'color',
 
     ];
     public function interaction()

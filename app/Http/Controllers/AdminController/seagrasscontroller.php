@@ -115,64 +115,71 @@ class seagrasscontroller extends Controller
     /**
      * Store a newly created resource in storage.
      */
+     public function store(Request $request)
+{
+    try {
+        // Validate the request data
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'scientificname' => 'required|string|max:255',
+            'description' => 'required|string|max:1000',
+            'location' => 'required|string|max:255',
+            'abundance' => 'required|integer|min:0',
+            'photo.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'polygon_coordinates' => 'required|json',
+            'color' => 'required|string|max:255', // Change this line
 
-    public function store(Request $request)
-    {
-        try {
-            // Validate the request data
-            $validatedData = $request->validate([
-                'name' => 'required|string|max:255',
-                'scientificname' => 'required|string|max:255',
-                'description' => 'required|string|max:1000',
-                'location' => 'required|string|max:255',
-                'latitude' => 'required|numeric|between:-90,90',
-                'longtitude' => 'required|numeric|between:-180,180',
-                'abundance' => 'required|integer|min:0',
-                'photo.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            ]);
+        ]);
 
-            // Create a new Seaview instance
-            $seaview = new Seaview();
-            $seaview->name = $request->input('name');
-            $seaview->scientificname = $request->input('scientificname');
-            $seaview->description = $request->input('description');
-            $seaview->location = $request->input('location');
-            $seaview->lati = $request->input('latitude');
-            $seaview->longti = $request->input('longtitude');
-            $seaview->abundance = $request->input('abundance');
-            $seaview->u_id = Auth::user()->id;
-            $seaview->status = 'approved';
+        // Create a new Seaview instance
+        $seaview = new Seaview();
+        $seaview->name = $validatedData['name'];
+        $seaview->scientificname = $validatedData['scientificname'];
+        $seaview->description = $validatedData['description'];
+        $seaview->location = $validatedData['location'];
+        $seaview->abundance = $validatedData['abundance'];
+        $seaview->u_id = Auth::id(); // Directly use Auth::id() for cleaner code
+        $seaview->status = 'approved';
+        $seaview->photo = null;
+        $seaview->color = $validatedData['color']; // Updated line
+        $seaview->polygon_coordinates = $validatedData['polygon_coordinates'];
 
-            // Save the Seaview instance to the database first
-            $seaview->save();
 
-            // Handle multiple file uploads
-            if ($request->hasFile('photo')) {
-                $seaviewId = $seaview->id;
+        // Save the Seaview instance to the database
+        $seaview->save();
 
-                foreach ($request->file('photo') as $index => $file) {
-                    $filePath = $file->store('seagrass', 'public');
+        // Handle multiple file uploads
+        if ($request->hasFile('photo')) {
+            foreach ($request->file('photo') as $index => $file) {
+                // Store each photo and create a record in Seagrasspic
+                $filePath = $file->store('seagrass', 'public');
 
-                    $seagrasspic = new Seagrasspic();
-                    $seagrasspic->sea_id = $seaviewId;
-                    $seagrasspic->photo = $filePath;
+                $seagrasspic = new Seagrasspic();
+                $seagrasspic->sea_id = $seaview->id; // Reference the correct variable
+                $seagrasspic->photo = $filePath;
+                $seagrasspic->save();
 
-                    $seagrasspic->save();
-
-                    if ($index === 0) {
-                        $seaview->photo = $filePath;
-                        $seaview->save();
-                    }
+                // Save the first uploaded photo as the main photo for the Seaview
+                if ($index === 0) {
+                    $seaview->photo = $filePath;
                 }
             }
-
-            return response()->json(['message' => 'Seaview data saved successfully.'], 200);
-        } catch (Exception $e) {
-            Log::error($e->getMessage());
-
-            return response()->json(['message' => 'Failed to save Seaview data. Please try again.'], 500);
+            // Save the updated Seaview instance with the main photo
+            $seaview->save();
         }
+
+        return response()->json(['message' => 'Seaview data saved successfully.'], 200);
+    } catch (ValidationException $e) {
+        // Handle validation errors
+        return response()->json(['message' => 'Validation failed.', 'errors' => $e->validator->errors()], 422);
+    } catch (Exception $e) {
+        Log::error($e->getMessage());
+        return response()->json(['message' => 'Failed to save Seaview data. Please try again.'], 500);
     }
+}
+
+
+
 
     /**
      * Display the specified resource.

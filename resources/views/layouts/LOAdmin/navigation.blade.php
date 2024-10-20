@@ -37,11 +37,6 @@
                         @endif
                     </x-nav-link>
 
-
-                    <x-nav-link :href="route('admin.view')" :active="request()->is('admin/view')" class="text-black dark:text-black no-underline">
-                        <i class="fas fa-users"style="margin-right: 8px; color:black;"></i> {{ __('Users') }}
-                    </x-nav-link>
-
                 </div>
             </div>
 
@@ -115,10 +110,6 @@
 
             <x-responsive-nav-link :href="route('admin.add.index')" :active="request()->is('admin/add/index')" class="text-black dark:text-black no-underline">
                 <i class="fas fa-plus"></i> {{ __('Add New') }}
-            </x-responsive-nav-link>
-
-            <x-responsive-nav-link :href="route('admin.view')" :active="request()->is('admin/view')" class="text-black dark:text-black no-underline">
-                <i class="fas fa-users"></i> {{ __('Users') }}
             </x-responsive-nav-link>
 
 

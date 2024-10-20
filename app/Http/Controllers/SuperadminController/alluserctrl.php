@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\AdminController;
+namespace App\Http\Controllers\SuperadminController;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Models\alluser;
@@ -11,22 +11,18 @@ class alluserctrl extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function view()
     {
         $allusers = DB::table('users')
-        // ->where('u_id', '=', Auth::user()->id)
+        ->join('role_users', 'users.id', '=', 'role_users.user_id')
+        ->whereNotIn('role_users.role_id', [1])
         ->get(); //this will retrive all your user entries regardless of the status
 
     // dd($myEntry);
 
     //then we return to the newly created blade file with the data we retrieved
-    return view('admin.view')
+    return view('superadmin.view')
         ->with('alluser', $allusers);
-        
-
-    /**
-     * Show the form for creating a new resource.
-     */
     }
     public function create()
     {
@@ -74,6 +70,6 @@ class alluserctrl extends Controller
     public function showAllUsers()
 {
     // Retrieve all users from the 'users' table
-   
+
 }
 }
