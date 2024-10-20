@@ -125,6 +125,8 @@ class seagrasscontroller extends Controller
             'description' => 'required|string|max:1000',
             'location' => 'required|string|max:255',
             'abundance' => 'required|integer|min:0',
+            'latitude' => 'required|numeric',
+            'longtitude' => 'required|numeric',
             'photo.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'polygon_coordinates' => 'required|json',
             'color' => 'required|string|max:255', // Change this line
@@ -138,6 +140,8 @@ class seagrasscontroller extends Controller
         $seaview->description = $validatedData['description'];
         $seaview->location = $validatedData['location'];
         $seaview->abundance = $validatedData['abundance'];
+        $seaview->latitude = $validatedData['latitude'];
+        $seaview->longtitude = $validatedData['longtitude'];
         $seaview->u_id = Auth::id(); // Directly use Auth::id() for cleaner code
         $seaview->status = 'approved';
         $seaview->photo = null;

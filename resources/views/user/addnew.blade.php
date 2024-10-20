@@ -94,6 +94,90 @@
                             </div>
 
                             <div class="row mt-3 d-flex align-items-center">
+                                <div class="col-5">
+                                    <label for="latitude" class="form-label">Latitude</label>
+                                    <input type="text" class="form-control" name="latitude" id="latitude"
+                                        autocomplete="off" placeholder="Enter latitude" required>
+                                </div>
+                                <div class="col-6">
+                                    <label for="longtitude" class="form-label">Longtitude</label>
+                                    <input type="text" class="form-control" name="longtitude" id="longtitude"
+                                        autocomplete="off" placeholder="Enter longtitude" required>
+                                </div>
+
+                                <div class="col-1 d-flex align-items-center mt-4">
+                                    <button id="openModalMapLocationAdmin" type="button" class="btn btn-primary">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-crosshair" viewBox="0 0 16 16">
+                                            <path
+                                                d="M8.5.5a.5.5 0 0 0-1 0v.518A7 7 0 0 0 1.018 7.5H.5a.5.5 0 0 0 0 1h.518A7 7 0 0 0 7.5 14.982v.518a.5.5 0 0 0 1 0v-.518A7 7 0 0 0 14.982 8.5h.518a.5.5 0 0 0 0-1h-.518A7 7 0 0 0 8.5 1.018zm-6.48 7A6 6 0 0 1 7.5 2.02v.48a.5.5 0 0 0 1 0v-.48a6 6 0 0 1 5.48 5.48h-.48a.5.5 0 0 0 0 1h.48a6 6 0 0 1-5.48 5.48v-.48a.5.5 0 0 0-1 0v.48A6 6 0 0 1 2.02 8.5h.48a.5.5 0 0 0 0-1zM8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4" />
+                                        </svg>
+                                    </button>
+                                </div>
+
+
+                            </div>
+
+                            <div class="modal fade" id="mapModalAdmin" tabindex="-1" aria-labelledby="mapModalAdminLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered modal-xl">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="mapModalAdminLabel">Add Location</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div id="mapAdmin" style="height: 400px;"></div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <script>
+                                var mapAdmin;
+                                var markerAdmin;
+                                var myLatlngAdmin = {
+                                    lat: 18.4905,
+                                    lng: 122.1285
+                                };
+
+                                function initMapAdmin() {
+                                    mapAdmin = new google.maps.Map(document.getElementById("mapAdmin"), {
+                                        center: myLatlngAdmin,
+                                        zoom: 13,
+                                    });
+
+                                    markerAdmin = new google.maps.Marker({
+                                        position: myLatlngAdmin,
+                                        map: mapAdmin,
+                                        draggable: true,
+                                    });
+
+                                    google.maps.event.addListener(markerAdmin, 'dragend',
+                                        function() {
+                                            var latLng = markerAdmin.getPosition();
+                                            document.getElementById("latitude").value = latLng
+                                                .lat();
+                                            document.getElementById("longtitude").value = latLng
+                                                .lng();
+                                        });
+                                }
+
+                                window.onload = initMapAdmin;
+
+                                document.getElementById("openModalMapLocationAdmin")
+                                    .addEventListener("click", function() {
+                                        var modal = new bootstrap.Modal(document.getElementById("mapModalAdmin"));
+                                        modal.show();
+                                    });
+                            </script>
+
+                            <div class="row mt-3 d-flex align-items-center">
                                 <div class="col-md-6">
                                     <label for="color" class="form-label">Polygon Color</label>
                                     <input type="color" name="color" class="form-control" value="#FF0000" required>
