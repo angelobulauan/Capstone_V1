@@ -6,7 +6,6 @@
 @endif
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,8 +26,7 @@
         }
 
         .custom-map-modal {
-            display: none;
-            /* Hidden by default */
+            display: none; /* Hidden by default */
             position: fixed;
             z-index: 1000;
             left: 0;
@@ -36,8 +34,7 @@
             width: 100%;
             height: 100%;
             overflow: auto;
-            background-color: rgba(0, 0, 0, 0.5);
-            /* Black background with opacity */
+            background-color: rgba(0, 0, 0, 0.5); /* Black background with opacity */
         }
 
         .modal-content {
@@ -62,72 +59,56 @@
         }
     </style>
 </head>
-
 <body>
     @extends('layouts.LOUser.app')
+
     @section('content')
     @if (auth()->user()->involvement == 'uploader' && auth()->user()->is_verified == 1)
-        <form id="seagrassForm" enctype="multipart/form-data" method="post">
+        <form id="seagrassForm" action="{{ route('user.addnew') }}" method="POST" enctype="multipart/form-data">
             @csrf
-
             <div class="container">
                 <div style="padding:10px;">
                     <div class="card-header">
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <label for="name" class="form-label">Name</label>
-                                <input type="text" name="name" class="form-control" autocomplete="off"
-                                    placeholder="Name of the Sea Grass" required>
+                                <input type="text" name="name" class="form-control" autocomplete="off" placeholder="Name of the Sea Grass" required>
                             </div>
-                            <br>
                             <div class="col-md-6">
                                 <label for="scientificname" class="form-label">Scientific Name</label>
-                                <input type="text" name="scientificname" class="form-control" autocomplete="off"
-                                    placeholder="Scientific Name of the Sea Grass"required>
+                                <input type="text" name="scientificname" class="form-control" autocomplete="off" placeholder="Scientific Name of the Sea Grass" required>
                             </div>
-                            <br>
                             <div class="col-12">
                                 <label for="description" class="form-label">Description</label>
-                                <textarea class="form-control" name="description" rows="3" autocomplete="off"
-                                    placeholder="Describe the look and texture" required></textarea>
+                                <textarea class="form-control" name="description" rows="3" autocomplete="off" placeholder="Describe the look and texture" required></textarea>
                             </div>
                             <div class="row">
                                 <div class="col">
-                                    <br>
                                     <label>Barangay, Town, Province</label>
-                                    <input type="text" name="location" class="form-control" autocomplete="off"
-                                        placeholder="Enter the Location"required>
+                                    <input type="text" name="location" class="form-control" autocomplete="off" placeholder="Enter the Location" required>
                                 </div>
                                 <div class="col">
-                                    <br>
                                     <label>Abundance</label>
-                                    <input type="text" name="abundance" class="form-control" autocomplete="off"
-                                        placeholder="Estimated Length" required>
+                                    <input type="number" name="abundance" class="form-control" autocomplete="off" placeholder="Estimated Length" required>
                                 </div>
                             </div>
 
-                            <div class="row mt-3">
-                                <div class="col-5">
-                                    <label for="latitude" class="form-label">Latitude</label>
-                                    <input type="text" class="form-control" name="latitude" id="latitude"
-                                        autocomplete="off" placeholder="Enter latitude" required>
+                            <div class="row mt-3 d-flex align-items-center">
+                                <div class="col-md-6">
+                                    <label for="color" class="form-label">Polygon Color</label>
+                                    <input type="color" name="color" class="form-control" value="#FF0000" required>
                                 </div>
-                                <div class="col-6">
-                                    <label for="longtitude" class="form-label">Longtitude</label>
-                                    <input type="text" class="form-control" name="longtitude" id="longtitude"
-                                        autocomplete="off" placeholder="Enter longtitude" required>
+                                <div class="col-auto">
+                                    <p>Press This to add Sea GrassLocation:</p>
                                 </div>
-                                <div class="col-1 d-flex align-items-center mt-4">
+                                <div class="col-auto">
                                     <button id="openModal" type="button" class="btn btn-primary">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                            fill="currentColor" class="bi bi-crosshair" viewBox="0 0 16 16">
-                                            <path
-                                                d="M8.5.5a.5.5 0 0 0-1 0v.518A7 7 0 0 0 1.018 7.5H.5a.5.5 0 0 0 0 1h.518A7 7 0 0 0 7.5 14.982v.518a.5.5 0 0 0 1 0v-.518A7 7 0 0 0 14.982 8.5h.518a.5.5 0 0 0 0-1h-.518A7 7 0 0 0 8.5 1.018zm-6.48 7A6 6 0 0 1 7.5 2.02v.48a.5.5 0 0 0 1 0v-.48a6 6 0 0 1 5.48 5.48h-.48a.5.5 0 0 0 0 1h.48a6 6 0 0 1-5.48 5.48v-.48a.5.5 0 0 0-1 0v.48A6 6 0 0 1 2.02 8.5h.48a.5.5 0 0 0 0-1zM8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4" />
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-crosshair" viewBox="0 0 16 16">
+                                            <path d="M8.5.5a.5.5 0 0 0-1 0v.518A7 7 0 0 0 1.018 7.5H.5a.5.5 0 0 0 0 1h.518A7 7 0 0 0 7.5 14.982v.518a.5.5 0 0 0 1 0v-.518A7 7 0 0 0 14.982 8.5h.518a.5.5 0 0 0 0-1h-.518A7 7 0 0 0 8.5 1.018zm-6.48 7A6 6 0 0 1 7.5 2.02v.48a.5.5 0 0 0 1 0v-.48a6 6 0 0 1 5.48 5.48h-.48a.5.5 0 0 0 0 1h.48a6 6 0 0 1-5.48 5.48v-.48a.5.5 0 0 0-1 0v.48A6 6 0 0 1 2.02 8.5h.48a.5.5 0 0 0 0-1zM8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4" />
                                         </svg>
                                     </button>
                                 </div>
                             </div>
-
 
                             <div class="row mb-1 mt-1">
                                 <label for="photo" class="col-form-label">Upload Photo:</label>
@@ -136,12 +117,13 @@
                                     <input type="file" name="photo[]" class="form-control border" required multiple>
                                 </div>
                             </div>
+
+                            <input type="hidden" id="polygonCoordinates" name="polygon_coordinates">
+
                             <div class="col-12">
-                                <br>
                                 <button type="submit" class="btn btn-primary">
                                     <i class="fas fa-save"></i> Save
                                 </button>
-
                             </div>
                         </div>
                     </div>
@@ -149,120 +131,167 @@
             </div>
         </form>
 
-
-        <div id="exampleModal" class="custom-map-modal" style="display:none;">
+        <div id="exampleModal" class="custom-map-modal">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Map Location</h5>
                     <span class="close">&times;</span>
                 </div>
                 <div class="modal-body">
-                    <!-- Map container -->
                     <div id="map" style="height: 400px;"></div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" id="closeModal">Close</button>
-                    <button type="button" class="btn btn-primary" id="saveLocation">Save Location</button>
                 </div>
             </div>
         </div>
 
-
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_API_KEY') }}"></script>
-        <script>
-            $(document).ready(function() {
-                let map;
-                let marker;
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_API_KEY') }}&libraries=drawing"></script>
+    <script>
+        $(document).ready(function () {
+            let map;
+            let drawingManager;
+            let selectedPolygon;
 
-                map = new google.maps.Map(document.getElementById('map'), {
-                    center: {
-                        lat: 18.4816,
-                        lng: 122.1557
-                    },
-                    zoom: 13
-                });
+            // Initialize the map
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: { lat: 18.4816, lng: 122.1557 },
+                zoom: 13
+            });
 
-                marker = new google.maps.Marker({
-                    position: {
-                        lat: 18.4816,
-                        lng: 122.1557
-                    },
-                    map: map,
-                    draggable: true
-                });
+            // Initialize the drawing manager for drawing polygons
+            drawingManager = new google.maps.drawing.DrawingManager({
+                drawingMode: google.maps.drawing.OverlayType.POLYGON,
+                drawingControl: true,
+                drawingControlOptions: {
+                    position: google.maps.ControlPosition.TOP_CENTER,
+                    drawingModes: ['polygon']
+                },
+                polygonOptions: {
+                    fillColor: '#FF0000',
+                    fillOpacity: 0.35,
+                    strokeWeight: 2,
+                    clickable: true,
+                    editable: true,
+                    draggable: false
+                }
+            });
 
-                $('#openModal').on('click', function() {
-                    $('#exampleModal').fadeIn();
-                    setTimeout(function() {
-                        google.maps.event.trigger(map, 'resize');
-                        map.setCenter(marker.getPosition());
-                    }, 100);
-                });
+            // Add drawing manager to the map
+            drawingManager.setMap(map);
 
-                $('.close, #closeModal').on('click', function() {
-                    $('#exampleModal').fadeOut();
-                });
+            // Event listener for when a polygon is completed
+            // Event listener for when a polygon is completed
+    google.maps.event.addListener(drawingManager, 'polygoncomplete', function (polygon) {
+        // Remove the previous polygon if it exists
+        if (selectedPolygon) {
+            selectedPolygon.setMap(null);
+        }
+        selectedPolygon = polygon;
 
-                $('#saveLocation').on('click', function() {
-                    const lat = marker.getPosition().lat();
-                    const lng = marker.getPosition().lng();
-                    $('input[name="latitude"]').val(lat.toFixed(6));
-                    $('input[name="longtitude"]').val(lng.toFixed(6));
-                    $('#exampleModal').fadeOut();
-                });
+        // Get the selected color from the color picker
+        const selectedColor = $('input[name="polygon_color"]').val(); // Change 'color' to 'polygon_color'
 
-                // for the submission
-                $('#seagrassForm').on('submit', function(e) {
-                    e.preventDefault();
+        // Set the polygon's fill and stroke colors
+        polygon.setOptions({
+            fillColor: selectedColor,
+            strokeColor: selectedColor
+        });
 
-                    let formData = new FormData(this);
+        // Get the coordinates of the completed polygon
+        const polygonPath = polygon.getPath();
+        let coordinates = [];
+        polygonPath.forEach(function (latLng) {
+            coordinates.push({
+                lat: latLng.lat(),
+                lng: latLng.lng()
+            });
+        });
 
-                    $.ajax({
-                        url: "{{ route('user.addnew.store') }}",
-                        method: "POST",
-                        data: formData,
-                        contentType: false,
-                        processData: false,
-                        success: function(response) {
-                            Swal.fire({
-                                icon: 'success',
-                                title: 'Success',
-                                text: response.message,
-                            }).then(function() {
-                                window.location.href = "{{ route('user.addnew') }}";
-                            });
-                        },
-                        error: function(response) {
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Error',
-                                text: response.responseJSON.message,
-                            });
+        // Store the coordinates as a JSON string
+        $('#polygonCoordinates').val(JSON.stringify(coordinates));
+    });
+
+
+            // Open the modal
+            $('#openModal').on('click', function () {
+                $('#exampleModal').fadeIn();
+            });
+
+            // Close the modal
+            $('.close, #closeModal').on('click', function () {
+                $('#exampleModal').fadeOut();
+                if (selectedPolygon) {
+                    selectedPolygon.setMap(null); // Clear polygon when closing modal
+                    selectedPolygon = null; // Reset the selected polygon
+                }
+            });
+
+            // Handle form submission with AJAX
+            $('#seagrassForm').on('submit', function (e) {
+                e.preventDefault(); // Prevent default form submission
+
+                const coordinates = $('#polygonCoordinates').val(); // Get the polygon coordinates
+                if (!coordinates) {
+                    alert('Please draw a polygon before saving!');
+                    return;
+                }
+
+                const formData = new FormData(this); // Create FormData object to hold form data
+                $.ajax({
+                    url: $(this).attr('action'),
+                    method: $(this).attr('method'),
+                    data: formData,
+                    processData: false, // Prevent jQuery from processing the data
+                    contentType: false, // Prevent jQuery from setting content type
+                    success: function (response) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success',
+                            text: 'Data saved successfully!',
+                        });
+                        // Reset the form fields and close modal
+                        $('#seagrassForm')[0].reset();
+                        $('#exampleModal').fadeOut();
+                        if (selectedPolygon) {
+                            selectedPolygon.setMap(null); // Clear polygon after saving
+                            selectedPolygon = null; // Reset the selected polygon
                         }
-                    });
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(xhr.responseText);
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'Failed to save data. Please try again.',
+                        });
+                    }
                 });
             });
-        </script>
-        @else
-        <div class="container h-screen flex justify-center items-center">
-            <div class="w-1/2 bg-white rounded-lg shadow-lg p-8">
-                <div class="flex items-center justify-center">
-                    <i class="fas fa-lock text-red-500" style="font-size: 3rem;"></i>
-                </div>
-                <h2 class="text-2xl font-bold text-center">ACCESS LOCKED</h2>
-                <p class="text-gray-600 text-center">PLEASE WAIT FOR AN ADMINISTRATOR TO VERIFY YOUR IDENTITY</p>
-                <p class="text-gray-600 text-center"><i>Note: Please update your profile information to provide a valid Identification</i></p>
-                <div class="flex items-center justify-center">
-                    <a href="{{ route('profile.edit') }}" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded mt-4 no-underline">
-                        <i class="fas fa-arrow-circle-right"></i> Go to Profile
-                    </a>
-                </div>
-            </div>
-        @endif
+        });
+    </script>
+     @else
+     <div class="container h-screen flex justify-center items-center">
+         <div class="w-1/2 bg-white rounded-lg shadow-lg p-8">
+             <div class="flex items-center justify-center">
+                 <i class="fas fa-lock text-red-500" style="font-size: 3rem;"></i>
+             </div>
+             <h2 class="text-2xl font-bold text-center">ACCESS LOCKED</h2>
+             <p class="text-gray-600 text-center">PLEASE WAIT FOR AN ADMINISTRATOR TO VERIFY YOUR IDENTITY</p>
+             <p class="text-gray-600 text-center"><i>Note: Please update your profile information to provide a valid Identification</i></p>
+             <div class="flex items-center justify-center">
+                 <a href="{{ route('profile.edit') }}" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded mt-4 no-underline">
+                     <i class="fas fa-arrow-circle-right"></i> Go to Profile
+                 </a>
+             </div>
+         </div>
+     @endif
+
     @endsection
 
 </body>
-
 </html>
+
+

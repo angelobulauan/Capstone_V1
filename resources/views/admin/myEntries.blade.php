@@ -49,14 +49,6 @@
                                                         <th>Abundance</th>
                                                         <td>{{ $d->abundance }}</td>
                                                     </tr>
-                                                    <tr>
-                                                        <th>Latitude</th>
-                                                        <td>{{ $d->lati }}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Longtitude</th>
-                                                        <td>{{ $d->longti }}</td>
-                                                    </tr>
 
                                                     <tr>
                                                         <th>Date of Entry</th>
@@ -68,18 +60,18 @@
                                         <div class="row mt-2">
                                             <div class="col-sm-12 d-flex justify-content-end align-items-center">
 
-                                            <button class="btn btn-primary me-2 py-0" data-bs-toggle="modal"
-        data-bs-target="#edit-entries-{{ $d->id }}">
-    <i class="fas fa-edit"></i> Edit
-</button>
+                                                <button class="btn btn-primary me-2 py-0" data-bs-toggle="modal"
+                                                    data-bs-target="#edit-entries-{{ $d->id }}">
+                                                    <i class="fas fa-edit"></i> Edit
+                                                </button>
 
 
                                                 <form action="{{ route('admin.deleteseagrass', ['id' => $d->id]) }}"
                                                     method="get" class="selec">
                                                     @csrf @method('DELETE')
                                                     <button type="submit" class="btn btn-danger py-0">
-    <i class="fas fa-trash-alt"></i> Delete
-</button>
+                                                        <i class="fas fa-trash-alt"></i> Delete
+                                                    </button>
 
                                                 </form>
                                             </div>
@@ -205,7 +197,7 @@
                                 confirmButtonText: 'OK'
                             }).then(() => {
                                 location
-                            .reload(); // Reload the page to reflect the updated data
+                                    .reload(); // Reload the page to reflect the updated data
                             });
                         } else {
                             // Display error message with Swal.fire

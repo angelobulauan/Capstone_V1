@@ -22,7 +22,7 @@
             <div class="col-xl-3 col-md-6 mb-4x">
 
                 <div class="card text-center" style="transition: all 0.3s ease-in-out;">
-                    <a href="{{ route('admin.view') }}" style="text-decoration: none;">
+
                         <div class="card-header bg-secondary text-white">
                             <div class="row align-items-center">
                                 <div class="col ">
@@ -36,7 +36,7 @@
                                 </div>
                             </div>
                         </div>
-                    </a>
+
                 </div>
 
                 <style>

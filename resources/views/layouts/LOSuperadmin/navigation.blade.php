@@ -23,6 +23,12 @@
                         <i class="fas fa-user"style="margin-right: 8px;"></i> {{-- FontAwesome icon --}}
                         {{ __('Verify Uploader') }}
                     </x-nav-link>
+
+                    <x-nav-link :href="route('superadmin.view')" :active="request()->is('superadmin.view')"
+                        class="flex items-center text-black dark:text-white hover:no-underline">
+                        <i class="fas fa-users"style="margin-right: 8px;"></i>
+                        {{ __('Users') }}
+                    </x-nav-link>
                 </div>
 
 
