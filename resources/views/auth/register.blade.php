@@ -192,7 +192,7 @@
                         </div>
                         <select id="involvement" class="form-control @error('involvement') is-invalid @enderror" name="involvement">
                             <option value="viewer">Viewer</option>
-                            <option value="uploader">Uploader</option>
+                            <option value="uploader">Contribitor</option>
                         </select>
                         @error('involvement')
                             <span class="invalid-feedback" role="alert">

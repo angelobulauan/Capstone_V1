@@ -1,3 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Pending Approval</title>
+</head>
+
+<body>
 @extends('layouts.LOadmin.app')
 
 @section('content')
@@ -41,13 +52,13 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-sm-6 p-1">Name: {{ $d->name }}</div>
-                                <div class="col-sm-6 p-1">Scientific Name: {{ $d->scientificname }}</div>
+                                <div class="col-sm-6 p-1"> <i class="fa fa-leaf mr-1 text-success"></i>Name: {{ $d->name }}</div>
+                                <div class="col-sm-6 p-1">  <i class="fa fa-microscope  text-secondary"></i> Scientific Name: {{ $d->scientificname }}</div>
                                 <div class="col-sm-6 p-1">
-                                    <i class="fa fa-info-circle mr-2 text-primary"></i>Description: {{ $d->description }}
+                                    <i class="fa fa-info-circle mr-1 text-primary"></i>Description: {{ $d->description }}
                                 </div>
                                 <div class="col-sm-6 p-1">
-                                    <i class="fa fa-map-marker mr-2 text-warning"></i>Location: {{ $d->location }}
+                                    <i class="fa fa-map-marker-alt mr-1 text-warning"></i>Location: {{ $d->location }}
                                 </div>
                                 <div class="col-sm-6 p-1">
                                     <i class="fa fa-map-pin mr-2"></i>Abundance: {{ $d->abundance }}
@@ -113,5 +124,5 @@
     @endforeach
     @endif
     <script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_API_KEY') }}"></script>
-    
+
 @endsection
