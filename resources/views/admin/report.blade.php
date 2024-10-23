@@ -53,7 +53,7 @@
                         <tr>
                             <td>{{ $report->name }}</td>
                             <td>{{ $report->scientificname }}</td>
-                            <td>{{ $report->description }}</td>
+                            <td>{{ \Illuminate\Support\Str::limit($report->description, 50) }}</td>
                             <td>{{ $report->location }}</td>
                             <td>{{ date('m-d-Y', strtotime($report->created_at)) }}</td>
                         </tr>
