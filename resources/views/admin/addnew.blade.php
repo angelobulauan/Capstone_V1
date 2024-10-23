@@ -1,3 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Add New Sea Grass</title>
+</head>
+
+<body>
 @extends('layouts.LOAdmin.app')
 
 @section('content')
@@ -75,7 +86,7 @@
                             </div>
                             <div class="col">
                                 <label>Abundance</label>
-                                <input type="number" name="abundance" class="form-control" autocomplete="off" placeholder="Estimated Length" required>
+                                <input type="text" name="abundance" class="form-control" autocomplete="off" placeholder="Estimated Length" required>
                             </div>
                         </div>
 

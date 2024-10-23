@@ -55,14 +55,20 @@
                             <div class="card shadow-sm">
                                 <div class="card-body">
                                     <div class="row">
-                                        <div class="col-sm-6 p-1">Name: {{ $d->name }}</div>
-                                        <div class="col-sm-6 p-1">Scientific Name: {{ $d->scientificname }}</div>
+                                        <div class="col-sm-6 p-1">
+                                            <i class="fa fa-leaf text-success"></i> Name: {{ $d->name }}
+                                        </div>
+
+                                        <div class="col-sm-6 p-1">
+                                            <i class="fa fa-microscope  text-secondary"></i> Scientific Name: {{ $d->scientificname }}
+                                        </div>
+
                                         <div class="col-sm-6 p-1">
                                             <i class="fa fa-info-circle mr-2 text-primary"></i>Description:
                                             {{ $d->description }}
                                         </div>
                                         <div class="col-sm-6 p-1">
-                                            <i class="fa fa-map-marker mr-2 text-warning"></i>Location: {{ $d->location }}
+                                            <i class="fa fa-map-marker-alt mr-2 text-warning"></i>Location: {{ $d->location }}
                                         </div>
                                         <div class="col-sm-6 p-1">
                                             <i class="fa fa-map-pin mr-2"></i>Abundance: {{ $d->abundance }}

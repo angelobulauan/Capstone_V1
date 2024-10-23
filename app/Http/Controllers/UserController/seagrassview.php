@@ -54,7 +54,7 @@ class seagrassview extends Controller
                 'scientificname' => 'required|string|max:255',
                 'description' => 'required|string|max:1000',
                 'location' => 'required|string|max:255',
-                'abundance' => 'required|integer|min:0',
+                'abundance' => 'required|string|max:255',
                 'latitude' => 'required|numeric',
                 'longtitude' => 'required|numeric',
                 'photo.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',

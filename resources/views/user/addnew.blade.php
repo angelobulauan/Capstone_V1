@@ -89,7 +89,7 @@
                                 </div>
                                 <div class="col">
                                     <label>Abundance</label>
-                                    <input type="number" name="abundance" class="form-control" autocomplete="off" placeholder="Estimated Length" required>
+                                    <input type="text" name="abundance" class="form-control" autocomplete="off" placeholder="Estimated Length" required>
                                 </div>
                             </div>
 
