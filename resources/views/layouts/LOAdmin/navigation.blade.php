@@ -21,7 +21,9 @@
                         <i class="fas fa-leaf"style="margin-right: 8px; color:black;"></i> {{ __('Sea Grasses') }}
                     </x-nav-link>
 
-
+                    <x-nav-link :href="route('admin.report')" :active="request()->is('admin/report')" class="text-black dark:text-black no-underline">
+                        <i class="fas fa-file"style="margin-right: 8px; color:black;"></i> {{ __('Reports') }}
+                    </x-nav-link>
 
                     <x-nav-link :href="route('admin.add.index')" :active="request()->is('admin/add/index')" class="text-black dark:text-black no-underline">
                         <i class="fas fa-plus"style="margin-right: 8px; color:black;"></i> {{ __('Add New') }}

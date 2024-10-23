@@ -105,6 +105,10 @@ Route::namespace('App\Http\Controllers\AdminController')
 
         Route::put('/approve/{id}', 'seagrasscontroller@approve')->name('admin.approve');
         Route::put('/reject/{id}', 'seagrasscontroller@reject')->name('admin.reject');
+
+        Route::get('/report', 'ReportsCtrl@index')->name('report');
+        Route::post('/export', 'ReportsCtrl@exportToExcel')->name('export');
+
     });
 
 //user
