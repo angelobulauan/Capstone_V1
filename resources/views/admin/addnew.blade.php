@@ -79,6 +79,7 @@
                             <label for="description" class="form-label">Description</label>
                             <textarea class="form-control" name="description" rows="3" autocomplete="off" placeholder="Describe the look and texture" required></textarea>
                         </div>
+                        <span></span>
                         <div class="row">
                             <div class="col">
                                 <label>Barangay, Town, Province</label>

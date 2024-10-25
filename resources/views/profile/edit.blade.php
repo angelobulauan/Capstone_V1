@@ -8,7 +8,8 @@
     <title>Profile</title>
 </head>
 
-<body>@extends('layouts.LOUser.app')
+<body>
+    @extends('layouts.LOUser.app')
 @section('content')
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">

@@ -14,7 +14,7 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" class="flex items-center text-black dark:text-white">
-                        <i class="fas fa-home" style="margin-right: 8px;">Home</i>
+                        <i class="fas fa-home" style="margin-right: 8px;"> {{_('Home')}}</i>
                     </x-nav-link>
 
                     <x-nav-link :href="route('user.article')" :active="request()->routeIs('Article')" class="flex items-center text-black dark:text-white">

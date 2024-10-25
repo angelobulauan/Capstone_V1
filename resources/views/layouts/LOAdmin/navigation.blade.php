@@ -110,8 +110,16 @@
                 <i class="fas fa-leaf"></i> {{ __('Sea Grasses') }}
             </x-responsive-nav-link>
 
+            <x-responsive-nav-link :href="route('admin.report')" :active="request()->is('admin/report')" class="text-black dark:text-black no-underline">
+                <i class="fas fa-file"></i> {{ __('Reports') }}
+            </x-responsive-nav-link>
+
             <x-responsive-nav-link :href="route('admin.add.index')" :active="request()->is('admin/add/index')" class="text-black dark:text-black no-underline">
                 <i class="fas fa-plus"></i> {{ __('Add New') }}
+            </x-responsive-nav-link>
+
+            <x-responsive-nav-link :href="route('admin.admin.pendingapproval')" :active="request()->is('admin/admin/pendingapproval')" class="text-black dark:text-black no-underline">
+                <i class="fas fa-hourglass-half"></i> {{ __('Pending Approval') }}
             </x-responsive-nav-link>
 
 

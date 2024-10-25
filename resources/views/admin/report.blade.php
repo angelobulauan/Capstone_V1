@@ -32,7 +32,7 @@
     <div class="container">
         <form action="{{ route('admin.export') }}" method="POST">
             @csrf
-            <button type="submit" class="btn btn-success">Export to Excel</button>
+            <button type="submit" class="btn btn-success"><i class="fas fa-file-excel"></i> Export to Excel</button>
         </form>
         <br><br>
         @if($reports->isEmpty())
@@ -41,11 +41,11 @@
             <table>
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Scientific Name</th>
-                        <th>Description</th>
-                        <th>Location</th>
-                        <th>Date Published</th>
+                        <th><i class="fas fa-leaf"></i> Name</th>
+                        <th><i class="fas fa-microscope"></i> Scientific Name</th>
+                        <th><i class="fas fa-info-circle"></i> Description</th>
+                        <th><i class="fas fa-map-marker-alt mr-1"></i>Location</th>
+                        <th><i class="fas fa-calendar-alt"></i> Date Published</th>
                     </tr>
                 </thead>
                 <tbody>
