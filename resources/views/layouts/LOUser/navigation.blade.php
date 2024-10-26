@@ -223,6 +223,12 @@
                 <i class="fas fa-leaf"></i> {{ __('Sea Grasses') }}
             </x-responsive-nav-link>
 
+            @if (Auth::user()->involvement == 'uploader')
+               <x-responsive-nav-link :href="route('user.addnew')" >
+                <i class="fas fa-plus"></i> <!-- Plus icon for "Add New" -->
+                {{ __('Add New Sea Grass') }}
+            </x-responsive-nav-link>
+        @endif
 
             <x-responsive-nav-link :href="route('user.map')" :active="request()->routeIs('Maps')">
                 <i class="fas fa-map"></i> {{ __('Maps') }}
@@ -245,6 +251,12 @@
                 <x-responsive-nav-link :href="route('profile.edit')">
                     <i class="fas fa-user"></i> {{ __('Profile') }}
                 </x-responsive-nav-link>
+
+                <x-responsive-nav-link :href="route('request.requests.index')">
+                    <i class="fas fa-bell"></i> {{ __('Requests') }}
+                            ({{ DB::table('seaviews')->where('u_id', auth()->user()->id)->where('status', 'pending')->count() }})
+                </x-responsive-nav-link>
+
 
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}">

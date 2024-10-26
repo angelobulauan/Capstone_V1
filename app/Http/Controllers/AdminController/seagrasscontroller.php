@@ -46,9 +46,9 @@ class seagrasscontroller extends Controller
             'archive' => 0
         ]);
 
-        return redirect()->back()->with('success', 'Seagrass entry approved successfully');
+        return redirect()->back()->with('success', 'Seagrass  approved successfully');
     } else {
-        return redirect()->back()->with('error', 'Seagrass entry status cannot be changed');
+        return redirect()->back()->with('error', 'Seagrass  status cannot be changed');
     }
 }
 
@@ -67,7 +67,7 @@ class seagrasscontroller extends Controller
             'archive' => 0
         ]);
 
-        return redirect()->back()->with('success', 'Seagrass entry rejected successfully');
+        return redirect()->back()->with('success', 'Seagrass rejected successfully');
     }
 
     public function updatePhoto(Request $request, $id, $photo)
@@ -240,9 +240,9 @@ class seagrasscontroller extends Controller
 
         if ($seagrass) {
             $seagrass->delete();
-            return response()->json(['success' => true, 'message' => 'Seagrass entry deleted successfully']);
+            return response()->json(['success' => true, 'message' => 'Seagrass  deleted successfully']);
         } else {
-            return response()->json(['success' => false, 'message' => 'Seagrass entry not found']);
+            return response()->json(['success' => false, 'message' => 'Seagrass  not found']);
         }
     }
 }
