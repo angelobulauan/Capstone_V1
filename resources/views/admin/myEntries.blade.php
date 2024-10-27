@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Sea Grasses</title>
+    <!-- Add Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Add SweetAlert2 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css">
 </head>
 
 <body>
@@ -27,7 +31,7 @@
                                 <div class="col-sm-6 d-flex align-items-center" data-bs-toggle="modal"
                                     data-bs-target="#imageSelectionModal-{{ $d->id }}">
                                     <img src="{{ asset('storage/' . $d->photo) }}" alt="First Photo"
-                                        class="img-fluid w-100 h-100 object-fit-cover"
+                                        class="img-fluid w-50 h-50 object-fit-cover mx-auto d-block"
                                         id="imageToSelect-{{ $d->id }}">
                                 </div>
 
@@ -65,7 +69,7 @@
                                                         <td>{{ $d->latitude }}</td>
                                                     </tr>
                                                     <tr>
-                                                        <th>Longtitude</th>
+                                                        <th>Longitude</th>
                                                         <td>{{ $d->longtitude }}</td>
                                                     </tr>
                                                     <tr>
@@ -88,14 +92,12 @@
                                                     <i class="fas fa-edit"></i> Edit
                                                 </button>
 
-
                                                 <form action="{{ route('admin.deleteseagrass', ['id' => $d->id]) }}"
                                                     method="get" class="selec">
                                                     @csrf @method('DELETE')
                                                     <button type="submit" class="btn btn-danger py-0">
                                                         <i class="fas fa-trash-alt"></i> Delete
                                                     </button>
-
                                                 </form>
                                             </div>
                                         </div>
@@ -117,15 +119,12 @@
                                     aria-label="Close"></button>
                             </div>
                             <div class="modal-body" id="imageOptions">
-                                <!-- Iterate through each photo fetched from the database -->
                                 @foreach ($selectphoto as $photo)
                                     <form
                                         action="{{ route('admin.update-photo', ['id' => $d->id, 'photo' => $photo->id]) }}"
                                         class="update-photo-form" method="POST"
                                         style="display: inline-block; margin-right: 10px;">
-                                        <!-- CSRF token for form security -->
                                         @csrf
-                                        <!-- Display the image using the path stored in the database -->
                                         <button type="submit" style="background: none; border: none; padding: 0;">
                                             <img src="{{ asset('storage/' . $photo->Photo) }}" alt="Photo"
                                                 style="width: 125px; height: 125px; display: inline-block;">
@@ -190,167 +189,49 @@
                 </div>
             </div>
         @endforeach
+
+        {{-- Pagination links --}}
+        <div class="row">
+            <div class="col-sm-12 d-flex justify-content-center">
+                {{ $myEntry->links() }} <!-- Adjust if you use a different pagination view -->
+            </div>
+        </div>
     </div> {{-- end of container --}}
+
+    <!-- Add jQuery and Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Add SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.all.min.js"></script>
 
     <script>
         $(document).ready(function() {
             // Handle form submission
             $('.update-photo-form').on('submit', function(event) {
-                // Prevent the default form submission
-                event.preventDefault();
+                event.preventDefault(); // Prevent default form submission
 
-                // Get the form data
-                var form = $(this);
-                var actionUrl = form.attr('action');
-                var formData = form.serialize(); // Serialize form data
+                const form = $(this);
+                const formData = new FormData(form[0]);
 
-                // Make the AJAX request
+                // Use AJAX to submit the form
                 $.ajax({
-                    url: actionUrl,
-                    type: 'POST',
+                    url: form.attr('action'),
+                    method: 'POST',
                     data: formData,
+                    processData: false,
+                    contentType: false,
                     success: function(response) {
-                        // Handle successful response
-                        if (response.success) {
-                            // Display success message with Swal.fire
-                            Swal.fire({
-                                title: 'Success!',
-                                text: response.message,
-                                icon: 'success',
-                                confirmButtonText: 'OK'
-                            }).then(() => {
-                                location
-                                    .reload(); // Reload the page to reflect the updated data
-                            });
-                        } else {
-                            // Display error message with Swal.fire
-                            Swal.fire({
-                                title: 'Error!',
-                                text: response.message,
-                                icon: 'error',
-                                confirmButtonText: 'OK'
-                            });
-                        }
+                        Swal.fire('Success', 'Image updated successfully!', 'success');
+                        // You can also refresh the page or update the UI accordingly
                     },
-                    error: function(xhr, status, error) {
-                        // Handle error case with Swal.fire
-                        Swal.fire({
-                            title: 'Error!',
-                            text: 'An error occurred. Please try again.',
-                            icon: 'error',
-                            confirmButtonText: 'OK'
-                        });
-                        console.error("AJAX Error:", status, error);
+                    error: function(xhr) {
+                        Swal.fire('Error', 'There was an error updating the image.', 'error');
                     }
                 });
             });
-
-            // Attach event listener for the photo button click to submit the form
-            $('.photo-button').on('click', function() {
-                var form = $(this).closest('.update-photo-form');
-                form.submit();
-            });
-
-            // Prefill the edit form if user will not enter a value and add ajax for the edit form submission
-            $('form[id^="seagrassForm-"]').on('submit', function(event) {
-                event.preventDefault();
-
-                var formId = $(this).attr('id');
-                var fields = ['name', 'scientificname', 'description', 'location', 'abundance'];
-                fields.forEach(function(field) {
-                    var input = $('#' + formId + ' #' + field);
-                    if (input.val().trim() === '') {
-                        input.val(input.attr('placeholder'));
-                    }
-                });
-
-                var formData = new FormData(this);
-
-                fetch($(this).attr('action'), {
-                        method: 'POST',
-                        headers: {
-                            'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value,
-                            'Accept': 'application/json',
-                        },
-                        body: formData
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.success) {
-                            Swal.fire({
-                                title: 'Success!',
-                                text: data.success,
-                                icon: 'success',
-                                confirmButtonText: 'OK'
-                            }).then(() => {
-                                location.reload();
-                            });
-                        } else if (data.error) {
-                            Swal.fire({
-                                title: 'Error!',
-                                text: data.error,
-                                icon: 'error',
-                                confirmButtonText: 'OK'
-                            });
-                        }
-                    })
-                    .catch(error => {
-                        Swal.fire({
-                            title: 'Error!',
-                            text: 'An error occurred while updating the record.',
-                            icon: 'error',
-                            confirmButtonText: 'OK'
-                        });
-                        console.error('Error:', error);
-                    });
-            });
-
-
-            // Handle form submission for all forms with class 'selec'
-            $(document).on('submit', '.selec', function(event) {
-                // Prevent the default form submission
-                event.preventDefault();
-
-                // Get the form data
-                var form = $(this);
-                var actionUrl = form.attr('action');
-
-                // Make the AJAX request
-                $.ajax({
-                    url: actionUrl,
-                    type: 'GET',
-                    data: form.serialize(), // Serialize form data
-                    success: function(response) {
-                        // Handle successful response
-                        if (response.success) {
-                            Swal.fire({
-                                title: 'Success!',
-                                text: response.message,
-                                icon: 'success',
-                                confirmButtonText: 'OK'
-                            }).then(() => {
-                                location.reload();
-                            });
-                        } else {
-                            // Display error message
-                            Swal.fire({
-                                title: 'Error!',
-                                text: response.message,
-                                icon: 'error',
-                                confirmButtonText: 'OK'
-                            });
-                        }
-                    },
-                    error: function(xhr, status, error) {
-                        // Handle error case
-                        console.error("AJAX Error:", status, error);
-                        alert("An error occurred. Please try again.");
-                    }
-                });
-            });
-
-
-
         });
     </script>
-@endsection
+    @endsection
+</body>
+
+</html>

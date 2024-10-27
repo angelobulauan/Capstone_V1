@@ -18,9 +18,9 @@ class seagrasscontroller extends Controller
     //this is used for my entries in the user nav
     public function index()
     {
-        $myEntry = DB::table('seaviews')->where('status', 'approved')->get();
+        $myEntry = DB::table('seaviews')->where('status', 'approved')->paginate(5);
 
-        return view('admin.myEntries')->with('myEntry', $myEntry);
+        return view('admin.myEntries', ['myEntry' => $myEntry]);
     }
 
     public function pendingapproval()
