@@ -145,6 +145,17 @@
             </div>
         </div>
     @endsection
+
+    <footer class="text-sm-start fixed-bottom bg-transparent">
+
+        <small class="text-center p-1 d-block text-white">
+            &copy; 2024 Copyright.
+            All right reserved
+            &nbsp;
+            <a class="text-white" href="/devs">Meet the Devs</a>
+        </small>
+
+    </footer>
 </body>
 
 </html>

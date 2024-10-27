@@ -44,6 +44,9 @@ Route::get('/article', function () {
     return view('user.article');
 });
 
+Route::get('/devs', function () {
+    return view('devs');
+})->name('devs');
 // Route::get('Addnew',[UserCTRL::class,'index'])-> name('addnew');
 
 // add

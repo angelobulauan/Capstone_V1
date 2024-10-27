@@ -149,7 +149,7 @@
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button
-                            class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
+                            class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-black dark:text-black bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
                             <div>{{ Auth::user()->name }}</div>
 
                             <div class="ms-1">
@@ -164,11 +164,11 @@
                     </x-slot>
 
                     <x-slot name="content">
-                        <x-dropdown-link :href="route('profile.edit')">
+                        <x-dropdown-link :href="route('profile.edit')" class="text-black dark:text-black hover:no-underline">
                             <i class="fas fa-user"></i> {{ __('Profile') }}
                         </x-dropdown-link>
 
-                        <x-dropdown-link :href="route('request.requests.index')">
+                        <x-dropdown-link :href="route('request.requests.index')" class="text-black dark:text-black hover:no-underline">
                             <i class="fas fa-bell"></i> {{ __('Requests') }}
                             ({{ DB::table('seaviews')->where('u_id', auth()->user()->id)->where('status', 'pending')->count() }})
                         </x-dropdown-link>
