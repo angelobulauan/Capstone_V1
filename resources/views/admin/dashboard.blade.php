@@ -382,4 +382,17 @@
         });
         uploaderChart.render();
     </script>
+
+    <br>
+    <div class="text-center bg-transparent text-black py-2">
+        <small>
+            &copy; 2024 All rights reserved.
+            <a href="/devs" class="text-dark">Meet the Devs</a>
+        </small>
+    </div>
 @endsection
+
+
+</body>
+</html>
+
