@@ -223,10 +223,10 @@
 
             <div class="col-xl-3 col-md-6 mb-4 ">
                 <div class="card text-center" style="transition: all 0.3s ease-in-out;">
-                    <div class="card-header bg-primary text-white">
+                    <div class="card-header bg-dark text-white">
                         <div class="row  align-items-center">
                             <div class="col">
-                                <i class="fas fa fa-user fa-4x text-black-300 wobble-on-hover"></i> <!-- Grass icon -->
+                                <i class="fas fa fa-user-check fa-4x text-black-300 wobble-on-hover"></i> <!-- Grass icon -->
 
                             </div>
                             <div class="col">
@@ -248,10 +248,10 @@
 
             <div class="col-xl-3 col-md-6 mb-4 ">
                 <div class="card text-center" style="transition: all 0.3s ease-in-out;">
-                    <div class="card-header bg-danger text-white">
+                    <div class="card-header bg-muted text-black">
                         <div class="row  align-items-center">
                             <div class="col">
-                                <i class="fas fa fa-user fa-4x text-black-300 wobble-on-hover"></i> <!-- Grass icon -->
+                                <i class="fas fa fa-user-times fa-4x text-black-300 wobble-on-hover"></i> <!-- Grass icon -->
 
                             </div>
                             <div class="col">
