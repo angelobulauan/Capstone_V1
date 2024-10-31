@@ -22,11 +22,13 @@
             font-weight: bold;
             font-style: italic;
             margin-bottom: 20px;
+            text-align: center
         }
 
         .contact-heading p {
             font-size: 1.2rem;
         }
+        
     </style>
 </head>
 
