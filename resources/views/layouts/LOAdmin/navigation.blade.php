@@ -63,7 +63,7 @@
                     </x-slot>
 
                     <x-slot name="content">
-                        <x-dropdown-link :href="route('profile.edit')" class="text-black dark:text-black no-underline">
+                        <x-dropdown-link :href="route('profile.adminedit')" class="text-black dark:text-black no-underline">
                             <i class="fas fa-user"></i> {{ __('Profile') }}
                         </x-dropdown-link>
 
@@ -131,7 +131,7 @@
                 </div>
 
                 <div class="mt-3 space-y-1">
-                    <x-responsive-nav-link :href="route('profile.edit')" class="text-black dark:text-black no-underline">
+                    <x-responsive-nav-link :href="route('profile.adminedit')" class="text-black dark:text-black no-underline">
                         <i class="fas fa-user"></i> {{ __('Profile') }}
                     </x-responsive-nav-link>
 
