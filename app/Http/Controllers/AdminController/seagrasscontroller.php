@@ -220,7 +220,7 @@ class seagrasscontroller extends Controller
                 ]);
 
             // Return a success response
-            return response()->json(['success' => 'Record updated successfully.']);
+            return back();
         }
     }
 
@@ -240,9 +240,9 @@ class seagrasscontroller extends Controller
 
         if ($seagrass) {
             $seagrass->delete();
-            return response()->json(['success' => true, 'message' => 'Seagrass  deleted successfully']);
+            return redirect()->back()->with('success', 'Seagrass deleted successfully');
         } else {
-            return response()->json(['success' => false, 'message' => 'Seagrass  not found']);
+            return redirect()->back()->with('error', 'Seagrass not found');
         }
     }
 }

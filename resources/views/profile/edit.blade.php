@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    @extends('layouts.LOUser.app')
+    @extends(auth()->user()->isAdmin() ? 'layouts.LOAdmin.app' : 'layouts.LOUser.app')
     @section('content')
         <x-slot name="header">
             <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">

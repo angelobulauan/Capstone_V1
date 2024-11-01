@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Sea Grasses</title>
     <!-- Add Bootstrap CSS -->
- 
+
 </head>
 
 <body>
@@ -152,31 +152,31 @@
                                     <div class="mb-2">
                                         <label for="name">Name:</label>
                                         <input type="text" id="name" name="name" class="form-control"
-                                            placeholder="{{ $d->name }}">
+                                            value="{{ $d->name }}">
                                     </div>
 
                                     <div class="mb-2">
                                         <label for="scientificname">Scientific Name:</label>
                                         <input type="text" id="scientificname" name="scientificname" class="form-control"
-                                            placeholder="{{ $d->scientificname }}">
+                                            value="{{ $d->scientificname }}">
                                     </div>
 
                                     <div class="mb-2">
                                         <label for="description">Description:</label>
                                         <input type="text" id="description" name="description" class="form-control"
-                                            placeholder="{{ $d->description }}">
+                                            value="{{ $d->description }}">
                                     </div>
 
                                     <div class="mb-2">
                                         <label for="location">Location:</label>
                                         <input type="text" id="location" name="location" class="form-control"
-                                            placeholder="{{ $d->location }}">
+                                            value="{{ $d->location }}">
                                     </div>
 
                                     <div class="mb-2">
                                         <label for="abundance">Abundance:</label>
                                         <input type="number" id="abundance" name="abundance" class="form-control"
-                                            placeholder="{{ $d->abundance }}">
+                                            value="{{ $d->abundance }}">
                                     </div>
                             </div>
                             <div class="modal-footer">
