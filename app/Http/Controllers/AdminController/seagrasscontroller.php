@@ -197,32 +197,46 @@ class seagrasscontroller extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit(Request $request, $id)
-    {
-        // Retrieve the record from the database
-        $record = DB::table('seaviews')->where('id', $id)->first();
+{
+    // Retrieve the record from the database
+    $record = DB::table('seaviews')->where('id', $id)->first();
 
-        // dd($record);
-
-        // Check if the record exists
-        if (!$record) {
-            return response()->json(['error' => 'Record not found.'], 404);
-        } else {
-            // Update the record with new values
-            DB::table('seaviews')
-                ->where('id', $id)
-                ->update([
-                    'name' => $request->input('name', $record->name),
-                    'scientificname' => $request->input('scientificname', $record->scientificname),
-                    'description' => $request->input('description', $record->description),
-                    'location' => $request->input('location', $record->location),
-                    'abundance' => $request->input('abundance', $record->abundance),
-                    'updated_at' => now(),
-                ]);
-
-            // Return a success response
-            return back();
-        }
+    // Check if the record exists
+    if (!$record) {
+        return response()->json(['error' => 'Record not found.'], 404);
     }
+
+    // Validate incoming request data
+    $validatedData = $request->validate([
+        'name' => 'nullable|string', // Allow null but ensure it's a string if provided
+        'scientificname' => 'nullable|string',
+        'description' => 'nullable|string',
+        'location' => 'nullable|string',
+        'abundance' => 'nullable|integer', // Adjust based on your data type
+    ]);
+
+    // Prepare update data
+    $updateData = [
+        'name' => $validatedData['name'] ?? $record->name,
+        'scientificname' => $validatedData['scientificname'] ?? $record->scientificname,
+        'description' => $validatedData['description'] ?? $record->description,
+        'location' => $validatedData['location'] ?? $record->location,
+        'abundance' => $validatedData['abundance'] ?? $record->abundance,
+        'updated_at' => now(),
+    ];
+
+    // Check if 'name' is null after preparing update data
+    if (is_null($updateData['name'])) {
+        return response()->json(['error' => 'Name cannot be null.'], 422);
+    }
+
+    // Update the record in the database
+    DB::table('seaviews')->where('id', $id)->update($updateData);
+
+    // Return a success response
+    return response()->json(['success' => 'Record updated successfully.']);
+}
+
 
     /**
      * Update the specified resource in storage.
