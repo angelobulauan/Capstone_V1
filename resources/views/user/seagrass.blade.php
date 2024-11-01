@@ -6,6 +6,83 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Sea Grasses</title>
+    <style>
+        .card {
+            border: none;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+            transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
+        }
+
+        .card:hover {
+            box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+        }
+
+        .card-img-top {
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .card-body {
+            padding: 1rem;
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-text {
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+
+        .card-footer {
+            background-color: transparent;
+            border-top: none;
+            padding: 0.5rem 1rem;
+        }
+
+        .btn-primary {
+            background-color: #3490dc;
+            border-color: #3490dc;
+        }
+
+        .custom-map-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
 </head>
 
 <body>
@@ -32,111 +109,137 @@
         @if ($myEntry->isEmpty())
             <p class="text-center">No Data Entry Published!</p>
         @else
-            @foreach ($myEntry as $d)
-                @php
-                    $interactions = DB::table('sea_grass_likes')
-                        ->select(
-                            'seaviews_id',
-                            DB::raw('SUM(likes) as total_likes'),
-                            DB::raw('SUM(dislikes) as total_dislikes'),
-                            DB::raw('SUM(views) as total_views'),
-                        )
-                        ->groupBy('seaviews_id')
-                        ->get();
-                @endphp
-                <div class="container mt-3">
-                    <div class="row">
-                        <div class="col-sm-3">
-                            <img src="{{ asset('storage/' . $d->photo) }}" alt="Seagrass Photo"
-                                class="img-fluid rounded shadow-sm" id="imageToSelect-{{ $d->id }}">
-                        </div>
+            <div class="row justify-content-center">
+                @foreach ($myEntry as $d)
+                    @php
+                        $interactions = DB::table('sea_grass_likes')
+                            ->select(
+                                'seaviews_id',
+                                DB::raw('SUM(likes) as total_likes'),
+                                DB::raw('SUM(dislikes) as total_dislikes'),
+                                DB::raw('SUM(views) as total_views'),
+                            )
+                            ->groupBy('seaviews_id')
+                            ->get();
+                    @endphp
+                    <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
+                        <div class="card">
+                            <img src="{{ asset('storage/' . $d->photo) }}" alt="Seagrass Photo" class="card-img-top">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ $d->name }}</h5>
+                                {{-- <p class="card-text">{{ $d->description }}</p> --}}
+                            </div>
+                            <div class="card-footer">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <a href="javascript:void(0);" class="btn btn-success btn-sm likeBtn"
+                                            data-id="{{ $d->id }}">
+                                            <i class="fas fa-heart"></i>
+                                            <span
+                                                id="like-count-{{ $d->id }}">{{ $interactions->firstWhere('seaviews_id', $d->id)->total_likes ?? 0 }}</span>
+                                        </a>
+                                        <a href="javascript:void(0);" class="btn btn-danger btn-sm dislikeBtn"
+                                            data-id="{{ $d->id }}">
+                                            <i class="fas fa-heart-broken"></i>
+                                            <span
+                                                id="dislike-count-{{ $d->id }}">{{ $interactions->firstWhere('seaviews_id', $d->id)->total_dislikes ?? 0 }}</span>
+                                        </a>
+                                    </div>
+                                    <div class="col-sm-6 text-right">
+                                        <a href="#viewModal-{{ $d->id }}" data-toggle="modal"
+                                            class="btn btn-success btn-sm">
+                                            View More
+                                        </a>
 
-                        <div class="col-sm-9">
-                            <div class="card shadow-sm">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-sm-6 p-1">
-                                            <i class="fa fa-leaf text-success"></i> Name: {{ $d->name }}
-                                        </div>
+                                        <div class="modal fade" id="viewModal-{{ $d->id }}" tabindex="-1"
+                                            role="dialog" aria-labelledby="viewModalLabel-{{ $d->id }}"
+                                            aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="viewModalLabel-{{ $d->id }}">
+                                                            </h5>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body text-justify">
+                                                        <h2>{{ $d->name }}</h2>
+                                                        <h6>Scientific Name: {{ $d->scientificname }}</h6>
+                                                        <div class="text-center">
+                                                            <img src="{{ asset('storage/' . $d->photo) }}"
+                                                                alt="{{ $d->name }}" class="img-fluid mx-auto d-block">
+                                                        </div>
+                                                        <h5>Description:</h5>
+                                                        <p>{{ $d->description }}</p>
 
-                                        <div class="col-sm-6 p-1">
-                                            <i class="fa fa-microscope  text-secondary"></i> Scientific Name: {{ $d->scientificname }}
-                                        </div>
+                                                        <h5>Location:</h5>
+                                                        <p>{{ $d->location }}</p>
 
-                                        <div class="col-sm-6 p-1">
-                                            <i class="fa fa-info-circle mr-2 text-primary"></i>Description:
-                                            {{ $d->description }}
-                                        </div>
-                                        <div class="col-sm-6 p-1">
-                                            <i class="fa fa-map-marker-alt mr-2 text-warning"></i>Location: {{ $d->location }}
-                                        </div>
-                                        <div class="col-sm-6 p-1">
-                                            <i class="fa fa-map-pin mr-2"></i>Abundance: {{ $d->abundance }}
-                                        </div>
+                                                        <h5>Abundance:</h5>
+                                                        <p>{{ $d->abundance }}</p>
 
-                                        <div class="row mt-2">
-                                            <div class="col-sm-3 d-flex justify-content-start align-items-center">
-                                                <button type="button" class="btn btn-primary viewMapBtn"
-                                                    data-id="{{ $d->id }}"
-                                                    data-coordinates="{{ $d->polygon_coordinates }}">
-                                                    View Location
-                                                </button>
+                                                        <h5>Latitude & Logitude:</h5>
+                                                        <p>{{ $d->latitude }} : {{ $d->longtitude }}</p>
+
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-dismiss="modal">Close</button>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="col-sm-9 d-flex justify-content-end align-items-center">
-                                                <a href="javascript:void(0);" class="p-4 likeBtn"
-                                                    data-id="{{ $d->id }}" style="text-decoration: none;">
-                                                    <i class="fas fa fa-thumbs-up fa-2x text-blue-500"></i>
-                                                    <span
-                                                        id="like-count-{{ $d->id }}">{{ $interactions->firstWhere('seaviews_id', $d->id)->total_likes ?? 0 }}</span>
-                                                </a>
-                                                <a href="javascript:void(0);" class="dislikeBtn"
-                                                    data-id="{{ $d->id }}" style="text-decoration: none;">
-                                                    <i class="fas fa fa-thumbs-down fa-2x text-red-500"></i>
-                                                    <span
-                                                        id="dislike-count-{{ $d->id }}">{{ $interactions->firstWhere('seaviews_id', $d->id)->total_dislikes ?? 0 }}</span>
-                                                </a>
-                                                <p class="text-danger pl-4 mt-4">
-                                                    <span
-                                                        id="view-count-{{ $d->id }}">{{ $interactions->firstWhere('seaviews_id', $d->id)->total_views ?? 0 }}</span>
-                                                    <i class="fa fa-eye" aria-hidden="true"></i>
-                                                </p>
-                                            </div>
                                         </div>
+
+                                        <script>
+                                            // Open modal for viewing more details
+                                            $(document).on('click', '.btn[data-toggle="modal"]', function(e) {
+                                                e.preventDefault();
+                                                var targetModal = $(this).attr('href');
+                                                $(targetModal).modal('show');
+                                            });
+
+                                            // Close modal
+                                            $(document).on('click', '.close, .btn-secondary[data-dismiss="modal"]', function() {
+                                                $(this).closest('.modal').modal('hide');
+                                            });
+                                        </script>
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-sm-6">
+                                        <a href="javascript:void(0);" class="btn btn-primary btn-sm viewMapBtn"
+                                            data-id="{{ $d->id }}"
+                                            data-coordinates="{{ $d->polygon_coordinates }}">
+                                            View Location
+                                        </a>
+                                    </div>
+                                    <div class="col-sm-6 text-right">
+                                        <p class="text-success">
+                                            <span
+                                                id="view-count-{{ $d->id }}">{{ $interactions->firstWhere('seaviews_id', $d->id)->total_views ?? 0 }}</span>
+                                            <i class="fa fa-eye" aria-hidden="true"></i>
+                                        </p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <hr>
-                </div>
 
-                <!-- Map Modal -->
-                <div class="modal mapCont" id="mapModal-{{ $d->id }}" tabindex="-1" role="dialog"
-                    style="display:none;">
-                    <div class="modal-dialog" role="document">
+                    <!-- Map Modal -->
+                    <div id="mapModal-{{ $d->id }}" class="custom-map-modal">
                         <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title">Map Location</h5>
-                                <button type="button" class="close closeMapModalBtn" data-id="{{ $d->id }}"
-                                    aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body bg-slate-200">
-                                <div id="map-{{ $d->id }}" style="height: 400px;"></div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary closeMapModalBtn"
-                                    data-id="{{ $d->id }}">Close</button>
-                            </div>
+                            <span class="close closeMapModalBtn" data-id="{{ $d->id }}">&times;</span>
+                            <div id="map-{{ $d->id }}" style="height: 400px;"></div>
                         </div>
                     </div>
-                </div>
-            @endforeach
+                @endforeach
 
-            <!-- Pagination Links -->
-            <div class="d-flex justify-content-center mt-4">
-                {{ $myEntry->links() }}
+                <!-- Pagination Links -->
+                <div class="d-flex justify-content-center mt-4">
+                    {{ $myEntry->links() }}
+                </div>
             </div>
         @endif
 
@@ -188,7 +291,6 @@
                     }
                 });
             });
-
 
             document.querySelectorAll('.closeMapModalBtn').forEach(button => {
                 button.addEventListener('click', function() {

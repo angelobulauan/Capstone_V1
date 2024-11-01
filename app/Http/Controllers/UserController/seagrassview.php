@@ -20,7 +20,7 @@ class seagrassview extends Controller
         $myEntry = DB::table('seaviews')
             ->where('status', '=', 'approved')
             // ->where('u_id', '=', Auth::user()->id)
-            ->paginate(5); //this will retrive all your user entries regardless of the status
+            ->paginate(6); //this will retrive all your user entries regardless of the status
 
         // dd($myEntry);
 
