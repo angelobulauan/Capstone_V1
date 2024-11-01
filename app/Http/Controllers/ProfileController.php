@@ -27,33 +27,43 @@ class ProfileController extends Controller
      * Update the user's profile information.
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
-    {
-        $request->user()->fill($request->validated());
+{
+    // Populate the user's model with validated data from the request
+    $request->user()->fill($request->validated());
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
-        }
-
-        $request->user()->save();
-
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+    // If the email was modified, reset the email verification timestamp
+    if ($request->user()->isDirty('email')) {
+        $request->user()->email_verified_at = null;
     }
 
+    // Save the updated user data
+    $request->user()->save();
 
-    /**
-     * Update the user's profile ID.
-     */
-    public function IDupdate(Request $request): RedirectResponse
-{
-    // Validate the request
-    $request->validateWithBag('updateID', [
+    // Redirect to the profile edit page with a status message
+    return Redirect::route('profile.edit')->with('status', 'profile-updated');
+}
+
+public function profileupdate(Request $request): RedirectResponse{
+    // dd($request->all());
+    $request->validate([
+        'name' => ['required', 'string', 'max:255'],
+        'email' => ['required', 'string', 'email', 'max:255'],
+        'dob' => ['required', 'date'],
+        'address' => ['required', 'string', 'max:255', 'min:5', 'max:255'], // Added 'min:5' and 'max:255' validation
+        'sex' => ['required', 'in:male,female'],
         'id_img' => ['required', 'image', 'mimes:png,jpg,jpeg', 'max:5120'],
+        'id_number' => ['required', 'string', 'max:255'],
     ]);
 
-    // Get the authenticated user
     $user = $request->user();
 
-    // Check if there is an existing image
+    $user->name = $request->input('name');
+    $user->email = $request->input('email');
+    $user->dob = $request->input('dob');
+    $user->address = $request->input('address');
+    $user->sex = $request->input('sex');
+    $user->id_number = $request->input('id_number');
+
     if ($user->id_img) {
         // Delete the old image from storage
         Storage::disk('public')->delete($user->id_img);
@@ -62,41 +72,36 @@ class ProfileController extends Controller
     // Check if a new file is uploaded
     if ($request->hasFile('id_img')) {
         $path = $request->file('id_img')->store('id_image', 'public');
-
-        // Check if the path is generated
         if ($path) {
-            // Update the user's id_img column with the new path
-            $user->fill(['id_img' => $path]);
-            $user->save();
-
-            return Redirect::route('profile.edit')->with('status', 'profile-updated');
+            $user->id_img = $path;  // Set the new image path
         }
     }
 
-    return Redirect::back()->withErrors(['id_img' => 'Failed to upload image.']);
-}
+    $user->save();
 
+    return Redirect::route('profile.edit')->with('status', 'profile-updated');
+}
 
 
 
     /**
      * Delete the user's account.
      */
-    public function destroy(Request $request): RedirectResponse
-    {
-        $request->validateWithBag('userDeletion', [
-            'password' => ['required', 'current_password'],
-        ]);
+    // public function destroy(Request $request): RedirectResponse
+    // {
+    //     $request->validateWithBag('userDeletion', [
+    //         'password' => ['required', 'current_password'],
+    //     ]);
 
-        $user = $request->user();
+    //     $user = $request->user();
 
-        Auth::logout();
+    //     Auth::logout();
 
-        $user->delete();
+    //     $user->delete();
 
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
+    //     $request->session()->invalidate();
+    //     $request->session()->regenerateToken();
 
-        return Redirect::to('/');
-    }
+    //     return Redirect::to('/');
+    // }
 }

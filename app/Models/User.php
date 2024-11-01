@@ -26,6 +26,10 @@ class User extends Authenticatable
         'involvement',
         'is_verified',
         'id_img',
+        'id_number',
+        'sex',
+        'address',
+        'dob',
     ];
 
     /**
