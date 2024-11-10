@@ -1,9 +1,4 @@
-@if (Auth::user()->involvement != 'uploader')
-    @php
-        header("Location: " . URL::route('dashboard'));
-        exit;
-    @endphp
-@endif
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -63,7 +58,6 @@
     @extends('layouts.LOUser.app')
 
     @section('content')
-    @if (auth()->user()->involvement == 'uploader' && auth()->user()->is_verified == 1)
         <form id="seagrassForm" action="{{ route('user.addnew') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="container">
@@ -71,26 +65,26 @@
                     <div class="card-header">
                         <div class="row g-3">
                             <div class="col-md-6">
-                                <label for="name" class="form-label">Name</label>
-                                <input type="text" name="name" class="form-control" autocomplete="off" placeholder="Name of the Sea Grass" required>
+                                <label for="scientificname" class="form-label">Scientific Name 1</label>
+                                <input type="text" name="scientificname1" class="form-control" autocomplete="off" placeholder="Scientific Name of the Sea Grass" required>
                             </div>
                             <div class="col-md-6">
-                                <label for="scientificname" class="form-label">Scientific Name</label>
-                                <input type="text" name="scientificname" class="form-control" autocomplete="off" placeholder="Scientific Name of the Sea Grass" required>
+                                <label for="scientificname" class="form-label">Scientific Name 2</label>
+                                <input type="text" name="scientificname2" class="form-control" autocomplete="off" placeholder="Scientific Name of the Sea Grass" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="scientificname" class="form-label">Scientific Name 3</label>
+                                <input type="text" name="scientificname3" class="form-control" autocomplete="off" placeholder="Scientific Name of the Sea Grass" required>
                             </div>
                             <div class="col-12">
                                 <label for="description" class="form-label">Description</label>
-                                <textarea class="form-control" name="description" rows="3" autocomplete="off" placeholder="Describe the look and texture" required></textarea>
+                                <textarea class="form-control" name="description" rows="3" autocomplete="off" placeholder="Describe the Location" required></textarea>
                             </div>
                             <span></span>
                             <div class="row">
                                 <div class="col">
                                     <label>Barangay, Town, Province</label>
                                     <input type="text" name="location" class="form-control" autocomplete="off" placeholder="Enter the Location" required>
-                                </div>
-                                <div class="col">
-                                    <label>Abundance</label>
-                                    <input type="text" name="abundance" class="form-control" autocomplete="off" placeholder="Estimated Length" required>
                                 </div>
                             </div>
 
@@ -178,7 +172,7 @@
                                     });
                             </script>
 
-                            <div class="row mt-3 d-flex align-items-center">
+                            {{-- <div class="row mt-3 d-flex align-items-center">
                                 <div class="col-md-6">
                                     <label for="color" class="form-label">Polygon Color</label>
                                     <input type="color" name="color" class="form-control" value="#FF0000" required>
@@ -193,7 +187,7 @@
                                         </svg>
                                     </button>
                                 </div>
-                            </div>
+                            </div> --}}
 
                             <div class="row mb-1 mt-1">
                                 <label for="photo" class="col-form-label">Upload Photo:</label>
@@ -203,7 +197,7 @@
                                 </div>
                             </div>
 
-                            <input type="hidden" id="polygonCoordinates" name="polygon_coordinates">
+                            {{-- <input type="hidden" id="polygonCoordinates" name="polygon_coordinates"> --}}
 
                             <div class="col-12">
                                 <button type="submit" class="btn btn-primary">
@@ -216,7 +210,7 @@
             </div>
         </form>
 
-        <div id="exampleModal" class="custom-map-modal">
+        {{-- <div id="exampleModal" class="custom-map-modal">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Map Location</h5>
@@ -229,12 +223,12 @@
                     <button type="button" class="btn btn-secondary" id="closeModal">Close</button>
                 </div>
             </div>
-        </div>
+        </div> --}}
 
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_API_KEY') }}&libraries=drawing"></script>
-    <script>
+    {{-- <script>
         $(document).ready(function () {
             let map;
             let drawingManager;
@@ -356,8 +350,8 @@
                 });
             });
         });
-    </script>
-     @else
+    </script> --}}
+     {{-- @else
      <div class="container h-screen flex justify-center items-center">
          <div class="w-1/2 bg-white rounded-lg shadow-lg p-8">
              <div class="flex items-center justify-center">
@@ -372,7 +366,7 @@
                  </a>
              </div>
          </div>
-     @endif
+     @endif --}}
 
     @endsection
 

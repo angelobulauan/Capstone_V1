@@ -50,29 +50,25 @@ class seagrassview extends Controller
         try {
             // Validate the request data
             $validatedData = $request->validate([
-                'name' => 'required|string|max:255',
-                'scientificname' => 'required|string|max:255',
+                'scientificname1' => 'required|string|max:255',
+                'scientificname2' => 'required|string|max:255',
+                'scientificname3' => 'required|string|max:255',
                 'description' => 'required|string|max:1000',
                 'location' => 'required|string|max:255',
-                'abundance' => 'required|string|max:255',
                 'latitude' => 'required|numeric',
                 'longtitude' => 'required|numeric',
                 'photo.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-                'polygon_coordinates' => 'required|json',
-                'color' => 'required|string|max:255',
             ]);
 
             // Create a new Seaview instance
             $seaview = new Seaview();
-            $seaview->name = $request->input('name');
-            $seaview->scientificname = $request->input('scientificname');
+            $seaview->scientificname1 = $request->input('scientificname1');
+            $seaview->scientificname2 = $request->input('scientificname2');
+            $seaview->scientificname3 = $request->input('scientificname3');
             $seaview->description = $request->input('description');
             $seaview->location = $request->input('location');
-            $seaview->abundance = $request->input('abundance');
             $seaview->latitude = $request->input('latitude');
             $seaview->longtitude = $request->input('longtitude');
-            $seaview->color = $validatedData['color']; // Updated line
-            $seaview->polygon_coordinates = $validatedData['polygon_coordinates'];
             $seaview->u_id = Auth::user()->id;
             $seaview->status = 'pending';
 
@@ -105,11 +101,10 @@ class seagrassview extends Controller
                 }
             }
 
-            return response()->json(['message' => 'Data Submitted For Approval'], 200);
-        } catch (Exception $e) {
-            Log::error($e->getMessage());
-
-            return response()->json(['message' => 'Failed to save data. Please try again.'], 500);
+            return redirect()->route('user.addnew')->with('message', 'Data Submitted For Approval');
+        } catch (\Throwable $th) {
+            Log::error($th);
+            return redirect()->route('user.addnew')->with('error', 'Something went wrong. Please try again later.');
         }
     }
     /**

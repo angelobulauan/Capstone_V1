@@ -20,7 +20,7 @@
                 ->get()
                 ->map(function ($d) {
                     $d->photo_url = asset('storage/' . $d->photo);
-                    $d->polygon_coordinates = json_decode($d->polygon_coordinates);
+                    
                     return $d;
                 });
         @endphp
@@ -66,7 +66,7 @@
             <div id="map"></div>
         </div>
 
-        <script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_API_KEY') }}"></script>
+
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
             integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
             crossorigin="anonymous"></script>
@@ -75,74 +75,56 @@
             crossorigin="anonymous"></script>
             <script>
                 function initMap() {
-    var mapOptions = {
-        center: {
-            lat: 18.4905,
-            lng: 122.1285
-        },
-        zoom: 13
-    };
+                    var mapOptions = {
+                        center: {
+                            lat: 18.4905,
+                            lng: 122.1285
+                        },
+                        zoom: 13
+                    };
 
-    var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+                    var map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
-    var entries = @json($myEntry);
+                    var entries = @json($myEntry);
 
-    entries.forEach(function(entry) {
-        var marker = new google.maps.Marker({
-            position: {
-                lat: parseFloat(entry.latitude),
-                lng: parseFloat(entry.longtitude)
-            },
-            map: map,
-        });
+                    entries.forEach(function(entry) {
+                        var marker = new google.maps.Marker({
+                            position: {
+                                lat: parseFloat(entry.latitude),
+                                lng: parseFloat(entry.longtitude)
+                            },
+                            map: map,
+                        });
 
-        var contentString = "<div class='modal-content'>" +
-            "<div class='modal-header'>" +
-            "<h5 class='modal-title'>" + entry.name + "</h5>" +
-            "<button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>" +
-            "</div>" +
-            "<div class='modal-body'>" +
-                "<img src='" + entry.photo_url + "' class='popup-image' />" +
-            "<p><strong>Scientific Name:</strong> " + entry.scientificname + "</p>" +
-            "<p><strong>Description:</strong> " + entry.description + "</p>" +
-            "<p><strong>Location:</strong> " + entry.location + "</p>" +
-            "<p><strong>Latitude & Logitude:</strong> " + entry.latitude + " : " + entry.longtitude + "</p>" +
-            "<p><strong>Abundance:</strong> " + entry.abundance + "</p>" +
-            "</div>" +
-            "</div>";
+                        var contentString = "<div class='modal-content'>" +
+                            "<div class='modal-header'>" +
+                            "<h5 class='modal-title'>" + entry.name + "</h5>" +
+                            "<button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>" +
+                            "</div>" +
+                            "<div class='modal-body'>" +
+                                "<img src='" + entry.photo_url + "' class='popup-image' />" +
+                            "<p><strong>Scientific Name:</strong> " + entry.scientificname + "</p>" +
+                            "<p><strong>Description:</strong> " + entry.description + "</p>" +
+                            "<p><strong>Location:</strong> " + entry.location + "</p>" +
+                            "<p><strong>Latitude & Longitude:</strong> " + entry.latitude + " : " + entry.longtitude + "</p>" +
+                            "<p><strong>Abundance:</strong> " + entry.abundance + "</p>" +
+                            "</div>" +
+                            "</div>";
 
-        var infowindow = new google.maps.InfoWindow({
-            content: contentString
-        });
+                        var infowindow = new google.maps.InfoWindow({
+                            content: contentString
+                        });
 
-        marker.addListener('click', function() {
-            $('#mapModal').modal('show');
-            $('.modal-content').html(contentString);
-        });
-
-        // Draw polygon if coordinates exist
-        if (entry.polygon_coordinates) {
-            var polygonCoordinates = entry.polygon_coordinates.map(function(coord) {
-                return { lat: coord.lat, lng: coord.lng };
-            });
-
-            var polygon = new google.maps.Polygon({
-                paths: polygonCoordinates,
-                strokeColor: entry.color || '#FF0000', // Use color from the database, default to red
-                strokeOpacity: 0.8,
-                strokeWeight: 2,
-                fillColor: entry.color || '#FF0000', // Use color from the database, default to red
-                fillOpacity: 0.35,
-            });
-
-            polygon.setMap(map);
-        }
-    });
-}
-
+                        marker.addListener('click', function() {
+                            $('#mapModal').modal('show');
+                            $('.modal-content').html(contentString);
+                        });
+                    });
+                }
 
                 window.onload = initMap;
             </script>
+
 
 
         <div class="modal fade" id="mapModal" tabindex="-1" role="dialog" aria-labelledby="mapModalLabel"

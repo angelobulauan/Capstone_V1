@@ -41,8 +41,9 @@
             <table>
                 <thead>
                     <tr>
-                        <th><i class="fas fa-leaf"></i> Name</th>
-                        <th><i class="fas fa-microscope"></i> Scientific Name</th>
+                        <th><i class="fas fa-microscope"></i> Scientific Name 1</th>
+                        <th><i class="fas fa-microscope"></i> Scientific Name 2</th>
+                        <th><i class="fas fa-microscope"></i> Scientific Name 3</th>
                         <th><i class="fas fa-info-circle"></i> Description</th>
                         <th><i class="fas fa-map-marker-alt mr-1"></i>Location</th>
                         <th><i class="fas fa-calendar-alt"></i> Date Published</th>
@@ -51,8 +52,9 @@
                 <tbody>
                     @foreach ($reports as $report)
                         <tr>
-                            <td>{{ $report->name }}</td>
-                            <td>{{ $report->scientificname }}</td>
+                            <td>{{ $report->scientificname1 }}</td>
+                            <td>{{ $report->scientificname2 }}</td>
+                            <td>{{ $report->scientificname3 }}</td>
                             <td>{{ \Illuminate\Support\Str::limit($report->description, 50) }}</td>
                             <td>{{ $report->location }}</td>
                             <td>{{ date('m-d-Y', strtotime($report->created_at)) }}</td>

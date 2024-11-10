@@ -17,8 +17,6 @@
         $totalDislikes = DB::table('sea_grass_likes')->where('dislikes', 1)->count();
         $totalViews = DB::table('sea_grass_likes')->sum('views');
         $pendingApproval = DB::table('seaviews')->where('status', 'pending')->count();
-        $uploader = DB::table('users')->where('involvement', 'uploader')->where('is_verified', 1)->count();
-        $unverifieduploader = DB::table('users')->where('involvement', 'uploader')->where('is_verified', 0)->count();
 
         $userActivity = DB::table('users')
             ->selectRaw("DATE_FORMAT(created_at, '%M') as label, COUNT(*) as y")
@@ -221,7 +219,7 @@
 
             </div>
 
-            <div class="col-xl-3 col-md-6 mb-4 ">
+            {{-- <div class="col-xl-3 col-md-6 mb-4 ">
                 <div class="card text-center" style="transition: all 0.3s ease-in-out;">
                     <div class="card-header bg-dark text-white">
                         <div class="row  align-items-center">
@@ -244,9 +242,9 @@
                     }
                 </style>
 
-            </div>
+            </div> --}}
 
-            <div class="col-xl-3 col-md-6 mb-4 ">
+            {{-- <div class="col-xl-3 col-md-6 mb-4 ">
                 <div class="card text-center" style="transition: all 0.3s ease-in-out;">
                     <div class="card-header bg-muted text-black">
                         <div class="row  align-items-center">
@@ -269,7 +267,7 @@
                     }
                 </style>
 
-            </div>
+            </div> --}}
         </div>
 
         <!-- Chart section -->
@@ -294,7 +292,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 mt-5">
+            {{-- <div class="col-md-6 mt-5">
                 <div class="card">
                     <div class="card-header bg-info text-white">
                         Verified vs Unverified Uploader
@@ -303,7 +301,7 @@
                         <div id="uploaderChart" style="height: 300px; width: 100%;"></div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
 
@@ -357,30 +355,7 @@
 
 
         // Verified vs Unverified Uploader Column Chart
-        var uploaderChart = new CanvasJS.Chart("uploaderChart", {
-            animationEnabled: true,
-            theme: "light",
-            title: {
-                text: "Verified and Unverified Uploader"
-            },
-            axisY: {
-                title: "Number of Users"
-            },
-            data: [{
-                type: "column",
-                indexLabelFontSize: 16,
-                dataPoints: [{
-                        label: "Verified Uploader",
-                        y: {{ $uploader }}
-                    },
-                    {
-                        label: "Unverified Uploader",
-                        y: {{ $unverifieduploader }}
-                    }
-                ]
-            }]
-        });
-        uploaderChart.render();
+        
     </script>
 
     <br>

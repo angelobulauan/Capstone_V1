@@ -18,11 +18,13 @@
                     <thead class="table-dark">
                         <tr>
                             <th scope="col">
-                                <i class="fa fa-leaf "></i> Name
+                                <i class="fa fa-microscope"></i> Scientific Name 1
                             </th>
-
                             <th scope="col">
-                                <i class="fa fa-microscope"></i> Scientific Name
+                                <i class="fa fa-microscope"></i> Scientific Name 2
+                            </th>
+                            <th scope="col">
+                                <i class="fa fa-microscope"></i> Scientific Name 3
                             </th>
 
                             <th scope="col">
@@ -39,8 +41,9 @@
                     <tbody>
                         @foreach ($pending as $d)
                             <tr>
-                                <td>{{ $d->name }}</td>
-                                <td>{{ $d->scientificname }}</td>
+                                <td>{{ $d->scientificname1 }}</td>
+                                <td>{{ $d->scientificname2 }}</td>
+                                <td>{{ $d->scientificname3 }}</td>
                                 <td>{{ $d->description }}</td>
                                 <td>{{ $d->location }}</td>
                                 <td>{{ $d->status }}</td>

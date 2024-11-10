@@ -39,13 +39,18 @@
                                                 <table class="table table-striped border-collapse">
                                                     <tbody>
                                                         <tr>
-                                                            <th>Name</th>
-                                                            <td>{{ $d->name }}</td>
+                                                            <th>Scientific Name 1</th>
+                                                            <td>{{ $d->scientificname1 }}</td>
                                                         </tr>
 
                                                         <tr>
-                                                            <th>Scientific Name</th>
-                                                            <td>{{ $d->scientificname }}</td>
+                                                            <th>Scientific Name 2</th>
+                                                            <td>{{ $d->scientificname2 }}</td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <th>Scientific Name 3</th>
+                                                            <td>{{ $d->scientificname3 }}</td>
                                                         </tr>
 
                                                         <tr>
@@ -59,10 +64,6 @@
                                                         </tr>
 
                                                         <tr>
-                                                            <th>Abundance</th>
-                                                            <td>{{ $d->abundance }}</td>
-                                                        </tr>
-                                                        <tr>
                                                             <th>Latitude</th>
                                                             <td>{{ $d->latitude }}</td>
                                                         </tr>
@@ -74,10 +75,7 @@
                                                             <th>Date of Submitted</th>
                                                             <td>{{ $d->created_at }}</td>
                                                         </tr>
-                                                        <tr>
-                                                            <th>Contributor</th>
-                                                            <td>{{ $d->name }}</td>
-                                                        </tr>
+
 
                                                     </tbody>
                                                 </table>
@@ -141,7 +139,7 @@
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="centeredModalLabel">Edit entry {{ $d->name }}</h5>
+                                <h5 class="modal-title" id="centeredModalLabel">Edit entry</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                     aria-label="Close"></button>
                             </div>
@@ -149,16 +147,21 @@
                                 <form id="seagrassForm-{{ $d->id }}"
                                     action="{{ route('admin.editseagrass', ['id' => $d->id]) }}" method="post">
                                     @csrf
-                                    <div class="mb-2">
-                                        <label for="name">Name:</label>
-                                        <input type="text" id="name" name="name" class="form-control"
-                                            value="{{ $d->name }}">
-                                    </div>
 
                                     <div class="mb-2">
-                                        <label for="scientificname">Scientific Name:</label>
-                                        <input type="text" id="scientificname" name="scientificname" class="form-control"
-                                            value="{{ $d->scientificname }}">
+                                        <label for="scientificname">Scientific Name 1:</label>
+                                        <input type="text" id="scientificname" name="scientificname1" class="form-control"
+                                            value="{{ $d->scientificname1 }}">
+                                    </div>
+                                    <div class="mb-2">
+                                        <label for="scientificname">Scientific Name 2:</label>
+                                        <input type="text" id="scientificname" name="scientificname2" class="form-control"
+                                            value="{{ $d->scientificname2 }}">
+                                    </div>
+                                    <div class="mb-2">
+                                        <label for="scientificname">Scientific Name 3:</label>
+                                        <input type="text" id="scientificname" name="scientificname3" class="form-control"
+                                            value="{{ $d->scientificname3 }}">
                                     </div>
 
                                     <div class="mb-2">
@@ -173,11 +176,7 @@
                                             value="{{ $d->location }}">
                                     </div>
 
-                                    <div class="mb-2">
-                                        <label for="abundance">Abundance:</label>
-                                        <input type="number" id="abundance" name="abundance" class="form-control"
-                                            value="{{ $d->abundance }}">
-                                    </div>
+
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>

@@ -15,11 +15,11 @@ class SeaviewExport implements FromCollection, WithHeadings, WithStyles
         // Retrieve all data from seaview table and format the created_at date
         return Seaview::all()->map(function ($item) {
             return [
-                'name' => $item->name,
-                'scientificname' => $item->scientificname,
+                'scientificname1' => $item->scientificname1,
+                'scientificname2' => $item->scientificname2,
+                'scientificname3' => $item->scientificname3,
                 'description' => $item->description,
                 'location' => $item->location,
-                'abundance' => $item->abundance,
                 'latitude' => $item->latitude,
                 'longtitude' => $item->longtitude,
                 'created_at' => $item->created_at->format('m-d-Y'), // Format to 'YYYY-MM-DD'
@@ -31,11 +31,11 @@ class SeaviewExport implements FromCollection, WithHeadings, WithStyles
     {
         // Define the column headings for the Excel file
         return [
-            'Name',
-            'Scientific Name',
+            'Scientific Name 1',
+            'Scientific Name 2',
+            'Scientific Name 3',
             'Description',
             'Location',
-            'Abundance',
             'Latitude',
             'Longitude',
             'Date Published',

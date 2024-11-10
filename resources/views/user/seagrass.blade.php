@@ -126,7 +126,7 @@
                         <div class="card">
                             <img src="{{ asset('storage/' . $d->photo) }}" alt="Seagrass Photo" class="card-img-top">
                             <div class="card-body">
-                                <h5 class="card-title">{{ $d->name }}</h5>
+                                <h5 class="card-title">Seagrass</h5>
                                 {{-- <p class="card-text">{{ $d->description }}</p> --}}
                             </div>
                             <div class="card-footer">
@@ -165,20 +165,18 @@
                                                         </button>
                                                     </div>
                                                     <div class="modal-body text-justify">
-                                                        <h2>{{ $d->name }}</h2>
-                                                        <h6>Scientific Name: {{ $d->scientificname }}</h6>
+                                                        <h6>Scientific Name 1: {{ $d->scientificname1 }}</h6>
+                                                        <h6>Scientific Name 2: {{ $d->scientificname2 }}</h6>
+                                                        <h6>Scientific Name 3: {{ $d->scientificname3 }}</h6>
                                                         <div class="text-center">
                                                             <img src="{{ asset('storage/' . $d->photo) }}"
-                                                                alt="{{ $d->name }}" class="img-fluid mx-auto d-block">
+                                                                alt="seagrass" class="img-fluid mx-auto d-block">
                                                         </div>
                                                         <h5>Description:</h5>
                                                         <p>{{ $d->description }}</p>
 
                                                         <h5>Location:</h5>
                                                         <p>{{ $d->location }}</p>
-
-                                                        <h5>Abundance:</h5>
-                                                        <p>{{ $d->abundance }}</p>
 
                                                         <h5>Latitude & Logitude:</h5>
                                                         <p>{{ $d->latitude }} : {{ $d->longtitude }}</p>
@@ -211,7 +209,8 @@
                                     <div class="col-sm-6">
                                         <a href="javascript:void(0);" class="btn btn-primary btn-sm viewMapBtn"
                                             data-id="{{ $d->id }}"
-                                            data-coordinates="{{ $d->polygon_coordinates }}">
+                                            data-latitude="{{ $d->latitude }}"
+                                            data-longtitude="{{ $d->longtitude }}">
                                             View Location
                                         </a>
                                     </div>
@@ -246,51 +245,52 @@
         <script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_API_KEY') }}"></script>
         <script>
             document.querySelectorAll('.viewMapBtn').forEach(button => {
-                button.addEventListener('click', function() {
-                    const entryId = this.dataset.id;
-                    const coordinates = JSON.parse(this.dataset.coordinates);
-                    const mapModal = document.getElementById('mapModal-' + entryId);
-                    mapModal.style.display = 'block';
+    button.addEventListener('click', function() {
+        const entryId = this.dataset.id;
+        const mapModal = document.getElementById('mapModal-' + entryId);
+        mapModal.style.display = 'block';
 
-                    // Update the view count via AJAX
-                    $.ajax({
-                        url: '/user/updateView/' + entryId,
-                        type: 'GET',
-                        success: function(response) {
-                            if (response && response.views !== undefined) {
-                                $('#view-count-' + entryId).text(response.views);
-                            }
-                        },
-                        error: function(xhr) {
-                            console.log('AJAX error:', xhr.responseText);
-                        }
-                    });
+        // Update the view count via AJAX
+        $.ajax({
+            url: '/user/updateView/' + entryId,
+            type: 'GET',
+            success: function(response) {
+                if (response && response.views !== undefined) {
+                    $('#view-count-' + entryId).text(response.views);
+                }
+            },
+            error: function(xhr) {
+                console.log('AJAX error:', xhr.responseText);
+            }
+        });
 
-                    const mapElement = document.getElementById('map-' + entryId);
+        const mapElement = document.getElementById('map-' + entryId);
 
-                    // Check if the map is already initialized
-                    if (!mapElement.dataset.initialized) {
-                        const map = new google.maps.Map(mapElement, {
-                            zoom: 12,
-                            center: coordinates[0] // Center map on the first coordinate
-                        });
-
-                        // Draw the polygon
-                        const polygon = new google.maps.Polygon({
-                            paths: coordinates,
-                            strokeColor: '#FF0000',
-                            strokeOpacity: 0.8,
-                            strokeWeight: 2,
-                            fillColor: '#FF0000',
-                            fillOpacity: 0.35
-                        });
-                        polygon.setMap(map);
-
-                        // Mark the map as initialized
-                        mapElement.dataset.initialized = 'true';
-                    }
-                });
+        // Check if the map is already initialized
+        if (!mapElement.dataset.initialized) {
+            const map = new google.maps.Map(mapElement, {
+                zoom: 12,
+                center: {
+                    lat: parseFloat(button.dataset.latitude),
+                    lng: parseFloat(button.dataset.longtitude)
+                } // Center map on the specified coordinates
             });
+
+            // Add marker to the map
+            new google.maps.Marker({
+                position: {
+                    lat: parseFloat(button.dataset.latitude),
+                    lng: parseFloat(button.dataset.longtitude)
+                },
+                map: map
+            });
+
+            // Mark the map as initialized
+            mapElement.dataset.initialized = 'true';
+        }
+    });
+});
+
 
             document.querySelectorAll('.closeMapModalBtn').forEach(button => {
                 button.addEventListener('click', function() {

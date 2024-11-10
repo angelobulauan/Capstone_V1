@@ -52,23 +52,22 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-sm-6 p-1"> <i class="fa fa-leaf mr-1 text-success"></i>Name: {{ $d->name }}</div>
-                                <div class="col-sm-6 p-1">  <i class="fa fa-microscope  text-secondary"></i> Scientific Name: {{ $d->scientificname }}</div>
+                                <div class="col-sm-6 p-1">  <i class="fa fa-microscope  text-secondary"></i> Scientific Name 1: {{ $d->scientificname1 }}</div>
+                                <div class="col-sm-6 p-1">  <i class="fa fa-microscope  text-secondary"></i> Scientific Name 2: {{ $d->scientificname2 }}</div>
+                                <div class="col-sm-6 p-1">  <i class="fa fa-microscope  text-secondary"></i> Scientific Name 3: {{ $d->scientificname3 }}</div>
                                 <div class="col-sm-6 p-1">
                                     <i class="fa fa-info-circle mr-1 text-primary"></i>Description: {{ $d->description }}
                                 </div>
                                 <div class="col-sm-6 p-1">
                                     <i class="fa fa-map-marker-alt mr-1 text-warning"></i>Location: {{ $d->location }}
                                 </div>
-                                <div class="col-sm-6 p-1">
-                                    <i class="fa fa-map-pin mr-2"></i>Abundance: {{ $d->abundance }}
-                                </div>
 
                                 <div class="row mt-0">
                                     <div class="col-sm-3 d-flex justify-content-start align-items-center">
                                         <button type="button" class="btn btn-primary viewMapBtn"
                                                     data-id="{{ $d->id }}"
-                                                    data-coordinates="{{ $d->polygon_coordinates }}">
+                                                    data-latitude="{{ $d->latitude }}"
+                                                    data-longtitude="{{ $d->longtitude }}">
                                                     View Location
                                                 </button>
                                     </div>
@@ -130,7 +129,6 @@
             document.querySelectorAll('.viewMapBtn').forEach(button => {
                 button.addEventListener('click', function() {
                     const entryId = this.dataset.id;
-                    const coordinates = JSON.parse(this.dataset.coordinates);
                     const mapModal = document.getElementById('mapModal-' + entryId);
                     mapModal.style.display = 'block';
 
@@ -154,19 +152,14 @@
                     if (!mapElement.dataset.initialized) {
                         const map = new google.maps.Map(mapElement, {
                             zoom: 12,
-                            center: coordinates[0] // Center map on the first coordinate
+                            center: { lat: parseFloat(button.dataset.latitude), lng: parseFloat(button.dataset.longtitude) } // Center map on the first coordinate
                         });
 
-                        // Draw the polygon
-                        const polygon = new google.maps.Polygon({
-                            paths: coordinates,
-                            strokeColor: '#FF0000',
-                            strokeOpacity: 0.8,
-                            strokeWeight: 2,
-                            fillColor: '#FF0000',
-                            fillOpacity: 0.35
+                        // Draw the marker
+                        const marker = new google.maps.Marker({
+                            position: { lat: parseFloat(button.dataset.latitude), lng: parseFloat(button.dataset.longtitude) },
+                            map: map,
                         });
-                        polygon.setMap(map);
 
                         // Mark the map as initialized
                         mapElement.dataset.initialized = 'true';

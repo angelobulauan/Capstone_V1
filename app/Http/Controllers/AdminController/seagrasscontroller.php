@@ -31,26 +31,26 @@ class seagrasscontroller extends Controller
     }
 
     public function approve($id)
-{
-    $seaview = Seaview::find($id);
+    {
+        $seaview = Seaview::find($id);
 
-    if ($seaview->status == 'pending') {
-        $seaview->status = 'approved';
-        $seaview->save();
+        if ($seaview->status == 'pending') {
+            $seaview->status = 'approved';
+            $seaview->save();
 
-        DB::table('request_notifs')->insert([
-            'req_id' => $seaview->id,
-            'u_id' => $seaview->u_id,
-            'message' => 'Your Request has been Approved',
-            'status' => 'Approved',
-            'archive' => 0
-        ]);
+            DB::table('request_notifs')->insert([
+                'req_id' => $seaview->id,
+                'u_id' => $seaview->u_id,
+                'message' => 'Your Request has been Approved',
+                'status' => 'Approved',
+                'archive' => 0,
+            ]);
 
-        return redirect()->back()->with('success', 'Seagrass  approved successfully');
-    } else {
-        return redirect()->back()->with('error', 'Seagrass  status cannot be changed');
+            return redirect()->back()->with('success', 'Seagrass  approved successfully');
+        } else {
+            return redirect()->back()->with('error', 'Seagrass  status cannot be changed');
+        }
     }
-}
 
     public function reject($id)
     {
@@ -64,7 +64,7 @@ class seagrasscontroller extends Controller
             'u_id' => $seaview->u_id,
             'message' => 'Your Request has been Rejected',
             'status' => 'Rejected',
-            'archive' => 0
+            'archive' => 0,
         ]);
 
         return redirect()->back()->with('success', 'Seagrass rejected successfully');
@@ -115,75 +115,62 @@ class seagrasscontroller extends Controller
     /**
      * Store a newly created resource in storage.
      */
-     public function store(Request $request)
-{
-    try {
-        // Validate the request data
-        $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
-            'scientificname' => 'required|string|max:255',
-            'description' => 'required|string|max:1000',
-            'location' => 'required|string|max:255',
-            'abundance' => 'required|string|max:255',
-            'latitude' => 'required|numeric',
-            'longtitude' => 'required|numeric',
-            'photo.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'polygon_coordinates' => 'required|json',
-            'color' => 'required|string|max:255', // Change this line
+    public function store(Request $request)
+    {
+        try {
+            // Validate the request data
+            $validatedData = $request->validate([
+                'scientificname1' => 'required|string|max:255',
+                'scientificname2' => 'required|string|max:255',
+                'scientificname3' => 'required|string|max:255',
+                'description' => 'required|string|max:1000',
+                'location' => 'required|string|max:255',
+                'latitude' => 'required|numeric',
+                'longtitude' => 'required|numeric',
+                'photo.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            ]);
 
-        ]);
+            // Create a new Seaview instance
+            $seaview = new Seaview();
+            $seaview->scientificname1 = $request->input('scientificname1');
+            $seaview->scientificname2 = $request->input('scientificname2');
+            $seaview->scientificname3 = $request->input('scientificname3');
+            $seaview->description = $request->input('description');
+            $seaview->location = $request->input('location');
+            $seaview->latitude = $request->input('latitude');
+            $seaview->longtitude = $request->input('longtitude');
+            $seaview->u_id = Auth::user()->id;
+            $seaview->status = 'approved';
 
-        // Create a new Seaview instance
-        $seaview = new Seaview();
-        $seaview->name = $validatedData['name'];
-        $seaview->scientificname = $validatedData['scientificname'];
-        $seaview->description = $validatedData['description'];
-        $seaview->location = $validatedData['location'];
-        $seaview->abundance = $validatedData['abundance'];
-        $seaview->latitude = $validatedData['latitude'];
-        $seaview->longtitude = $validatedData['longtitude'];
-        $seaview->u_id = Auth::id(); // Directly use Auth::id() for cleaner code
-        $seaview->status = 'approved';
-        $seaview->photo = null;
-        $seaview->color = $validatedData['color']; // Updated line
-        $seaview->polygon_coordinates = $validatedData['polygon_coordinates'];
+            // Save the Seaview instance to the database first
+            $seaview->save();
 
+            // Handle multiple file uploads
+            if ($request->hasFile('photo')) {
+                $seaviewId = $seaview->id;
 
-        // Save the Seaview instance to the database
-        $seaview->save();
+                foreach ($request->file('photo') as $index => $file) {
+                    $filePath = $file->store('seagrass', 'public');
 
-        // Handle multiple file uploads
-        if ($request->hasFile('photo')) {
-            foreach ($request->file('photo') as $index => $file) {
-                // Store each photo and create a record in Seagrasspic
-                $filePath = $file->store('seagrass', 'public');
+                    $seagrasspic = new Seagrasspic();
+                    $seagrasspic->sea_id = $seaviewId;
+                    $seagrasspic->photo = $filePath;
 
-                $seagrasspic = new Seagrasspic();
-                $seagrasspic->sea_id = $seaview->id; // Reference the correct variable
-                $seagrasspic->photo = $filePath;
-                $seagrasspic->save();
+                    $seagrasspic->save();
 
-                // Save the first uploaded photo as the main photo for the Seaview
-                if ($index === 0) {
-                    $seaview->photo = $filePath;
+                    if ($index === 0) {
+                        $seaview->photo = $filePath;
+                        $seaview->save();
+                    }
                 }
             }
-            // Save the updated Seaview instance with the main photo
-            $seaview->save();
+
+            return redirect()->route('user.addnew')->with('message', 'Data Submitted For Approval');
+        } catch (\Throwable $th) {
+            Log::error($th);
+            return redirect()->route('user.addnew')->with('error', 'Something went wrong. Please try again later.');
         }
-
-        return response()->json(['message' => 'Seaview data saved successfully.'], 200);
-    } catch (ValidationException $e) {
-        // Handle validation errors
-        return response()->json(['message' => 'Validation failed.', 'errors' => $e->validator->errors()], 422);
-    } catch (Exception $e) {
-        Log::error($e->getMessage());
-        return response()->json(['message' => 'Failed to save Seaview data. Please try again.'], 500);
     }
-}
-
-
-
 
     /**
      * Display the specified resource.
@@ -197,46 +184,39 @@ class seagrasscontroller extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit(Request $request, $id)
-{
-    // Retrieve the record from the database
-    $record = DB::table('seaviews')->where('id', $id)->first();
+    {
+        // Retrieve the record from the database
+        $record = DB::table('seaviews')->where('id', $id)->first();
 
-    // Check if the record exists
-    if (!$record) {
-        return response()->json(['error' => 'Record not found.'], 404);
+        // Check if the record exists
+        if (!$record) {
+            return response()->json(['error' => 'Record not found.'], 404);
+        }
+
+        // Validate incoming request data
+        $validatedData = $request->validate([
+            'scientificname1' => 'nullable|string',
+            'scientificname2' => 'nullable|string',
+            'scientificname3' => 'nullable|string',
+            'description' => 'nullable|string',
+            'location' => 'nullable|string',
+        ]);
+
+        // Prepare update data
+        $updateData = [
+            'scientificname1' => $validatedData['scientificname1'] ?? $record->scientificname1,
+            'scientificname2' => $validatedData['scientificname2'] ?? $record->scientificname2,
+            'scientificname3' => $validatedData['scientificname3'] ?? $record->scientificname3,
+            'description' => $validatedData['description'] ?? $record->description,
+            'location' => $validatedData['location'] ?? $record->location,
+            'updated_at' => now(),
+        ];
+
+        // Update the record in the database
+        DB::table('seaviews')->where('id', $id)->update($updateData);
+
+        return back()->with('success', 'Record updated successfully');
     }
-
-    // Validate incoming request data
-    $validatedData = $request->validate([
-        'name' => 'nullable|string', // Allow null but ensure it's a string if provided
-        'scientificname' => 'nullable|string',
-        'description' => 'nullable|string',
-        'location' => 'nullable|string',
-        'abundance' => 'nullable|integer', // Adjust based on your data type
-    ]);
-
-    // Prepare update data
-    $updateData = [
-        'name' => $validatedData['name'] ?? $record->name,
-        'scientificname' => $validatedData['scientificname'] ?? $record->scientificname,
-        'description' => $validatedData['description'] ?? $record->description,
-        'location' => $validatedData['location'] ?? $record->location,
-        'abundance' => $validatedData['abundance'] ?? $record->abundance,
-        'updated_at' => now(),
-    ];
-
-    // Check if 'name' is null after preparing update data
-    if (is_null($updateData['name'])) {
-        return response()->json(['error' => 'Name cannot be null.'], 422);
-    }
-
-    // Update the record in the database
-    DB::table('seaviews')->where('id', $id)->update($updateData);
-
-    // Return a success response
-    return response()->json(['success' => 'Record updated successfully.']);
-}
-
 
     /**
      * Update the specified resource in storage.

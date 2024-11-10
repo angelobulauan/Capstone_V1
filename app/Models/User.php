@@ -23,8 +23,6 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'involvement',
-        'is_verified',
         'id_img',
         'id_number',
         'sex',
@@ -58,5 +56,5 @@ class User extends Authenticatable
         return $this->belongsToMany(Role::class, 'role_users');
     }
 
-    
+
 }
