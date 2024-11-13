@@ -66,19 +66,19 @@
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <label for="scientificname" class="form-label">Scientific Name 1</label>
-                                <input type="text" name="scientificname1" class="form-control" autocomplete="off" placeholder="Scientific Name of the Sea Grass" required>
+                                <input type="text" name="scientificname1" class="form-control" autocomplete="off" placeholder="Scientific Name of the Sea Grass">
                             </div>
                             <div class="col-md-6">
                                 <label for="scientificname" class="form-label">Scientific Name 2</label>
-                                <input type="text" name="scientificname2" class="form-control" autocomplete="off" placeholder="Scientific Name of the Sea Grass" required>
+                                <input type="text" name="scientificname2" class="form-control" autocomplete="off" placeholder="Scientific Name of the Sea Grass">
                             </div>
                             <div class="col-md-6">
                                 <label for="scientificname" class="form-label">Scientific Name 3</label>
-                                <input type="text" name="scientificname3" class="form-control" autocomplete="off" placeholder="Scientific Name of the Sea Grass" required>
+                                <input type="text" name="scientificname3" class="form-control" autocomplete="off" placeholder="Scientific Name of the Sea Grass">
                             </div>
                             <div class="col-12">
                                 <label for="description" class="form-label">Description</label>
-                                <textarea class="form-control" name="description" rows="3" autocomplete="off" placeholder="Describe the Location" required></textarea>
+                                <textarea class="form-control" name="description" rows="3" autocomplete="off" placeholder="Describe the Location"></textarea>
                             </div>
                             <span></span>
                             <div class="row">
@@ -92,12 +92,12 @@
                                 <div class="col-5">
                                     <label for="latitude" class="form-label">Latitude</label>
                                     <input type="text" class="form-control" name="latitude" id="latitude"
-                                        autocomplete="off" placeholder="Enter latitude" required>
+                                        autocomplete="off" placeholder="Enter Latitude" required>
                                 </div>
                                 <div class="col-6">
                                     <label for="longtitude" class="form-label">Longtitude</label>
                                     <input type="text" class="form-control" name="longtitude" id="longtitude"
-                                        autocomplete="off" placeholder="Enter longtitude" required>
+                                        autocomplete="off" placeholder="Enter Longtitude" required>
                                 </div>
 
                                 <div class="col-1 d-flex align-items-center mt-4">

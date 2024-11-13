@@ -101,7 +101,7 @@
                 <div class="welcome d-none d-lg-block">
                     <div class="d-flex align-items-center font-weight-normal mb-1">
                         <i class="fa fa-at mr-2"></i>
-                        <span>seagrasses@gmail.com</span>
+                        <span>Seagrass0fnc@gmail.com</span>
                     </div>
                     <div class="d-flex align-items-center font-weight-normal mb-1">
                         <i class="fa fa-phone mr-2"></i>

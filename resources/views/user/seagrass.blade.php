@@ -165,27 +165,53 @@
                                                         </button>
                                                     </div>
                                                     <div class="modal-body text-justify">
-                                                        <h6>Scientific Name 1: {{ $d->scientificname1 }}</h6>
-                                                        <h6>Scientific Name 2: {{ $d->scientificname2 }}</h6>
-                                                        <h6>Scientific Name 3: {{ $d->scientificname3 }}</h6>
-                                                        <div class="text-center">
-                                                            <img src="{{ asset('storage/' . $d->photo) }}"
-                                                                alt="seagrass" class="img-fluid mx-auto d-block">
+                                                        <div class="text-center mb-4">
+                                                            <img src="{{ asset('storage/' . $d->photo) }}" alt="seagrass" class="img-fluid mx-auto d-block rounded">
                                                         </div>
-                                                        <h5>Description:</h5>
-                                                        <p>{{ $d->description }}</p>
 
-                                                        <h5>Location:</h5>
-                                                        <p>{{ $d->location }}</p>
+                                                        <!-- Table to display details with spacing -->
+                                                        <table class="table table-bordered table-striped table-hover mb-4">
+                                                            <tbody>
+                                                                <!-- Scientific Names -->
+                                                                <tr>
+                                                                    <td><i class="fas fa-leaf text-success"></i> <strong>Scientific Name 1:</strong></td>
+                                                                    <td>{{ $d->scientificname1 }}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><i class="fas fa-leaf text-success"></i> <strong>Scientific Name 2:</strong></td>
+                                                                    <td>{{ $d->scientificname2 }}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><i class="fas fa-leaf text-success"></i> <strong>Scientific Name 3:</strong></td>
+                                                                    <td>{{ $d->scientificname3 }}</td>
+                                                                </tr>
 
-                                                        <h5>Latitude & Logitude:</h5>
-                                                        <p>{{ $d->latitude }} : {{ $d->longtitude }}</p>
+                                                                <!-- Description -->
+                                                                <tr>
+                                                                    <td><i class="fas fa-info-circle text-primary"></i> <strong>Description:</strong></td>
+                                                                    <td>{{ $d->description }}</td>
+                                                                </tr>
+
+                                                                <!-- Location -->
+                                                                <tr>
+                                                                    <td><i class="fas fa-map-marker-alt text-warning"></i> <strong>Location:</strong></td>
+                                                                    <td>{{ $d->location }}</td>
+                                                                </tr>
+
+                                                                <!-- Latitude & Longitude -->
+                                                                <tr>
+                                                                    <td><i class="fas fa-globe text-info"></i> <strong>Latitude & Longitude:</strong></td>
+                                                                    <td>{{ $d->latitude }} : {{ $d->longtitude }}</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
 
                                                     </div>
+
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary"
-                                                            data-dismiss="modal">Close</button>
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-times"></i> Close</button>
                                                     </div>
+
                                                 </div>
                                             </div>
                                         </div>
