@@ -167,10 +167,10 @@ class seagrasscontroller extends Controller
                 }
             }
 
-            return redirect()->route('user.addnew')->with('message', 'Data Submitted For Approval');
+            return redirect()->back()->with('message', 'Data Submitted For Approval');
         } catch (\Throwable $th) {
             Log::error($th);
-            return redirect()->route('user.addnew')->with('error', 'Something went wrong. Please try again later.');
+            return redirect()->back()->with('error', 'Something went wrong. Please try again later.');
         }
     }
 

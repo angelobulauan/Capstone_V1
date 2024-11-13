@@ -58,7 +58,7 @@
     @extends('layouts.LOAdmin.app')
 
     @section('content')
-    <form id="seagrassForm" action="{{ route('admin.addNew') }}" method="POST" enctype="multipart/form-data">
+    <form id="seagrassForm" action="{{ route('admin.addNew.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="container">
                 <div style="padding:10px;">

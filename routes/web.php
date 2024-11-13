@@ -47,7 +47,6 @@ Route::get('/article', function () {
 Route::get('/devs', function () {
     return view('devs');
 })->name('devs');
-// Route::get('Addnew',[UserCTRL::class,'index'])-> name('addnew');
 
 // add
 
@@ -94,6 +93,7 @@ Route::namespace('App\Http\Controllers\AdminController')
 
         //new seagrass controller for users only UserController/seagrasscontroller jay folder na
         Route::post('addNew', 'seagrasscontroller@store')->name('addNew');
+        Route::post('/addNew', 'seagrasscontroller@store')->name('addNew.store');
 
         //route in editing seagrass entries
         Route::post('/editseagrass/{id}', 'seagrasscontroller@edit')->name('editseagrass');
