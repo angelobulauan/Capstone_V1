@@ -45,7 +45,7 @@
                                         <i class="fas fa-plus"></i> <!-- Plus icon for "Add New" -->
                                         {{ __('Add New Sea Grass') }}
                                     </x-dropdown-link>
-                                
+
                                 {{-- <x-dropdown-link :href="route('user.view.index')">
                                     <i class="fas fa-info-circle"></i> <!-- Info icon for "Status" -->
                                     {{ __('Status Uploaded') }}
@@ -83,13 +83,12 @@
                             <x-slot name="content">
                                 <!-- Fetch messages from the request_notif table -->
 
-
                                 <!-- Display the messages -->
                                 @if ($messages->isNotEmpty())
                                     @foreach ($messages as $message)
                                         <div
                                             class="notification-box px-4 py-2 flex justify-between items-center mb-2 border">
-                                            <p class="text-gray-800">{{ $message->message }}</p>
+                                            <p class="text-gray-800">{{ $message->message }} by {{ $message->updated_by }}</p>
                                             <button class="text-red-500 ml-2 hover:text-red-700"
                                                 onclick="archiveMessage({{ $message->id }})" type="button"
                                                 title="Archive this message">

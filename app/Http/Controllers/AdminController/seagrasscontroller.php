@@ -43,6 +43,7 @@ class seagrasscontroller extends Controller
                 'u_id' => $seaview->u_id,
                 'message' => 'Your Request has been Approved',
                 'status' => 'Approved',
+                'updated_by' => Auth::user()->name,
                 'archive' => 0,
             ]);
 
@@ -64,6 +65,7 @@ class seagrasscontroller extends Controller
             'u_id' => $seaview->u_id,
             'message' => 'Your Request has been Rejected',
             'status' => 'Rejected',
+            'updated_by' => Auth::user()->name,
             'archive' => 0,
         ]);
 
