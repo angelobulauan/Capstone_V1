@@ -75,6 +75,10 @@
                                                             <th>Date of Submitted</th>
                                                             <td>{{ $d->created_at }}</td>
                                                         </tr>
+                                                        <tr>
+                                                            <th>Author</th>
+                                                            <td>{{$d->updated_by     }}</td>
+                                                        </tr>
 
 
                                                     </tbody>

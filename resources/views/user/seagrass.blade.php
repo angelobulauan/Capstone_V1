@@ -203,6 +203,12 @@
                                                                     <td><i class="fas fa-globe text-info"></i> <strong>Latitude & Longitude:</strong></td>
                                                                     <td>{{ $d->latitude }} : {{ $d->longtitude }}</td>
                                                                 </tr>
+
+                                                                 <!-- Updated_by -->
+                                                                 <tr>
+                                                                    <td><i class="fas fa-user-alt text-dark"></i> <strong>Author:</strong></td>
+                                                                    <td>{{ $d->updated_by }}</td>
+                                                                </tr>
                                                             </tbody>
                                                         </table>
 

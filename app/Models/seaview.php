@@ -20,6 +20,7 @@ class seaview extends Model
         'u_id',
         'status',
         'req_id',
+        'updated_by',
 
 
     ];

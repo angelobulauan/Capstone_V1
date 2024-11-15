@@ -142,6 +142,7 @@ class seagrasscontroller extends Controller
             $seaview->latitude = $request->input('latitude');
             $seaview->longtitude = $request->input('longtitude');
             $seaview->u_id = Auth::user()->id;
+            $seaview->updated_by = Auth::user()->name;
             $seaview->status = 'approved';
 
             // Save the Seaview instance to the database first
@@ -172,6 +173,8 @@ class seagrasscontroller extends Controller
             Log::error($th);
             return redirect()->back()->with('error', 'Something went wrong. Please try again later.');
         }
+
+
     }
 
     /**

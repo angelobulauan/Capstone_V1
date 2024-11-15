@@ -176,8 +176,8 @@
                         "<tr class='table-info'><td><i class='fas fa-leaf text-success'></i> <strong>Scientific Name 3:</strong></td><td>" + entry.scientificname3 + "</td></tr>" +
                         "<tr class='table-light'><td><i class='fas fa-info-circle text-primary'></i> <strong>Description:</strong></td><td>" + entry.description + "</td></tr>" +
                         "<tr class='table-info'><td><i class='fas fa-map-marker-alt text-warning'></i> <strong>Location:</strong></td><td>" + entry.location + "</td></tr>" +
-                        "<tr class='table-light'><td><i class='fas fa-globe text-info'></i> <strong>Latitude:</strong></td><td>" + entry.latitude + "</td></tr>" +
-                        "<tr class='table-info'><td><i class='fas fa-globe text-info'></i> <strong>Longitude:</strong></td><td>" + entry.longtitude + "</td></tr>" +
+                        "<tr class='table-light'><td><i class='fas fa-globe text-info'></i> <strong>Latitude & Longitude:</strong></td><td>" + entry.latitude + " : " + entry.longtitude + "</td></tr>" +
+                        "<tr class='table-info'><td><i class='fas fa-user text-dark'></i> <strong>Author:</strong></td><td>" + entry.updated_by + "</td></tr>" +
                         "</table>" +
                         "</div>" +
                         "</div>";
