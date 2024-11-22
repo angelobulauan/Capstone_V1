@@ -70,6 +70,7 @@ class seagrassview extends Controller
             $seaview->latitude = $request->input('latitude');
             $seaview->longtitude = $request->input('longtitude');
             $seaview->u_id = Auth::user()->id;
+            $seaview->updated_by = Auth::user()->name;
             $seaview->status = 'pending';
 
             // Get the latest req_id
