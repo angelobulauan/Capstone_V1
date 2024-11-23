@@ -109,14 +109,14 @@
                     </div>
                     <div class="d-flex align-items-center font-weight-normal mb-1">
                         <i class="fa fa-map-marker mr-2"></i>
-                        <span>Sta. Ana, Cagayan</span>
+                        <span>Punta, Aparri, Cagayan</span>
                     </div>
                 </div>
             </div>
             <div class="auth-container">
 
                 <form method="POST" action="{{ route('login') }}">
-                    <img src="{{ asset('img/bg1.png') }}" alt="Default Icon" loading="lazy" width="100" height="100" />
+                    <img src="{{ asset('img/bg1.png') }}" alt="Default Icon" loading="lazy" width="90" height="120" />
                     <h1>LOGIN</h1>
                     @csrf
                     <div class="input-group mb-3">
