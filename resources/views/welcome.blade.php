@@ -131,12 +131,12 @@
     <section class="home">
         <div class="slideshow">
             <div class="slide active" style="background-image: url('{{ asset('img/wl/welcome.jpg') }}');"></div>
-            <div class="slide" style="background-image: url('{{ asset('img/seagrass_image1.jpeg') }}');"></div>
+            {{-- <div class="slide" style="background-image: url('{{ asset('img/seagrass_image1.jpeg') }}');"></div>
             <div class="slide" style="background-image: url('{{ asset('img/seagrass_image2.jpeg') }}');"></div>
-            <div class="slide" style="background-image: url('{{ asset('img/seagrass_image3.jpeg') }}');"></div>
+            <div class="slide" style="background-image: url('{{ asset('img/seagrass_image3.jpeg') }}');"></div> --}}
         </div>
         <div class="content">
-            <h1 class="typing" style="animation-delay: 2s; animation-duration: 5s;"></h2>
+            <h1 class="typing" style="animation-delay: 1s; animation-duration: 5s;"></h1>
                 <br>
             <p style="font-size: 1.2em;">Welcome! Seagrasses play very important roles in marine ecosystems, and we need to conserve and take care
                 of these majestic species. Explore our website to learn more and discover how you can help protect these
@@ -160,7 +160,7 @@
 
         </div>
         <div class="media-icons">
-            <a href="#"><i class="fa fa-facebook-square" aria-hidden="true" style="transition: all 0.3s ease-in-out;"
+            <a href="https://www.facebook.com/p/DENR-CENRO-APARRI-CAGAYAN-100067828756511/"><i class="fa fa-facebook-square" aria-hidden="true" style="transition: all 0.3s ease-in-out;"
                     onmouseover="this.style.fontSize='2em';"
                     onmouseout="this.style.fontSize='1.6em';"></i></a>
             <a href="#"><i class="fa fa-twitter-square" aria-hidden="true" style="transition: all 0.3s ease-in-out;"
