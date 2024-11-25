@@ -126,7 +126,8 @@
                         <div class="card">
                             <img src="{{ asset('storage/' . $d->photo) }}" alt="Seagrass Photo" class="card-img-top">
                             <div class="card-body">
-                                <h5 class="card-title">Seagrass</h5>
+                                <h5 class="card-title">{{ $d->scientificname1 }}</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">By: {{ $d->updated_by }}</h6>
                                 {{-- <p class="card-text">{{ $d->description }}</p> --}}
                             </div>
                             <div class="card-footer">

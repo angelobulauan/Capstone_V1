@@ -145,6 +145,10 @@ Route::namespace('App\Http\Controllers\UserController')
         Route::resource('/request', 'requestCtrl');
         // Route::get('/show/{id}', 'requestCtrl@show')->name('requests.show');
         Route::post('/request/{id}/archive', 'requestCtrl@archiveMessage')->name('requests.archive');
+
+        Route::get('/edit/{id}', 'requestCtrl@edit')->name('requests.edit');
+        Route::put('/update/{id}', 'requestCtrl@update')->name('requests.update');
+        Route::delete('/destroy/{id}', 'requestCtrl@destroy')->name('requests.destroy');
     });
 
 Route::namespace('App\Http\Controllers\SuperadminController')

@@ -48,15 +48,39 @@
                                 <td>{{ $d->location }}</td>
                                 <td>{{ $d->status }}</td>
                                 <td>
-                                    <button class="btn btn-primary me-2 py-0" data-bs-toggle="modal"
-                                                    data-bs-target="#edit-addnew-{{ $d->req_id }}">
-                                                    <i class="fas fa-edit"></i> Edit
-                                                </button>
-                                                @csrf @method('DELETE')
-                                    <button type="submit" class="btn btn-danger py-0">
-                                        <i class="fas fa-trash-alt"></i> Delete
-                                    </button>
-                                    </td>
+                                    <a href="{{ route('request.requests.edit', ['id' => $d->id]) }}" class="btn btn-primary me-2 py-0">
+                                        <i class="fas fa-edit"></i> Edit
+                                    </a>
+
+                                    <form action="{{ route('request.requests.destroy', ['id' => $d->id]) }}" method="post" class="d-inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger py-0">
+                                            <i class="fas fa-trash-alt"></i> Delete
+                                        </button>
+                                    </form>
+
+<script>
+    $(document).ready(function() {
+        $('.btn-danger').click(function(event) {
+            event.preventDefault();
+            var form = $(this).closest('form');
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            });
+        });
+    });
+</script>
                             </tr>
                         @endforeach
                     </tbody>
