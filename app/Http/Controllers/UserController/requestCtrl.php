@@ -175,9 +175,33 @@ class requestCtrl extends Controller
             \Log::error('Main file does not exist or is not a file: ' . $mainPhotoPath);
         }
 
-        dd($seaview);
-        // Delete the seaview request
+        // Delete all files in the 'seagrass' directory
+        $seagrassDirectory = storage_path('app/public/seagrass');
+        \Log::info('Attempting to delete all files in directory: ' . $seagrassDirectory);
+
+        if (is_dir($seagrassDirectory)) {
+            $files = glob($seagrassDirectory . '/*'); // Get all files in the directory
+
+            foreach ($files as $file) {
+                if (is_file($file)) {
+                    if (unlink($file)) {
+                        \Log::info('File deleted successfully: ' . $file);
+                    } else {
+                        \Log::error('Failed to delete the file: ' . $file);
+                    }
+                }
+            }
+        } else {
+            \Log::error('Directory does not exist: ' . $seagrassDirectory);
+        }
+
+        // Delete the seaview record
         $seaview->delete();
+
+        // Delete related records for the authenticated user
+        DB::table('seagrasspics')
+            ->where('u_id', Auth::user()->id)
+            ->delete();
 
         return back()
             ->with('success', 'Request and related photos deleted successfully!')
@@ -187,5 +211,6 @@ class requestCtrl extends Controller
                 'notificationType' => 'success',
             ]);
     }
+
 
 }

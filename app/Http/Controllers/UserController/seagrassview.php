@@ -47,6 +47,7 @@ class seagrassview extends Controller
 
     public function store(Request $request)
     {
+        // dd($request);
         try {
             // Validate the request data
             $validatedData = $request->validate([
@@ -91,6 +92,7 @@ class seagrassview extends Controller
 
                     $seagrasspic = new Seagrasspic();
                     $seagrasspic->sea_id = $seaviewId;
+                    $seagrasspic->u_id = Auth::user()->id;
                     $seagrasspic->photo = $filePath;
 
                     $seagrasspic->save();

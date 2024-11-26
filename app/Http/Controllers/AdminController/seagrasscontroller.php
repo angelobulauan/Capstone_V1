@@ -156,6 +156,7 @@ class seagrasscontroller extends Controller
                     $filePath = $file->store('seagrass', 'public');
 
                     $seagrasspic = new Seagrasspic();
+                    $seagrasspic->u_id = Auth::user()->id;
                     $seagrasspic->sea_id = $seaviewId;
                     $seagrasspic->photo = $filePath;
 
@@ -235,13 +236,56 @@ class seagrasscontroller extends Controller
      */
     public function destroy($id)
     {
-        $seagrass = Seaview::find($id);
+        // Delete the main seaview record for the authenticated user
+        $seaview = Seaview::where('id', $id)
+            ->where('u_id', Auth::user()->id)
+            ->first();
 
-        if ($seagrass) {
-            $seagrass->delete();
-            return redirect()->back()->with('success', 'Seagrass deleted successfully');
-        } else {
-            return redirect()->back()->with('error', 'Seagrass not found');
+        if (!$seaview) {
+            return back()->withErrors('Record not found or unauthorized access.');
         }
+
+        // Retrieve and delete related photos from the `seagrasspics` table
+        $seagrasspics = DB::table('seagrasspics')
+            ->where('u_id', Auth::user()->id)
+            ->where('sea_id', $id)
+            ->get();
+
+        foreach ($seagrasspics as $pic) {
+            // Check if the `photo` already includes the directory
+            $photoPath = storage_path('app/public/' . $pic->Photo);
+
+            // Log the constructed path for debugging
+            \Log::info('Constructed file path: ' . $photoPath);
+
+            // Check if the file exists and delete it
+            if (file_exists($photoPath) && is_file($photoPath)) {
+                if (unlink($photoPath)) {
+                    \Log::info('File deleted successfully: ' . $photoPath);
+                } else {
+                    \Log::error('Failed to delete file: ' . $photoPath);
+                }
+            } else {
+                \Log::error('File does not exist or is not a file: ' . $photoPath);
+            }
+        }
+
+        // Delete the records from the `seagrasspics` table
+        DB::table('seagrasspics')
+            ->where('u_id', Auth::user()->id)
+            ->where('sea_id', $id)
+            ->delete();
+
+        // Delete the `seaview` record
+        $seaview->delete();
+
+        return back()
+            ->with('success', 'Record and related images deleted successfully!')
+            ->with([
+                'showNotification' => true,
+                'notificationMessage' => 'Record and related images deleted successfully!',
+                'notificationType' => 'success',
+            ]);
     }
+
 }
