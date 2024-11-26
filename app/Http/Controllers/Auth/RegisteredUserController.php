@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 
+use Illuminate\Support\Facades\Log;
+
 
 use App\Models\RoleUser;
 
@@ -36,7 +38,7 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
 
         ]);
@@ -48,6 +50,8 @@ class RegisteredUserController extends Controller
         ]);
 
         event(new Registered($user));
+        Log::info('Registered event dispatched:', ['user_id' => $user->id]);
+
 
         Auth::login($user);
 
@@ -56,10 +60,8 @@ class RegisteredUserController extends Controller
             'user_id' => Auth::user()->id,
             'role_id' => '3',
         ]);
+        // return view('auth.login');
 
-
-return view('auth.login');
-
-      //  return redirect(RouteServiceProvider::HOME);
+         return redirect(RouteServiceProvider::HOME);
     }
 }

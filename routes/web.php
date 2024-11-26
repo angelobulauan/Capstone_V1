@@ -18,6 +18,8 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Role;
 use App\Models\User;
 
+use Illuminate\Support\Facades\Mail;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -28,6 +30,8 @@ use App\Models\User;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+
 
 Route::get('/', function () {
     return view('welcome');
