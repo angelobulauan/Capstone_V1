@@ -205,6 +205,35 @@
 
     <!-- Responsive Navigation Menu -->
     <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden">
+
+        <x-dropdown align="right" width="48">
+            <x-slot name="trigger">
+                <button
+                    class="flex items-center px-4 py-2 text-sm font-medium leading-5 text-gray-700 dark:text-gray-300 transition duration-150 ease-in-out hover:text-gray-500 dark:hover:text-gray-400 focus:outline-none focus:text-gray-700 dark:focus:text-gray-300">
+                    Notifications
+                    <span class="badge rounded-pill bg-danger text-white ml-2">{{ $messages->count() }}</span>
+                </button>
+            </x-slot>
+            <x-slot name="content">
+                @if ($messages->isNotEmpty())
+                    @foreach ($messages as $message)
+                        <div class="notification-box px-4 py-2 flex justify-between items-center mb-2 border">
+                            <p class="text-gray-800">{{ $message->message }} by {{ $message->updated_by }}</p>
+                            <button class="text-red-500 ml-2 hover:text-red-700"
+                                onclick="archiveMessage({{ $message->id }})" type="button"
+                                title="Archive this message">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    @endforeach
+                @else
+                    <div class="px-4 py-2">
+                        <p>You Have No Notifications!</p>
+                    </div>
+                @endif
+            </x-slot>
+        </x-dropdown>
+
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" class="flex items-center">
                 <i class="fas fa-home" style="margin-right: 8px;"></i> <!-- Home icon -->

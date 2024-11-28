@@ -25,7 +25,7 @@ class seagrassview extends Controller
         // dd($myEntry);
 
         //then we return to the newly created blade file with the data we retrieved
-        return view('User.seagrass')->with('myEntry', $myEntry);
+        return view('user.seagrass')->with('myEntry', $myEntry);
     }
 
 
