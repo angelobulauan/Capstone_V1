@@ -2,7 +2,7 @@
 
 namespace App\Exports;
 
-use App\Models\Seaview; // Ensure proper casing for the model
+use App\Models\seaview;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithStyles;
@@ -13,7 +13,7 @@ class SeaviewExport implements FromCollection, WithHeadings, WithStyles
     public function collection()
     {
         // Retrieve all data from seaview table and format the created_at date
-        return Seaview::all()->map(function ($item) {
+        return seaview::all()->map(function ($item) {
             return [
                 'scientificname1' => $item->scientificname1,
                 'scientificname2' => $item->scientificname2,

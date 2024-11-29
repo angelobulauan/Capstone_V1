@@ -9,7 +9,7 @@
 </head>
 
 <body>
-@extends('layouts.LOadmin.app')
+@extends('layouts.LOAdmin.app')
 
 @section('content')
     @php
