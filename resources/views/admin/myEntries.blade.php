@@ -15,11 +15,11 @@
     @section('content')
         <div class="container-fluid mt-4">
             @foreach ($myEntry as $d)
-                @php
+                {{-- @php
                     $selectphoto = DB::table('seagrasspics')
                         ->where('seagrasspics.sea_id', $d->id)
                         ->get();
-                @endphp
+                @endphp --}}
 
                 <div class="container mb-4">
                     <div class="row">

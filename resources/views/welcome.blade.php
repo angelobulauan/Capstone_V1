@@ -181,9 +181,6 @@ body {
     <section class="home">
         <div class="slideshow">
             <div class="slide active" style="background-image: url('{{ asset('img/wl/welcome.jpg') }}');"></div>
-            <div class="slide active" style="background-image: url('{{ asset('img/seagrass_image1.jpeg') }}');"></div>
-            <div class="slide active" style="background-image: url('{{ asset('img/seagrass_image2.jpeg') }}');"></div>
-            <div class="slide active" style="background-image: url('{{ asset('img/seagrass_image3.jpeg') }}');"></div>
         </div>
         <div class="content">
             <h1 class="typing"></h1>

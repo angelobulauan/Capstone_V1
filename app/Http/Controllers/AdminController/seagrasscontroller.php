@@ -19,8 +19,9 @@ class seagrasscontroller extends Controller
     public function index()
     {
         $myEntry = DB::table('seaviews')->where('status', 'approved')->paginate(5);
+            $selectphoto = DB::table('seagrasspics')->get();
 
-        return view('admin.myEntries', ['myEntry' => $myEntry]);
+        return view('admin.myEntries', ['myEntry' => $myEntry, 'selectphoto' => $selectphoto]);
     }
 
     public function pendingapproval()
