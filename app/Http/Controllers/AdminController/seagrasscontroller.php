@@ -30,6 +30,19 @@ class seagrasscontroller extends Controller
     return view('admin.myEntries', ['myEntry' => $myEntry]);
 }
 
+public function pendingapproval()
+{
+    $myEntry = DB::table('seaviews')->where('status', 'pending')->orderBy('created_at', 'desc')->get();
+
+    foreach ($myEntry as $entry) {
+        $entry->photos = DB::table('seagrasspics')
+            ->where('sea_id', $entry->id)
+            ->get();
+    }
+
+    return view('admin.pendingapproval', ['myEntry' => $myEntry]);
+}
+
 
     public function approve($id)
     {
