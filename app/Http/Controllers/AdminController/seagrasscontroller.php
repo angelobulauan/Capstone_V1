@@ -17,19 +17,19 @@ class seagrasscontroller extends Controller
 {
     //this is used for my entries in the user nav
     public function index()
-    {
-        $myEntry = DB::table('seaviews')->where('status', 'approved')->paginate(5);
-            $selectphoto = DB::table('seagrasspics')->get();
+{
+    $myEntry = DB::table('seaviews')->where('status', 'approved')->paginate(5);
 
-        return view('admin.myEntries', ['myEntry' => $myEntry, 'selectphoto' => $selectphoto]);
+    // Fetch photos for each entry and pass them along
+    foreach ($myEntry as $entry) {
+        $entry->photos = DB::table('seagrasspics')
+            ->where('sea_id', $entry->id)
+            ->get();
     }
 
-    public function pendingapproval()
-    {
-        $myEntry = DB::table('seaviews')->where('status', 'pending')->get();
+    return view('admin.myEntries', ['myEntry' => $myEntry]);
+}
 
-        return view('admin.pendingapproval')->with('myEntry', $myEntry);
-    }
 
     public function approve($id)
     {
