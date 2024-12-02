@@ -249,30 +249,41 @@ public function pendingapproval()
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Request $request, $id)
-    {
-        // Retrieve the seaview record
+public function destroy(Request $request, $id)
+{
+    DB::transaction(function () use ($id) {
+        // Step 1: Retrieve the seaview record
         $seaview = Seaview::findOrFail($id);
-        Log::info("Deleting Seaview ID: " . $seaview->id); // Debug log
 
-        // Delete the main seaview photo if it exists
-        $mainPhotoPath = public_path('storage/' . $seaview->photo);
+        // Step 2: Retrieve and delete related photos with the specific sea_id
+        $photos = Seagrasspic::where('sea_id', $id)->get();
+        foreach ($photos as $pic) {
+            $photoPath = public_path('storage/' . $pic->photo);
 
-        if (file_exists($mainPhotoPath) && is_file($mainPhotoPath)) {
-            Log::info("Deleting Seaview Photo: " . $mainPhotoPath); // Debug log
-            unlink($mainPhotoPath); // Delete the main photo
+            // Delete the file if it exists
+            if (file_exists($photoPath) && is_file($photoPath)) {
+                unlink($photoPath);
+            }
+
+            // Delete the database record for the photo
+            $pic->delete();
         }
 
-        // Delete the seaview database record
+        // Step 3: Delete the main seaview photo if it exists
+        $mainPhotoPath = public_path('storage/' . $seaview->photo);
+        if (file_exists($mainPhotoPath) && is_file($mainPhotoPath)) {
+            unlink($mainPhotoPath);
+        }
+
+        // Step 4: Delete the seaview record
         $seaview->delete();
-        Log::info("Seaview record deleted successfully."); // Debug log
+    });
 
-        // Return a JSON response
-        return response()->json([
-            'success' => true,
-            'message' => 'Request and related photos deleted successfully!',
-        ]);
-    }
-
+    // Return a JSON response
+    return response()->json([
+        'success' => true,
+        'message' => 'Request and related photos deleted successfully!',
+    ]);
+}
 
 }
