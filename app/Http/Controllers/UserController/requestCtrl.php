@@ -200,7 +200,7 @@ class requestCtrl extends Controller
 
         // Delete related records for the authenticated user
         DB::table('seagrasspics')
-            ->where('u_id', Auth::user()->id)
+            ->where('sea_id', $id)
             ->delete();
 
         return back()

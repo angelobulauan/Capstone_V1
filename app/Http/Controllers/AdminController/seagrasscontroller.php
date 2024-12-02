@@ -250,54 +250,29 @@ public function pendingapproval()
      * Remove the specified resource from storage.
      */
     public function destroy(Request $request, $id)
-{
-    // Retrieve the seaview record
-    $seaview = Seaview::findOrFail($id);
+    {
+        // Retrieve the seaview record
+        $seaview = Seaview::findOrFail($id);
+        Log::info("Deleting Seaview ID: " . $seaview->id); // Debug log
 
-    // Retrieve and delete related photos
-    Seagrasspic::where('sea_id', $id)->each(function ($pic) {
-        $photoPath = public_path('storage/' . $pic->photo);
+        // Delete the main seaview photo if it exists
+        $mainPhotoPath = public_path('storage/' . $seaview->photo);
 
-        if (file_exists($photoPath) && is_file($photoPath)) {
-            unlink($photoPath); // Delete the file
+        if (file_exists($mainPhotoPath) && is_file($mainPhotoPath)) {
+            Log::info("Deleting Seaview Photo: " . $mainPhotoPath); // Debug log
+            unlink($mainPhotoPath); // Delete the main photo
         }
 
-        $pic->delete(); // Delete the database record
-    });
+        // Delete the seaview database record
+        $seaview->delete();
+        Log::info("Seaview record deleted successfully."); // Debug log
 
-    // Delete the main seaview photo
-    $mainPhotoPath = public_path('storage/' . $seaview->photo);
-
-    if (file_exists($mainPhotoPath) && is_file($mainPhotoPath)) {
-        unlink($mainPhotoPath); // Delete the main photo
+        // Return a JSON response
+        return response()->json([
+            'success' => true,
+            'message' => 'Request and related photos deleted successfully!',
+        ]);
     }
 
-    // Delete all files in the 'seagrass' directory
-    $seagrassDirectory = storage_path('app/public/seagrass');
-
-    if (is_dir($seagrassDirectory)) {
-        $files = glob($seagrassDirectory . '/*'); // Get all files in the directory
-
-        foreach ($files as $file) {
-            if (is_file($file)) {
-                unlink($file); // Delete each file
-            }
-        }
-    }
-
-    // Delete the seaview record
-    $seaview->delete();
-
-    // Delete related records for the authenticated user
-    DB::table('seagrasspics')
-        ->where('u_id', Auth::user()->id)
-        ->delete();
-
-    // Return a JSON response for AJAX
-    return response()->json([
-        'success' => true,
-        'message' => 'Request and related photos deleted successfully!',
-    ]);
-}
 
 }
