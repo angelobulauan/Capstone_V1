@@ -204,39 +204,40 @@ public function pendingapproval()
      * Show the form for editing the specified resource.
      */
     public function edit(Request $request, $id)
-    {
-        // Retrieve the record from the database
-        $record = DB::table('seaviews')->where('id', $id)->first();
+{
+    // Retrieve the record from the database
+    $record = DB::table('seaviews')->where('id', $id)->first();
 
-        // Check if the record exists
-        if (!$record) {
-            return response()->json(['error' => 'Record not found.'], 404);
-        }
-
-        // Validate incoming request data
-        $validatedData = $request->validate([
-            'scientificname1' => 'nullable|string',
-            'scientificname2' => 'nullable|string',
-            'scientificname3' => 'nullable|string',
-            'description' => 'nullable|string',
-            'location' => 'nullable|string',
-        ]);
-
-        // Prepare update data
-        $updateData = [
-            'scientificname1' => $validatedData['scientificname1'] ?? $record->scientificname1,
-            'scientificname2' => $validatedData['scientificname2'] ?? $record->scientificname2,
-            'scientificname3' => $validatedData['scientificname3'] ?? $record->scientificname3,
-            'description' => $validatedData['description'] ?? $record->description,
-            'location' => $validatedData['location'] ?? $record->location,
-            'updated_at' => now(),
-        ];
-
-        // Update the record in the database
-        DB::table('seaviews')->where('id', $id)->update($updateData);
-
-        return back()->with('success', 'Record updated successfully');
+    // Check if the record exists
+    if (!$record) {
+        return response()->json(['success' => false, 'message' => 'Record not found.'], 404);
     }
+
+    // Validate incoming request data
+    $validatedData = $request->validate([
+        'scientificname1' => 'nullable|string',
+        'scientificname2' => 'nullable|string',
+        'scientificname3' => 'nullable|string',
+        'description' => 'nullable|string',
+        'location' => 'nullable|string',
+    ]);
+
+    // Prepare update data
+    $updateData = [
+        'scientificname1' => $validatedData['scientificname1'] ?? $record->scientificname1,
+        'scientificname2' => $validatedData['scientificname2'] ?? $record->scientificname2,
+        'scientificname3' => $validatedData['scientificname3'] ?? $record->scientificname3,
+        'description' => $validatedData['description'] ?? $record->description,
+        'location' => $validatedData['location'] ?? $record->location,
+        'updated_at' => now(),
+    ];
+
+    // Update the record in the database
+    DB::table('seaviews')->where('id', $id)->update($updateData);
+
+    // Return a JSON response for the AJAX call
+    return response()->json(['success' => true, 'message' => 'Record updated successfully!']);
+}
 
     /**
      * Update the specified resource in storage.
@@ -248,58 +249,55 @@ public function pendingapproval()
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
-    {
-        // Delete the main seaview record for the authenticated user
-        $seaview = Seaview::where('id', $id)
-            ->where('u_id', Auth::user()->id)
-            ->first();
+    public function destroy(Request $request, $id)
+{
+    // Retrieve the seaview record
+    $seaview = Seaview::findOrFail($id);
 
-        if (!$seaview) {
-            return back()->withErrors('Record not found or unauthorized access.');
+    // Retrieve and delete related photos
+    Seagrasspic::where('sea_id', $id)->each(function ($pic) {
+        $photoPath = public_path('storage/' . $pic->photo);
+
+        if (file_exists($photoPath) && is_file($photoPath)) {
+            unlink($photoPath); // Delete the file
         }
 
-        // Retrieve and delete related photos from the `seagrasspics` table
-        $seagrasspics = DB::table('seagrasspics')
-            ->where('u_id', Auth::user()->id)
-            ->where('sea_id', $id)
-            ->get();
+        $pic->delete(); // Delete the database record
+    });
 
-        foreach ($seagrasspics as $pic) {
-            // Check if the `photo` already includes the directory
-            $photoPath = storage_path('app/public/' . $pic->Photo);
+    // Delete the main seaview photo
+    $mainPhotoPath = public_path('storage/' . $seaview->photo);
 
-            // Log the constructed path for debugging
-            \Log::info('Constructed file path: ' . $photoPath);
+    if (file_exists($mainPhotoPath) && is_file($mainPhotoPath)) {
+        unlink($mainPhotoPath); // Delete the main photo
+    }
 
-            // Check if the file exists and delete it
-            if (file_exists($photoPath) && is_file($photoPath)) {
-                if (unlink($photoPath)) {
-                    \Log::info('File deleted successfully: ' . $photoPath);
-                } else {
-                    \Log::error('Failed to delete file: ' . $photoPath);
-                }
-            } else {
-                \Log::error('File does not exist or is not a file: ' . $photoPath);
+    // Delete all files in the 'seagrass' directory
+    $seagrassDirectory = storage_path('app/public/seagrass');
+
+    if (is_dir($seagrassDirectory)) {
+        $files = glob($seagrassDirectory . '/*'); // Get all files in the directory
+
+        foreach ($files as $file) {
+            if (is_file($file)) {
+                unlink($file); // Delete each file
             }
         }
-
-        // Delete the records from the `seagrasspics` table
-        DB::table('seagrasspics')
-            ->where('u_id', Auth::user()->id)
-            ->where('sea_id', $id)
-            ->delete();
-
-        // Delete the `seaview` record
-        $seaview->delete();
-
-        return back()
-            ->with('success', 'Record and related images deleted successfully!')
-            ->with([
-                'showNotification' => true,
-                'notificationMessage' => 'Record and related images deleted successfully!',
-                'notificationType' => 'success',
-            ]);
     }
+
+    // Delete the seaview record
+    $seaview->delete();
+
+    // Delete related records for the authenticated user
+    DB::table('seagrasspics')
+        ->where('u_id', Auth::user()->id)
+        ->delete();
+
+    // Return a JSON response for AJAX
+    return response()->json([
+        'success' => true,
+        'message' => 'Request and related photos deleted successfully!',
+    ]);
+}
 
 }
