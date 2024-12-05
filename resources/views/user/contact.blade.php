@@ -49,10 +49,10 @@
                                 </div>
                                 <div class="card-body">
                                     <p class="text">Reach us via: <i class="fa fa-envelope" style="font-size:24px;color:white"></i> <strong><a
-                                            href="https://mail.google.com/mail/?view=cm&fs=1&to=Seagrass0fnc@gmail.com"
+                                            href="https://mail.google.com/mail/?view=cm&fs=1&to=seagrass.nc2024@gmail.com"
                                             target="_blank" style="color: white; text-decoration: none; font-size: 1.5rem;"
                                             onmouseover="this.style.color='#00ff7f'" onmouseout="this.style.color='white'">
-                                            Seagrass0fnc@gmail.com </a></strong></p>
+                                            Seagrass.nc2024@gmail.com </a></strong></p>
                                     <div style="display: flex; justify-content: center; align-items: center; margin-top: 10px;">
                                         <a href="https://www.facebook.com/p/DENR-CENRO-APARRI-CAGAYAN-100067828756511/" target="_blank" class="m-2" style="font-size: 36px; color: white; transition: all 0.3s ease-in-out;"
                                             onmouseover="this.style.color='#00ff7f'; this.style.fontSize='50px'" onmouseout="this.style.color='white'; this.style.fontSize='36px'">

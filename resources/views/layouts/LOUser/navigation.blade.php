@@ -37,12 +37,12 @@
 
                             <x-slot name="content">
                                 <x-dropdown-link :href="route('user.view.index')" class="flex items-center text-black dark:text-white hover:bg-blue-800 hover:text-white">
-                                    <i class="fas fa-eye"></i> <!-- Eye icon for "View All" -->
+                                    <i class="fas fa-eye"style="margin-right: 8px;"></i> <!-- Eye icon for "View All" -->
                                     {{ __('View All Sea Grasses') }}
                                 </x-dropdown-link>
 
                                     <x-dropdown-link :href="route('user.addnew')" class="flex items-center text-black dark:text-white hover:bg-blue-800 hover:text-white">
-                                        <i class="fas fa-plus"></i> <!-- Plus icon for "Add New" -->
+                                        <i class="fas fa-plus" style="margin-right: 8px;"></i> <!-- Plus icon for "Add New" -->
                                         {{ __('Add New Sea Grass') }}
                                     </x-dropdown-link>
 
@@ -171,6 +171,8 @@
                             <i class="fas fa-bell"></i> {{ __('Requests') }}
                             ({{ DB::table('seaviews')->where('u_id', auth()->user()->id)->where('status', 'pending')->count() }})
                         </x-dropdown-link>
+
+                           
 
 
                         <!-- Authentication -->

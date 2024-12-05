@@ -66,7 +66,7 @@
                         <x-dropdown-link :href="route('profile.adminedit')" class="text-black dark:text-black no-underline">
                             <i class="fas fa-user"></i> {{ __('Profile') }}
                         </x-dropdown-link>
-
+                        
 
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
