@@ -172,14 +172,9 @@
                             ({{ DB::table('seaviews')->where('u_id', auth()->user()->id)->where('status', 'pending')->count() }})
                         </x-dropdown-link>
 
-<<<<<<< HEAD
                         <x-dropdown-link :href="route('user.user.help')" class="text-black dark:text-black no-underline">
                             <i class="fas fa-question-circle"></i> {{ __('Help') }}
                         </x-dropdown-link>
-=======
-                           
->>>>>>> f8f04a5d4e12ab7e5a1cc8e60e7dc0e9ac040a7b
-
 
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
