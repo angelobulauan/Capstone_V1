@@ -17,7 +17,7 @@
 </head>
 <body>
     @section('content')
-    <iframe src="{{ asset('User_MANUAL.pdf') }}" width="1000px" height="1000px" style="border:none;"></iframe>
+    <iframe src="{{ asset('storage/User_MANUAL.pdf') }}" width="1000px" height="1000px" style="border:none;"></iframe>
     @endsection
 </object>
 </body>
