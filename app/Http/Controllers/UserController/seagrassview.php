@@ -271,5 +271,9 @@ class seagrassview extends Controller
     return view('user.seagrass', compact('myEntry'));
 }
 
+public function help()
+    {
+        return view('user.UserManual');
+    }
 
 }

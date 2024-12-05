@@ -286,4 +286,13 @@ public function destroy(Request $request, $id)
     ]);
 }
 
+
+    /**
+     * Show the help page.
+     */
+    public function help()
+    {
+        return view('admin.AdminManual');
+    }
+
 }

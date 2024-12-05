@@ -117,6 +117,8 @@ Route::namespace('App\Http\Controllers\AdminController')
 
         Route::get('/report', 'ReportsCtrl@index')->name('report');
         Route::post('/export', 'ReportsCtrl@exportToExcel')->name('export');
+
+        Route::get('/help', 'seagrasscontroller@help')->name('admin.help');
     });
 
 //user
@@ -138,6 +140,7 @@ Route::namespace('App\Http\Controllers\UserController')
         Route::get('/addnew', 'seagrassview@addnew')->name('addnew');
         Route::post('/addnew', 'seagrassview@store')->name('addnew.store');
         Route::get('/search', 'seagrassview@search')->name('seagrass.search');
+    Route::get('/help', 'seagrassview@help')->name('user.help');
     });
 
 //request

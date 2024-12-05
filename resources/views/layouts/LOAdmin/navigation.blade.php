@@ -66,6 +66,9 @@
                         <x-dropdown-link :href="route('profile.adminedit')" class="text-black dark:text-black no-underline">
                             <i class="fas fa-user"></i> {{ __('Profile') }}
                         </x-dropdown-link>
+                        <x-dropdown-link :href="route('admin.admin.help')" class="text-black dark:text-black no-underline">
+                            <i class="fas fa-question-circle"></i> {{ __('Help') }}
+                        </x-dropdown-link>
 
 
                         <!-- Authentication -->

@@ -172,6 +172,10 @@
                             ({{ DB::table('seaviews')->where('u_id', auth()->user()->id)->where('status', 'pending')->count() }})
                         </x-dropdown-link>
 
+                        <x-dropdown-link :href="route('user.user.help')" class="text-black dark:text-black no-underline">
+                            <i class="fas fa-question-circle"></i> {{ __('Help') }}
+                        </x-dropdown-link>
+
 
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
@@ -284,6 +288,10 @@
                     <i class="fas fa-bell"></i> {{ __('Requests') }}
                             ({{ DB::table('seaviews')->where('u_id', auth()->user()->id)->where('status', 'pending')->count() }})
                 </x-responsive-nav-link>
+
+                <x-dropdown-link :href="route('user.user.help')" class="text-black dark:text-black no-underline">
+                    <i class="fas fa-user"></i> {{ __('Help') }}
+                </x-dropdown-link>
 
 
                 <!-- Authentication -->
