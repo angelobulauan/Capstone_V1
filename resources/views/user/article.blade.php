@@ -32,7 +32,7 @@
         }
         .mission-vision
         {
-          background-color: #094F87;
+          background-color:rgba(19,125,177,255);
           text-align: center;
           border: 1px solid transparent;
           border-radius: 20px;
@@ -44,7 +44,7 @@
         }
         .info h1
         {
-          font-weight: bold;
+          font-weight: normal;
           color:white;
           font-size: 40px;
         }
@@ -53,14 +53,14 @@
           margin: 1.2rem 0 2rem;
           font-size: 1.2rem;
           color: #fff;
-          font-style: italic;
+          /* font-style: italic; */
           font-weight: 500;
           text-align: justify;
         }
         .moreText{
           display: none;
         }
-        .read-more-btn{
+        /* .read-more-btn{
           padding: 15px 60px;
           background-color: #E8AB53;
           color: black;
@@ -71,7 +71,7 @@
           cursor:pointer;
           font-weight: 500;
           font-family:cursive;
-        }
+        } */
         .read-more-btn:hover{
           background-color: white;
         }
@@ -99,18 +99,20 @@
             <div class="info">
               <h1>"Sea Secrets Unveiled: The Hidden Treasures of Seagrass Meadows"</h1>
               <hr>
-              <p class="text">Seagrasses play a vital role in marine ecosystems and provide numerous benefits to the environment. Here are some of the key importance of seagrasses:  <br> <br>
-    1. Habitat and Biodiversity: Seagrasses serve as essential habitats for a diverse range of marine species, including fish, invertebrates, and other marine organisms. They provide shelter, breeding grounds, and food sources for many marine animals, contributing to the overall biodiversity of coastal and marine <span class="dots">...</span> <span class="moreText">ecosystems. <br>
-    2. Carbon Sequestration: Seagrasses are highly efficient at capturing and storing carbon dioxide from the atmosphere through photosynthesis. They play a crucial role in carbon sequestration, helping to mitigate climate change by reducing the levels of greenhouse gases in the atmosphere. <br>
-    3. Coastal Protection: Seagrasses help stabilize coastlines and reduce coastal erosion by trapping sediments with their roots and rhizomes. They act as natural barriers against storm surges, protecting shorelines from erosion and minimizing the impact of waves and currents. <br>
-    4. Water Quality: Seagrasses improve water quality by trapping sediments and nutrients, thereby reducing turbidity and preventing algal blooms. They act as natural filters, helping to maintain the clarity and quality of coastal waters. <br>
-    5. Economic Importance: Seagrasses support important commercial and recreational fisheries by providing essential habitats for fish and shellfish. They contribute to the livelihoods of coastal communities through fishing, tourism, and other economic activities. <br>
-    6. Oxygen Production: Like terrestrial plants, seagrasses produce oxygen as a byproduct of photosynthesis. They contribute to the oxygenation of marine environments, supporting the health and survival of marine organisms. <br>
-    7. Nursery Grounds: Seagrasses are crucial nursery grounds for many marine species, including commercially important fish species. Juvenile fish and other marine organisms find shelter and food in seagrass beds, which are essential for their growth and survival. <br>
-    8. Erosion Control: Seagrasses help prevent coastal erosion by stabilizing sediments with their roots and rhizomes. They play a vital role in maintaining the integrity of coastal ecosystems and protecting shorelines from the impacts of waves and currents. <br> <br>
-    Overall, seagrasses are invaluable components of coastal and marine ecosystems, providing a wide range of ecological, economic, and social benefits. Protecting and conserving seagrass habitats is essential for the health and sustainability of marine environments worldwide. <br>
-    </span></p>
-    <button class="read-more-btn">Read More</button>
+              <p class="text">Seagrasses play a vital role in marine ecosystems and provide numerous benefits to the environment. Here are some of the key importance of seagrasses:  <br><br>
+                1. <strong style="font-size: 1.4rem;">Habitat and Biodiversity:</strong> Seagrasses serve as essential habitats for a diverse range of marine species, including fish, invertebrates, and other marine organisms. They provide shelter, breeding grounds, and food sources for many marine animals, contributing to the overall biodiversity of coastal and marine ecosystems. <br>
+                2. <strong style="font-size: 1.4rem;">Carbon Sequestration:</strong> Seagrasses are highly efficient at capturing and storing carbon dioxide from the atmosphere through photosynthesis. They play a crucial role in carbon sequestration, helping to mitigate climate change by reducing the levels of greenhouse gases in the atmosphere. <br>
+                3. <strong style="font-size: 1.4rem;">Coastal Protection:</strong> Seagrasses help stabilize coastlines and reduce coastal erosion by trapping sediments with their roots and rhizomes. They act as natural barriers against storm surges, protecting shorelines from erosion and minimizing the impact of waves and currents. <br>
+                4. <strong style="font-size: 1.4rem;">Water Quality:</strong> Seagrasses improve water quality by trapping sediments and nutrients, thereby reducing turbidity and preventing algal blooms. They act as natural filters, helping to maintain the clarity and quality of coastal waters. <br>
+                5. <strong style="font-size: 1.4rem;">Economic Importance:</strong> Seagrasses support important commercial and recreational fisheries by providing essential habitats for fish and shellfish. They contribute to the livelihoods of coastal communities through fishing, tourism, and other economic activities. <br>
+                6. <strong style="font-size: 1.4rem;">Oxygen Production:</strong> Like terrestrial plants, seagrasses produce oxygen as a byproduct of photosynthesis. They contribute to the oxygenation of marine environments, supporting the health and survival of marine organisms. <br>
+                7. <strong style="font-size: 1.4rem;">Nursery Grounds:</strong> Seagrasses are crucial nursery grounds for many marine species, including commercially important fish species. Juvenile fish and other marine organisms find shelter and food in seagrass beds, which are essential for their growth and survival. <br>
+                8. <strong style="font-size: 1.4rem;">Erosion Control:</strong> Seagrasses help prevent coastal erosion by stabilizing sediments with their roots and rhizomes. They play a vital role in maintaining the integrity of coastal ecosystems and protecting shorelines from the impacts of waves and currents. <br><br>
+                Overall, seagrasses are invaluable components of coastal and marine ecosystems, providing a wide range of ecological, economic, and social benefits. Protecting and conserving seagrass habitats is essential for the health and sustainability of marine environments worldwide. <br>
+            </p>
+
+
+    {{-- <button class="read-more-btn">Read More</button> --}}
             </div>
           </article>
           </div>
@@ -144,7 +146,7 @@
             </div>
         </div>
 
-    <script>
+    {{-- <script>
       const readMoreBtn = document.querySelector('.read-more-btn');
       const text = document.querySelector('.text');
 
@@ -157,7 +159,7 @@
         }
       })
 
-    </script>
+    </script> --}}
         @endsection
 
 </body>
