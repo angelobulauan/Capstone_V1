@@ -181,7 +181,10 @@
             </div>
         @endforeach
     </div> {{-- end of container --}}
-
+<!-- Pagination Links -->
+<div class="d-flex justify-content-center mt-4">
+    {{ $myEntry->links() }}
+</div>
     <script>
         $(document).ready(function() {
             // Handle form submission
