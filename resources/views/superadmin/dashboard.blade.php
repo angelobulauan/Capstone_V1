@@ -1,9 +1,6 @@
 @extends('layouts.LOSuperAdmin.app')
 @section('content')
-    @php
-        $uploader = DB::table('users')->where('involvement', 'uploader')->where('is_verified', 1)->count();
-        $unverifieduploader = DB::table('users')->where('involvement', 'uploader')->where('is_verified', 0)->count();
-    @endphp
+<link rel="shortcut icon" href="{{asset('favicon.png') }}">
 
     <div class="container mt-5">
         <div class="row">
@@ -15,10 +12,7 @@
                             <div class="col">
                                 <i class="fas fa-user fa-4x text-black-300 wobble-on-hover"></i>
                             </div>
-                            <div class="col">
-                                <h3 class="display-4">{{ $uploader }}</h3>
-                                <h6 class="text-uppercase mb-1">Verified Uploader</h6>
-                            </div>
+                            {{--  --}}
                         </div>
                     </div>
 
@@ -39,10 +33,7 @@
                             <div class="col">
                                 <i class="fas fa-user fa-4x text-black-300 wobble-on-hover"></i>
                             </div>
-                            <div class="col">
-                                <h3 class="display-4">{{ $unverifieduploader }}</h3>
-                                <h6 class="text-uppercase mb-1">Unverified Uploader</h6>
-                            </div>
+
                         </div>
                     </div>
 
