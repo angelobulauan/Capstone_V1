@@ -49,16 +49,17 @@ class AllUserCtrl extends Controller
 
     $user->save();
 
-    return redirect()->route('superadmin.view')->with('success', 'User updated successfully!');
+    return redirect()->route('superadmin.user.update')->with('success', 'User updated successfully!');
 }
 
     /**
      * Disable the specified user.
      */
     public function disable($id)
-    {
-        $user = User::findOrFail($id); // Find the user by ID
-        $user->update(['status' => 'disabled']); // Disable the user (set status)
-        return redirect()->back()->with('success', 'User disabled successfully!');
-    }
+{
+    $user = User::findOrFail($id); // Find the user by ID
+    $user->update(['status' => 'disabled']); // Disable the user (set status)
+
+    return redirect()->route('superadmin.view')->with('success', 'User disabled successfully!');
+}
 }

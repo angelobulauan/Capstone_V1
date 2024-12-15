@@ -171,6 +171,6 @@ Route::namespace('App\Http\Controllers\SuperadminController')
     Route::delete('/users/{id}', [AllUserCtrl::class, 'disable'])->name('superadmin.user.disable');
 
     Route::get('/users', [AllUserCtrl::class, 'view'])->name('view');
-    Route::put('/users/{id}', [AllUserCtrl::class, 'update'])->name('superadmin.user.update');
+    Route::put('/users/{id}', [AllUserCtrl::class, 'update'])->name('superadmin.user.update');  
 
     });
