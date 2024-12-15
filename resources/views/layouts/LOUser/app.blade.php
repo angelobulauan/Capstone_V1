@@ -15,7 +15,7 @@
     <script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_API_KEY') }}"></script>
 
 <!-- Favicon -->
-    <link rel="shortcut icon" href="{{asset('favicon.png') }}">
+<link rel="shortcut icon" href="{{ asset('storage/favicon.png') }}">
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <!-- Fonts -->

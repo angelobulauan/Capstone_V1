@@ -1,6 +1,6 @@
 @extends('layouts.LOSuperAdmin.app')
 @section('content')
-<link rel="shortcut icon" href="{{asset('favicon.png') }}">
+<link rel="shortcut icon" href="{{ asset('storage/favicon.png') }}">
 
     <div class="container mt-5">
         <div class="row">

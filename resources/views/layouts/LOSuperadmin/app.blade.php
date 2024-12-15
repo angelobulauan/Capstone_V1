@@ -14,7 +14,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
 
-    <link rel="shortcut icon" href="{{asset('favicon.png') }}"> 
+    <link rel="shortcut icon" href="{{ asset('storage/favicon.png') }}">
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <!-- Fonts -->

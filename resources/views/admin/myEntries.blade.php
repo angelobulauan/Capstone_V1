@@ -1,6 +1,6 @@
 @extends('layouts.LOAdmin.app')
 @section('content')
-<link rel="shortcut icon" href="{{asset('favicon.png') }}"> 
+<link rel="shortcut icon" href="{{ asset('storage/favicon.png') }}">
     <div class="container-fluid mt-4">
         @foreach ($myEntry as $d)
             @php
