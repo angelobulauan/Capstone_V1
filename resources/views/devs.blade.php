@@ -1,3 +1,4 @@
+<link rel="shortcut icon" href="{{ asset('storage/favicon.png') }}">
 <style>
     html, body {
         height: 100%;

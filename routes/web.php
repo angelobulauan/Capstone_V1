@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\AdminController\alluserctrl;
+use App\Http\Controllers\SuperadminController\alluserctrl;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserCTRL;
 use App\Models\RoleUser;
@@ -170,4 +170,11 @@ Route::namespace('App\Http\Controllers\SuperadminController')
         Route::put('/verify/{id}/reject', 'UserVerifyCtrl@reject')->name('reject');
         Route::put('/verify/{id}/verified', 'UserVerifyCtrl@verified')->name('verified');
         Route::get('/view', 'AllUserCtrl@view')->name('view');
+
+        // Route to disable a user (DELETE request)
+    Route::delete('/users/{id}', [AllUserCtrl::class, 'disable'])->name('superadmin.user.disable');
+
+    Route::get('/users', [AllUserCtrl::class, 'view'])->name('view');
+    Route::put('/users/{id}', [AllUserCtrl::class, 'update'])->name('superadmin.user.update');  
+
     });

@@ -12,17 +12,13 @@
                 </div>
 
                 <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                {{-- <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')"
                         class="flex items-center text-black dark:text-white hover:no-underline">
                         <i class="fas fa-home" style="margin-right: 8px;">Home</i>
-                    </x-nav-link>
+                    </x-nav-link> --}}
 
-                    <x-nav-link :href="route('superadmin.verify')" :active="request()->routeIs('superadmin.verify')"
-                        class="flex items-center text-black dark:text-white hover:no-underline">
-                        <i class="fas fa-user"style="margin-right: 8px;"></i> {{-- FontAwesome icon --}}
-                        {{ __('Verify Uploader') }}
-                    </x-nav-link>
+
 
                     <x-nav-link :href="route('superadmin.view')" :active="request()->is('superadmin.view')"
                         class="flex items-center text-black dark:text-white hover:no-underline">

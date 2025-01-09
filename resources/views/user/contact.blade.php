@@ -8,7 +8,7 @@
     <title>Contact Us</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-4iFRndTElwPARgF7xrjkoX7z7evOD/zrJdqV6zDnLpJwxCjZvVvxiK7rI5S3yRQ7Vv6RXGsTAFXdSdO6wDnLpJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
+    <link rel="shortcut icon" href="{{ asset('storage/favicon.png') }}">
     <style>
         .contact-heading {
             display: flex;

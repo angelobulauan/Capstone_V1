@@ -1,75 +1,65 @@
 <?php
 
-namespace App\Http\Controllers\SuperadminController;
+namespace App\Http\Controllers\SuperadminController; // Ensure this is correct
+
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use App\Models\alluser;
 use Illuminate\Http\Request;
 
-class alluserctrl extends Controller
+class AllUserCtrl extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the users.
      */
     public function view()
     {
-        $allusers = DB::table('users')
-        ->join('role_users', 'users.id', '=', 'role_users.user_id')
-        ->whereNotIn('role_users.role_id', [1])
-        ->get(); //this will retrive all your user entries regardless of the status
+        $alluser = DB::table('users')
+            ->join('role_users', 'users.id', '=', 'role_users.user_id')
+            ->whereNotIn('role_users.role_id', [1])
+            ->get();
 
-    // dd($myEntry);
+        return view('superadmin.view', compact('alluser')); // Pass $alluser to view
+    }
 
-    //then we return to the newly created blade file with the data we retrieved
-    return view('superadmin.view')
-        ->with('alluser', $allusers);
-    }
-    public function create()
-    {
-        //
-    }
 
     /**
-     * Store a newly created resource in storage.
+     * Update the specified user in storage.
      */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy($id)
-    {
-    }
-    public function showAllUsers()
+    public function update(Request $request, $id)
 {
-    // Retrieve all users from the 'users' table
+    // Check the incoming request data
+    dd($request->all());
 
+    $user = User::findOrFail($id);
+
+    // Validation logic
+    $validated = $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|email|max:255',
+        'password' => 'nullable|min:8|confirmed',
+    ]);
+
+    // Update logic
+    $user->name = $validated['name'];
+    $user->email = $validated['email'];
+    if ($request->filled('password')) {
+        $user->password = Hash::make($validated['password']);
+    }
+
+    $user->save();
+
+    return redirect()->route('superadmin.user.update')->with('success', 'User updated successfully!');
+}
+
+    /**
+     * Disable the specified user.
+     */
+    public function disable($id)
+{
+    $user = User::findOrFail($id); // Find the user by ID
+    $user->update(['status' => 'disabled']); // Disable the user (set status)
+
+    return redirect()->route('superadmin.view')->with('success', 'User disabled successfully!');
 }
 }

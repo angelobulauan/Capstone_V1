@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Homepage</title>
+    <link rel="shortcut icon" href="{{ asset('storage/favicon.png') }}">
 </head>
 
 <body>
@@ -355,7 +356,7 @@
 
 
         // Verified vs Unverified Uploader Column Chart
-        
+
     </script>
 
     <br>

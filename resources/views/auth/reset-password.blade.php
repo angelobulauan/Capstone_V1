@@ -1,3 +1,4 @@
+<link rel="shortcut icon" href="{{ asset('storage/favicon.png') }}">
 <x-guest-layout>
     <form method="POST" action="{{ route('password.store') }}">
         @csrf
