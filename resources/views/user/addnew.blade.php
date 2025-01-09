@@ -89,27 +89,30 @@
                             </div>
 
                             <div class="row mt-3 d-flex align-items-center">
-                                <div class="col-5">
-                                    <label for="latitude" class="form-label">Latitude</label>
-                                    <input type="text" class="form-control" name="latitude" id="latitude"
-                                        autocomplete="off" placeholder="Enter Latitude" required>
+                                <div class="col-12">
+                                    <p>Note: <i>The system only accepts decimal Coordinates. Click on the map coordinate button and drag the marker to pinpoint the location for the Latitude and Longitude</i></p>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <label for="latitude" class="form-label">Latitude</label>
+                                            <input type="text" class="form-control" name="latitude" id="latitude"
+                                                autocomplete="off" placeholder="Enter Latitude" required>
+                                        </div>
+                                        <div class="col-5">
+                                            <label for="longtitude" class="form-label">Longtitude</label>
+                                            <input type="text" class="form-control" name="longtitude" id="longtitude"
+                                                autocomplete="off" placeholder="Enter Longtitude" required>
+                                        </div>
+                                        <div class="col-1 d-flex align-items-center mt-4">
+                                            <button id="openModalMapLocationAdmin" type="button" class="btn btn-primary">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                    fill="currentColor" class="bi bi-crosshair" viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M8.5.5a.5.5 0 0 0-1 0v.518A7 7 0 0 0 1.018 7.5H.5a.5.5 0 0 0 0 1h.518A7 7 0 0 0 7.5 14.982v.518a.5.5 0 0 0 1 0v-.518A7 7 0 0 0 14.982 8.5h.518a.5.5 0 0 0 0-1h-.518A7 7 0 0 0 8.5 1.018zm-6.48 7A6 6 0 0 1 7.5 2.02v.48a.5.5 0 0 0 1 0v-.48a6 6 0 0 1 5.48 5.48h-.48a.5.5 0 0 0 0 1h.48a6 6 0 0 1-5.48 5.48v-.48a.5.5 0 0 0-1 0v.48A6 6 0 0 1 2.02 8.5h.48a.5.5 0 0 0 0-1zM8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4" />
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="col-6">
-                                    <label for="longtitude" class="form-label">Longtitude</label>
-                                    <input type="text" class="form-control" name="longtitude" id="longtitude"
-                                        autocomplete="off" placeholder="Enter Longtitude" required>
-                                </div>
-
-                                <div class="col-1 d-flex align-items-center mt-4">
-                                    <button id="openModalMapLocationAdmin" type="button" class="btn btn-primary">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                            fill="currentColor" class="bi bi-crosshair" viewBox="0 0 16 16">
-                                            <path
-                                                d="M8.5.5a.5.5 0 0 0-1 0v.518A7 7 0 0 0 1.018 7.5H.5a.5.5 0 0 0 0 1h.518A7 7 0 0 0 7.5 14.982v.518a.5.5 0 0 0 1 0v-.518A7 7 0 0 0 14.982 8.5h.518a.5.5 0 0 0 0-1h-.518A7 7 0 0 0 8.5 1.018zm-6.48 7A6 6 0 0 1 7.5 2.02v.48a.5.5 0 0 0 1 0v-.48a6 6 0 0 1 5.48 5.48h-.48a.5.5 0 0 0 0 1h.48a6 6 0 0 1-5.48 5.48v-.48a.5.5 0 0 0-1 0v.48A6 6 0 0 1 2.02 8.5h.48a.5.5 0 0 0 0-1zM8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4" />
-                                        </svg>
-                                    </button>
-                                </div>
-
 
                             </div>
 

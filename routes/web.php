@@ -52,6 +52,10 @@ Route::get('/devs', function () {
     return view('devs');
 })->name('devs');
 
+Route::get('/map-guest', function () {
+    return view('map-guest');
+})->name('map-guest')->middleware('guest');
+
 // add
 
 Route::get('/dashboard', function () {
