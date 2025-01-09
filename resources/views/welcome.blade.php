@@ -11,7 +11,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 
     <style>
@@ -352,11 +354,16 @@
 </head>
 
 <body>
-    <div class="navbar">
-        <a href="#home">Home</a>
-        <a href="{{ route('map-guest') }}">Map</a>
-        <a href="#article">Article</a>
-        <a href="#contact">Contact Us</a>
+       <div class="navbar d-flex justify-content-between align-items-center">
+        <div class="d-flex justify-content-center flex-grow-1">
+            <a href="#home" class="mx-2">Home</a>
+            <a href="{{ route('map-guest') }}" class="mx-2">Map</a>
+            <a href="#article" class="mx-2">Article</a>
+            <a href="#contact" class="mx-2">Contact Us</a>
+        </div>
+        <div class="ml-auto" style="margin-right: 10px;">
+            <a href="{{ route('login') }}" class="btn btn">Login</a>
+        </div>
     </div>
     <section id="home" class="home section">
         <div class="slideshow">
