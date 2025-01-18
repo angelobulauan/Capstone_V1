@@ -41,7 +41,17 @@ class LoginRequest extends FormRequest
     {
         $this->ensureIsNotRateLimited();
 
-        if (! Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
+        $credentials = $this->only('email', 'password');
+
+        // Check if the user is disabled
+        $user = \App\Models\User::where('email', $credentials['email'])->first();
+        if ($user && $user->status === 'disabled') {
+            throw ValidationException::withMessages([
+                'email' => trans('This account is Disabled'),
+            ]);
+        }
+
+        if (! Auth::attempt($credentials, $this->boolean('remember'))) {
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([

@@ -31,8 +31,6 @@ use Illuminate\Support\Facades\Mail;
 |
 */
 
-
-
 Route::get('/', function () {
     return view('welcome');
 });
@@ -54,7 +52,9 @@ Route::get('/devs', function () {
 
 Route::get('/map-guest', function () {
     return view('map-guest');
-})->name('map-guest')->middleware('guest');
+})
+    ->name('map-guest')
+    ->middleware('guest');
 
 // add
 
@@ -144,7 +144,7 @@ Route::namespace('App\Http\Controllers\UserController')
         Route::get('/addnew', 'seagrassview@addnew')->name('addnew');
         Route::post('/addnew', 'seagrassview@store')->name('addnew.store');
         Route::get('/search', 'seagrassview@search')->name('seagrass.search');
-    Route::get('/help', 'seagrassview@help')->name('user.help');
+        Route::get('/help', 'seagrassview@help')->name('user.help');
     });
 
 //request
@@ -172,9 +172,9 @@ Route::namespace('App\Http\Controllers\SuperadminController')
         Route::get('/view', 'AllUserCtrl@view')->name('view');
 
         // Route to disable a user (DELETE request)
-    Route::delete('/users/{id}', [AllUserCtrl::class, 'disable'])->name('superadmin.user.disable');
+        Route::delete('/users/{id}', [AllUserCtrl::class, 'disable'])->name('user.disable');
+        Route::put('/users/{id}/activate', [AllUserCtrl::class, 'activate'])->name('user.activate');
 
-    Route::get('/users', [AllUserCtrl::class, 'view'])->name('view');
-    Route::put('/users/{id}', [AllUserCtrl::class, 'update'])->name('superadmin.user.update');  
-
+        Route::get('/users', [AllUserCtrl::class, 'view'])->name('view');
+        Route::put('/users/{id}', [AllUserCtrl::class, 'update'])->name('user.update');
     });

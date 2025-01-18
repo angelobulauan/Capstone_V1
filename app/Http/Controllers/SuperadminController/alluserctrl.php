@@ -6,22 +6,29 @@ use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class AllUserCtrl extends Controller
 {
     /**
      * Display a listing of the users.
      */
-    public function view()
+    public function view(Request $request)
     {
+        // Get all users except those with role_id 1 and paginate the results
         $alluser = DB::table('users')
             ->join('role_users', 'users.id', '=', 'role_users.user_id')
             ->whereNotIn('role_users.role_id', [1])
-            ->get();
+            ->paginate(10); // Paginate with 10 users per page
 
-        return view('superadmin.view', compact('alluser')); // Pass $alluser to view
+        // Check if an `id` is provided to edit a specific user
+        $userToEdit = null;
+        if ($request->has('id')) {
+            $userToEdit = User::find($request->id);
+        }
+
+        return view('superadmin.view', compact('alluser', 'userToEdit'));
     }
-
 
     /**
      * Update the specified user in storage.
@@ -29,7 +36,7 @@ class AllUserCtrl extends Controller
     public function update(Request $request, $id)
 {
     // Check the incoming request data
-    dd($request->all());
+    // dd($request->all());
 
     $user = User::findOrFail($id);
 
@@ -49,17 +56,46 @@ class AllUserCtrl extends Controller
 
     $user->save();
 
-    return redirect()->route('superadmin.user.update')->with('success', 'User updated successfully!');
+    return redirect()->route('superadmin.view')->with('success', 'User updated successfully!');
 }
 
     /**
      * Disable the specified user.
      */
-    public function disable($id)
+/**
+ * Disable the specified user.
+ */
+public function disable($id)
 {
-    $user = User::findOrFail($id); // Find the user by ID
-    $user->update(['status' => 'disabled']); // Disable the user (set status)
+    // Find the user by ID
+    $user = User::findOrFail($id);
 
+    // Disable the user by changing the status field to 'disabled'
+    $user->status = 'disabled';
+
+    // Save the user with the updated status
+    $user->save();
+
+    // Redirect with a success message
     return redirect()->route('superadmin.view')->with('success', 'User disabled successfully!');
 }
+
+/**
+ * Undisable the specified user.
+ */
+public function activate($id)
+{
+    // Find the user by ID
+    $user = User::findOrFail($id);
+
+    // Undisable the user by changing the status field to 'active'
+    $user->status = 'active';
+
+    // Save the user with the updated status
+    $user->save();
+
+    // Redirect with a success message
+    return redirect()->route('superadmin.view')->with('success', 'User undisabled successfully!');
+}
+
 }
