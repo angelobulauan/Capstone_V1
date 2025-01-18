@@ -33,7 +33,7 @@
         }
         .typing {
         font-family: 'Roboto', sans-serif; /* Replace with your desired font */
-        font-size: 10px; 
+        font-size: 10px;
         color: #333; /* Set the desired text color */
     }
 
@@ -398,7 +398,7 @@
         <!-- Slideshow Section -->
         <div class="slideshow">
             <!-- Background Image -->
-            <div class="slide active" style="background-image: url('{{ asset('img/super bg.png') }}');"></div>
+            <div class="slide active" style="background-image: url('{{ asset('img/superbg.png') }}');"></div>
         </div>
 
         <!-- Content Section -->

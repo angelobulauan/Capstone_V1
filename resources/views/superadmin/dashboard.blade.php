@@ -13,7 +13,7 @@
 
 <link rel="shortcut icon" href="{{ asset('storage/favicon.png') }}">
 
-<div class="container-fluid position-relative p-0" style="height: 90vh; background: url('{{ asset('img/WELCOME SUPER ADMIN.jpg') }}') no-repeat center center/cover;">
+<div class="container-fluid position-relative p-0" style="height: 90vh; background: url('{{ asset('img/WELCOMESUPERADMIN.jpg') }}') no-repeat center center/cover;">
     <!-- Overlay -->
 
 
