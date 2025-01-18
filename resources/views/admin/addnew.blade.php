@@ -88,7 +88,10 @@
                                     <input type="text" name="location" class="form-control" autocomplete="off" placeholder="Enter the Location" required>
                                 </div>
                             </div>
-
+                            <p style="color: red;">
+                                <i class="fas fa-exclamation-circle"></i>
+                                Note: <i>The system only accepts decimal Coordinates. Click on the map coordinate button and drag the marker to pinpoint the location for the Latitude and Longitude</i>
+                              </p>
                             <div class="row mt-3 d-flex align-items-center">
                                 <div class="col-5">
                                     <label for="latitude" class="form-label">Latitude</label>

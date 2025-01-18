@@ -177,4 +177,6 @@ Route::namespace('App\Http\Controllers\SuperadminController')
 
         Route::get('/users', [AllUserCtrl::class, 'view'])->name('view');
         Route::put('/users/{id}', [AllUserCtrl::class, 'update'])->name('user.update');
+        Route::delete('superadmin/users/{user}', [alluserctrl::class, 'destroy'])->name('superadmin.user.destroy');
+
     });

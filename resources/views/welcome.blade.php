@@ -29,7 +29,13 @@
             overflow-x: hidden;
             margin: 0;
             background-color: #f4f4f9;
+            font-family: 'Arial', sans-serif;
         }
+        .typing {
+        font-family: 'Roboto', sans-serif; /* Replace with your desired font */
+        font-size: 10px; 
+        color: #333; /* Set the desired text color */
+    }
 
         /* Home Section */
         .home {
@@ -68,6 +74,15 @@
         .slide.active {
             opacity: 1;
         }
+        .back-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
 
         /* Content */
         .home .content {
@@ -105,10 +120,12 @@
             text-decoration: none;
             border-radius: 20px;
             transition: background-color 0.3s ease;
+            outline: none;
         }
 
         .home .content a:hover {
             background-color: limegreen;
+            outline: none;
         }
 
         /* Media Icons */
@@ -124,7 +141,7 @@
 
         .home .media-icons a {
             color: white;
-            font-size: 1.6em;
+            font-size: 1em;
             margin-bottom: 20px;
             transition: all 0.3s ease-in-out;
         }
@@ -173,31 +190,34 @@
             }
         }
 
-        /* Navigation Bar */
-        .navbar {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background-color: #333;
-            z-index: 3;
-            display: flex;
-            justify-content: center;
-            padding: 10px 0;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
+    .navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.2); /* Semi-transparent background */
+    backdrop-filter: blur(10px); /* Blur effect */
+    -webkit-backdrop-filter: blur(10px); /* Safari support */
+    z-index: 3;
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: Shadow for depth */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3); /* Optional: Border for emphasis */
+}
 
-        .navbar a {
-            color: white;
-            padding: 14px 20px;
-            text-decoration: none;
-            text-align: center;
-            transition: background-color 0.3s, color 0.3s;
-        }
+.navbar a {
+    color: white;
+    padding: 14px 20px;
+    text-decoration: none;
+    text-align: center;
+    transition: background-color 0.3s, color 0.3s;
+}
 
-        .navbar a:hover {
-            background-color: #ddd;
-            color: black;
-        }
+.navbar a:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    color: black;
+}
+
 
         .section {
             padding-top: 80px;
@@ -356,36 +376,58 @@
 <body>
        <div class="navbar d-flex justify-content-between align-items-center">
         <div class="d-flex justify-content-center flex-grow-1">
-            <a href="#home" class="mx-2">Home</a>
-            <a href="{{ route('map-guest') }}" class="mx-2">Map</a>
-            <a href="#article" class="mx-2">Article</a>
-            <a href="#contact" class="mx-2">Contact Us</a>
-        </div>
-        <div class="ml-auto" style="margin-right: 10px;">
-            <a href="{{ route('login') }}" class="btn btn">Login</a>
-        </div>
-    </div>
-    <section id="home" class="home section">
-        <div class="slideshow">
-            <div class="slide active" style="background-image: url('{{ asset('img/wl/welcome.jpg') }}');"></div>
-        </div>
-        <div class="content">
-            <h1 class="typing"></h1>
-            <p>Welcome! Seagrasses play very important roles in marine ecosystems, and we need to conserve and take care
-                of these majestic species. Explore our website to learn more and discover how you can help protect these
-                amazing plants.</p>
-            <a href="{{ route('login') }}">
-                <i class="fas fa-sign-in-alt" style="margin-right: 8px;"></i> {{ __('Get Started') }}
+            <a href="#home" class="mx-2">
+                <i class="fas fa-home"></i> Home
+            </a>
+            <a href="{{ route('map-guest') }}" class="mx-2">
+                <i class="fas fa-map"></i> Map
+            </a>
+            <a href="#article" class="mx-2">
+                <i class="fas fa-newspaper"></i> Article
+            </a>
+            <a href="#contact" class="mx-2">
+                <i class="fas fa-envelope"></i> Contact Us
             </a>
         </div>
-        <div class="media-icons">
-            <a href="https://www.facebook.com/p/DENR-CENRO-APARRI-CAGAYAN-100067828756511/"><i
-                    class="fab fa-facebook-square"></i></a>
-            <a href="#"><i class="fab fa-twitter-square"></i></a>
-            <a href="#"><i class="fab fa-instagram"></i></a>
+
+        {{-- <div class="ml-auto" style="margin-right: 10px;">
+            <a href="{{ route('login') }}" class="btn btn">Login</a>
+        </div> --}}
+    </div>
+    <section id="home" class="home section">
+        <!-- Slideshow Section -->
+        <div class="slideshow">
+            <!-- Background Image -->
+            <div class="slide active" style="background-image: url('{{ asset('img/super bg.png') }}');"></div>
+        </div>
+
+        <!-- Content Section -->
+        <div class="content text-center text-light">
+            <h1 class="typing">Welcome to Seagrass Conservation</h1>
+            <p class="mt-3">
+                Seagrasses play very important roles in marine ecosystems, and we need to conserve and take care of these
+                majestic species. Explore our website to learn more and discover how you can help protect these amazing plants.
+            </p>
+            <a href="{{ route('login') }}" class="btn-primary mt-3">
+                <i class="fas fa-sign-in-alt me-2"></i> {{ __('Get Started') }}
+            </a>
+        </div>
+
+        <!-- Social Media Icons -->
+        <div class="media-icons d-flex justify-content-center mt-4">
+            <a href="https://www.facebook.com/p/DENR-CENRO-APARRI-CAGAYAN-100067828756511/" class="mx-2 text-light">
+                <i class="fab fa-facebook-square fa-2x"></i>
+            </a>
+            <a href="#" class="mx-2 text-light">
+                <i class="fab fa-twitter-square fa-2x"></i>
+            </a>
+            <a href="#" class="mx-2 text-light">
+                <i class="fab fa-instagram fa-2x"></i>
+            </a>
         </div>
     </section>
-    <section id="article" class="section">
+
+    <section id="article" class="section" style="background-image: url('{{ asset('img/seagrass_image1.jpeg') }}'); background-size: cover;">>
         <div class="content">
             <div class="container">
                 <h1 class="Title text-center py-4">ARTICLE</h1>
@@ -436,7 +478,6 @@
                                     providing a wide range of ecological, economic, and social benefits. Protecting and
                                     conserving seagrass habitats is essential for the health and sustainability of
                                     marine environments worldwide. <br>
-                                    {{-- adadadada --}}
                                 </p>
                             </div>
                         </article>
@@ -478,18 +519,37 @@
         </div>
     </section>
     <script>
-        // Typing animation
-        const typingElement = document.querySelector('.typing');
-        const text = 'Sea Grasses of Northern Cagayan';
-        let index = 0;
-        const type = () => {
-            if (index < text.length) {
-                typingElement.textContent += text[index];
-                index++;
-                setTimeout(type, 100);
-            }
-        };
-        type();
+       const typingElement = document.querySelector('.typing');
+const staticText = 'Sea Grasses'; // Static part of the text
+const dynamicText = '  of Northern Cagayan'; // Part to type and erase
+let index = 0;
+let isTyping = true; // Determines whether to type or erase
+
+const type = () => {
+    if (isTyping) {
+        // Typing the text
+        if (index < dynamicText.length) {
+            typingElement.textContent = staticText + dynamicText.substring(0, index + 1);
+            index++;
+            setTimeout(type, 100);
+        } else {
+            isTyping = false; // Switch to erasing
+            setTimeout(type, 1000); // Pause before erasing
+        }
+    } else {
+        // Erasing the text
+        if (index > 0) {
+            typingElement.textContent = staticText + dynamicText.substring(0, index - 1);
+            index--;
+            setTimeout(type, 100);
+        } else {
+            isTyping = true; // Switch to typing
+            setTimeout(type, 500); // Pause before typing again
+        }
+    }
+};
+
+type();
 
         // Slideshow
         let currentSlide = 0;

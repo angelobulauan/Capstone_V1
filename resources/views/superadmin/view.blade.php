@@ -5,19 +5,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manage Users</title>
+    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="shortcut icon" href="{{ asset('storage/favicon.png') }}">
 </head>
 
 <body>
     @extends('layouts.LOSuperadmin.app')
     @section('content')
         <div class="container mt-5">
-            <h1 class="mb-4">Manage Users</h1>
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h1 class="text-primary"><i class="fas fa-users"></i> Manage Users</h1>
+                {{--     --}}
+            </div>
 
             <!-- Success/Error Messages -->
             @if (session('success'))
                 <div class="alert alert-success">
-                    {{ session('success') }}
+                    <i class="fas fa-check-circle"></i> {{ session('success') }}
                 </div>
             @endif
 
@@ -25,55 +32,66 @@
                 <div class="alert alert-danger">
                     <ul>
                         @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
+                            <li><i class="fas fa-exclamation-triangle"></i> {{ $error }}</li>
                         @endforeach
                     </ul>
                 </div>
             @endif
 
             <!-- User List -->
-            <h2>All Users</h2>
-            <table class="table table-bordered table-striped">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Status</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($alluser as $user)
+            <h2 class="text-secondary"><i class="fas fa-list"></i> All Users</h2>
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover table-striped align-middle">
+                    <thead class="table-dark">
                         <tr>
-                            <td>{{ $user->name }}</td>
-                            <td>{{ $user->email }}</td>
-                            <td>{{ $user->status }}</td>
-                            <td>
-                                <!-- Trigger the edit modal -->
-                                <button class="btn btn-primary btn-sm" data-bs-toggle="modal"
-                                    data-bs-target="#editUserModal" data-id="{{ $user->id }}"
-                                    data-name="{{ $user->name }}" data-email="{{ $user->email }}">
-                                    Edit
-                                </button>
-
-                                @if ($user->status !== 'disabled')
-                                    <form action="{{ route('superadmin.user.disable', $user->id) }}" method="POST" style="display:inline;">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-warning btn-sm">Disable</button>
-                                    </form>
-                                @else
-                                    <form action="{{ route('superadmin.user.activate', $user->id) }}" method="POST" style="display:inline;">
-                                        @csrf
-                                        @method('PUT')
-                                        <button type="submit" class="btn btn-success btn-sm">Activate</button>
-                                    </form>
-                                @endif
-                            </td>
+                            <th><i class="fas fa-user"></i> Name</th>
+                            <th><i class="fas fa-envelope"></i> Email</th>
+                            <th><i class="fas fa-toggle-on"></i> Status</th>
+                            <th><i class="fas fa-cogs"></i> Actions</th>
                         </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        @foreach ($alluser as $user)
+                            <tr>
+                                <td>{{ $user->name }}</td>
+                                <td>{{ $user->email }}</td>
+                                <td>
+                                    <span class="badge {{ $user->status === 'disabled' ? 'bg-danger' : 'bg-success' }}">
+                                        {{ ucfirst($user->status) }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <!-- Edit Button -->
+                                    <button class="btn btn-primary btn-sm" data-bs-toggle="modal"
+                                        data-bs-target="#editUserModal" data-id="{{ $user->id }}"
+                                        data-name="{{ $user->name }}" data-email="{{ $user->email }}">
+                                        <i class="fas fa-edit"></i> Edit
+                                    </button>
+
+                                    <!-- Disable/Enable Button -->
+                                    @if ($user->status !== 'disabled')
+                                        <form action="{{ route('superadmin.user.disable', $user->id) }}" method="POST" class="d-inline">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-warning btn-sm">
+                                                <i class="fas fa-user-slash"></i> Disable
+                                            </button>
+                                        </form>
+                                    @else
+                                        <form action="{{ route('superadmin.user.activate', $user->id) }}" method="POST" class="d-inline">
+                                            @csrf
+                                            @method('PUT')
+                                            <button type="submit" class="btn btn-success btn-sm">
+                                                <i class="fas fa-user-check"></i> Activate
+                                            </button>
+                                        </form>
+                                    @endif
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
 
             <!-- Pagination Links -->
             <div class="d-flex justify-content-center">
@@ -89,8 +107,8 @@
                         @csrf
                         @method('PUT')
 
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="editUserModalLabel">Edit User</h5>
+                        <div class="modal-header bg-primary text-white">
+                            <h5 class="modal-title" id="editUserModalLabel"><i class="fas fa-user-edit"></i> Edit User</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
@@ -118,8 +136,8 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-success">Update User</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fas fa-times"></i> Close</button>
+                            <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Update User</button>
                         </div>
                     </form>
                 </div>

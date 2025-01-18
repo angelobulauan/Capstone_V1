@@ -97,5 +97,12 @@ public function activate($id)
     // Redirect with a success message
     return redirect()->route('superadmin.view')->with('success', 'User undisabled successfully!');
 }
+public function destroy($id)
+{
+    $user = User::findOrFail($id);
+    $user->delete();
+
+    return redirect()->route('superadmin.users.index')->with('success', 'User deleted successfully');
+}
 
 }
