@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    @extends('layouts.LOSuperAdmin.app')
+    @extends('layouts.LOSuperadmin.app')
     @section('content')
         <div class="container mt-5">
             <h1 class="mb-4">Manage Users</h1>
