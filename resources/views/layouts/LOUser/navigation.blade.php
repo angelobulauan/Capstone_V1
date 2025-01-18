@@ -88,7 +88,7 @@
                                     @foreach ($messages as $message)
                                         <div
                                             class="notification-box px-4 py-2 flex justify-between items-center mb-2 border">
-                                            <p class="text-gray-800">{{ $message->message }} by {{ $message->updated_by }}</p>
+                                            <p class="text-gray-800">{{ $message->message }} - {{ $message->updated_by }}</p>
                                             <button class="text-red-500 ml-2 hover:text-red-700"
                                                 onclick="archiveMessage({{ $message->id }})" type="button"
                                                 title="Archive this message">
@@ -221,7 +221,7 @@
                 @if ($messages->isNotEmpty())
                     @foreach ($messages as $message)
                         <div class="notification-box px-4 py-2 flex justify-between items-center mb-2 border">
-                            <p class="text-gray-800">{{ $message->message }} by {{ $message->updated_by }}</p>
+                            <p class="text-gray-800">{{ $message->message }} - {{ $message->updated_by }}</p>
                             <button class="text-red-500 ml-2 hover:text-red-700"
                                 onclick="archiveMessage({{ $message->id }})" type="button"
                                 title="Archive this message">

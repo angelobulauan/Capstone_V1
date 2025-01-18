@@ -82,15 +82,38 @@
 </button>
 
     </form>
-    <form action="{{ route('admin.admin.reject', $d->id) }}" method="post" class="ms-2">
-        @csrf
-        @method('PUT')
-        <input type="hidden" name="action" value="reject">
-        <button type="submit" class="btn btn-danger">
-    <i class="fas fa-times"></i> Reject
-</button>
+    <button type="button" class="btn btn-danger ms-2" data-bs-toggle="modal" data-bs-target="#rejectModal-{{ $d->id }}">
+        <i class="fas fa-times"></i> Reject
+    </button>
 
-    </form>
+    <!-- Reject Modal -->
+    <div class="modal fade" id="rejectModal-{{ $d->id }}" tabindex="-1" role="dialog" aria-labelledby="rejectModalLabel-{{ $d->id }}" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="rejectModalLabel-{{ $d->id }}">Reject Entry</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('admin.admin.reject', $d->id) }}" method="post" id="rejectForm-{{ $d->id }}">
+                        @csrf
+                        @method('PUT')
+                        <input type="hidden" name="action" value="reject">
+                        <div class="form-group">
+                            <label for="rejectMessage-{{ $d->id }}">Explain Why the Submitted Entry was Rejected: </label>
+                            <textarea class="form-control" id="rejectMessage-{{ $d->id }}" name="message" rows="3" required></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-danger" form="rejectForm-{{ $d->id }}">Reject</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
                                 </div>

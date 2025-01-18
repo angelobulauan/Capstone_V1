@@ -67,23 +67,30 @@ public function pendingapproval()
         }
     }
 
-    public function reject($id)
+    public function reject(Request $request, $id)
     {
+        // Validate the request data
+        $validatedData = $request->validate([
+            'message' => 'required|string|max:255',
+        ]);
+
         // Update the seagrass entry to rejected
         $seaview = Seaview::find($id);
         $seaview->status = 'rejected';
-        $seaview->delete();
+        $seaview->save();
+
+        $message = $validatedData['message'];
 
         DB::table('request_notifs')->insert([
             'req_id' => $seaview->id,
             'u_id' => $seaview->u_id,
-            'message' => 'Your Request has been Rejected',
+            'message' => $message,
             'status' => 'Rejected',
             'updated_by' => Auth::user()->name,
             'archive' => 0,
         ]);
 
-        return redirect()->back()->with('success', 'Seagrass rejected successfully');
+        return redirect()->back()->with('success', 'Seagrass rejected successfully with message: ' . $message);
     }
 
     public function updatePhoto(Request $request, $id, $photo)
