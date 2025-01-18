@@ -1,4 +1,4 @@
-@extends('layouts.LOSuperAdmin.app')
+@extends('layouts.LOSuperadmin.app')
 @section('content')
 <link rel="shortcut icon" href="{{ asset('storage/favicon.png') }}">
 

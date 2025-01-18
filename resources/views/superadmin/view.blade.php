@@ -98,7 +98,7 @@
     </style>
 </head>
 <body>
-    @extends('layouts.LOSuperAdmin.app')
+    @extends('layouts.LOSuperadmin.app')
     @section('content')
 
     <div class="container mt-5">
