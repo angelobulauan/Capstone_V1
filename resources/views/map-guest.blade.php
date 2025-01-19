@@ -13,7 +13,7 @@
     <style>
 
 body {
-    background-image: url('{{ asset('img/seagrass_image3.jpeg') }}');
+    background-image: url('{{ asset('img/mapbg.jpg') }}');
     background-size: cover; /* Ensures the image covers the entire background */
     background-repeat: no-repeat; /* Prevents the image from repeating */
     background-position: center; /* Centers the image */

@@ -398,7 +398,7 @@
         <!-- Slideshow Section -->
         <div class="slideshow">
             <!-- Background Image -->
-            <div class="slide active" style="background-image: url('{{ asset('img/welcomebg.png') }}');"></div>
+            <div class="slide active" style="background-image: url('{{ asset('img/welcomebgg.png') }}');"></div>
         </div>
 
         <!-- Content Section -->
