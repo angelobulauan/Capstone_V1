@@ -8,38 +8,54 @@
     <title>Sea Grass Map</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+        <link rel="shortcut icon" href="{{ asset('storage/favicon.png') }}">
     <style>
 
-        body {
-            background-color: #f4f4f9;
-        }
+body {
+    background-image: url('{{ asset('img/seagrass_image3.jpeg') }}');
+    background-size: cover; /* Ensures the image covers the entire background */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+    background-position: center; /* Centers the image */
+    color: #f4f4f4; /* Ensures text is readable over the background */
+    font-family: Arial, sans-serif;
+    position: relative; /* Required for pseudo-element positioning */
+    z-index: 0;
+}
+
 
         .navbar {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background-color: #333;
-            z-index: 3;
-            display: flex;
-            justify-content: center;
-            padding: 10px 0;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.2); /* Semi-transparent background */
+    backdrop-filter: blur(10px); /* Blur effect */
+    -webkit-backdrop-filter: blur(10px); /* Safari support */
+    z-index: 3;
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: Shadow for depth */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3); /* Optional: Border for emphasis */
+}
+    .navbar a {
+        color: #fff;
+        text-decoration: none;
+        font-size: 1rem;
+        padding: 10px 15px;
+        transition: color 0.3s ease, background 0.3s ease;
+    }
 
-        .navbar a {
-            color: white;
-            padding: 14px 20px;
-            text-decoration: none;
-            text-align: center;
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        .navbar a:hover {
-            background-color: #ddd;
-            color: black;
-        }
+    .navbar a:hover {
+        color: #000;
+        background: rgba(255, 255, 255, 0.5);
+        border-radius: 5px;
+    }
+    .navbar i {
+        margin-right: 8px;
+    }
         #map {
-            height: 90vh;
+            height: 100vh;
             width: 100%;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -70,37 +86,40 @@
             }
 
             #map {
-                height: 80vh;
+                height: 100vh;
             }
         }
 
         .input-group {
-            background-color: #f8f9fa;
-            border-radius: 30px;
-            overflow: hidden;
-        }
+    background-color: transparent; /* Remove background */
+    border-radius: 30px;
+    overflow: hidden;
+}
 
-        .input-group .form-control {
-            border: 2px solid #ccc;
-            border-radius: 30px 0 0 30px;
-            padding: 12px 20px;
-            font-size: 16px;
-        }
+.input-group .form-control {
+    background-color: white; /* Remove background */
+    border: 2px solid #ccc; /* Retain border for structure */
+    border-radius: 30px 0 0 30px;
+    padding: 12px 20px;
+    font-size: 16px;
+    color: #000; /* Ensure text is readable */
+}
 
-        .input-group-append .btn {
-            border: 2px solid #ccc;
-            border-left: none;
-            border-radius: 0 30px 30px 0;
-            padding: 12px 20px;
-            font-size: 16px;
-            background-color: #28a745;
-            color: white;
-        }
+.input-group-append .btn {
+    background-color: #28a745; /* Remove background */
+    border: 2px solid #28a745; /* Retain border */
+    border-left: none;
+    border-radius: 0 30px 30px 0;
+    padding: 12px 20px;
+    font-size: 16px;
+    color: white; /* Green text color */
+}
 
-        .input-group-append .btn:hover {
-            background-color: #218838;
-            color: white;
-        }
+.input-group-append .btn:hover {
+    background-color: rgba(24, 84, 38, 0.926); /* Light green highlight on hover */
+    color: #ecf2ed; /* Slightly darker green text */
+}
+
 
         .form-control::placeholder {
             color: #6c757d;
@@ -134,7 +153,9 @@
         .table-light {
             background-color: #f8f9fa;
         }
-
+        .table td, .table th {
+    color: #000; /* Set the text color to black */
+}
 
     </style>
 </head>
@@ -153,11 +174,12 @@
                 });
         @endphp
 <div class="navbar">
-    <a href="/">Home</a>
-    {{-- <a href="{{ route('map-guest') }}">Map</a> --}}
-    <a href="/#article">Article</a>
-    <a href="/#contact">Contact Us</a>
+    <a href="/"><i class="fas fa-home"></i> Home</a>
+    <a href="{{ route('map-guest') }}"><i class="fas fa-map"></i> Map</a>
+    <a href="/#article"><i class="fas fa-newspaper"></i> Article</a>
+    <a href="/#contact"><i class="fas fa-envelope"></i> Contact Us</a>
 </div>
+
         <!-- Search Bar -->
                        <div class="container-fluid" style="margin-top: 100px;">
                     <div class="row justify-content-center">
@@ -197,7 +219,7 @@
                         lat: 18.4905,
                         lng: 122.1285
                     },
-                    zoom: 13
+                    zoom: 12
                 };
 
                 map = new google.maps.Map(document.getElementById('map'), mapOptions);
