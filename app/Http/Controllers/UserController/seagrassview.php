@@ -50,29 +50,38 @@ class seagrassview extends Controller
         // dd($request);
         try {
             // Validate the request data
-            $validatedData = $request->validate([
-                'scientificname1' => 'required|string|max:255',
-                'scientificname2' => 'required|string|max:255',
-                'scientificname3' => 'required|string|max:255',
-                'description' => 'required|string|max:1000',
-                'location' => 'required|string|max:255',
-                'latitude' => 'required|numeric',
-                'longtitude' => 'required|numeric',
-                'photo.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            ]);
+        $validatedData = $request->validate([
+            'scientificname1' => 'required|string|max:255',
+            'scientificname2' => 'required|string|max:255',
+            'scientificname3' => 'required|string|max:255',
+            'description' => 'required|string|max:1000',
+            'location' => 'required|string|max:255',
+            'latitude' => 'nullable|numeric',
+            'longtitude' => 'nullable|numeric',
+            'latitude_dms' => 'nullable|string|max:255',
+            'longitude_dms' => 'nullable|string|max:255',
+            'utm_zone' => 'nullable|string|max:50',
+            'utm_coordinates' => 'nullable|string|max:255',
+            'photo.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
 
             // Create a new Seaview instance
-            $seaview = new Seaview();
-            $seaview->scientificname1 = $request->input('scientificname1');
-            $seaview->scientificname2 = $request->input('scientificname2');
-            $seaview->scientificname3 = $request->input('scientificname3');
-            $seaview->description = $request->input('description');
-            $seaview->location = $request->input('location');
-            $seaview->latitude = $request->input('latitude');
-            $seaview->longtitude = $request->input('longtitude');
-            $seaview->u_id = Auth::user()->id;
-            $seaview->updated_by = Auth::user()->name;
-            $seaview->status = 'pending';
+        $seaview = new Seaview();
+        $seaview->scientificname1 = $request->input('scientificname1');
+        $seaview->scientificname2 = $request->input('scientificname2');
+        $seaview->scientificname3 = $request->input('scientificname3');
+        $seaview->description = $request->input('description');
+        $seaview->location = $request->input('location');
+        $seaview->latitude = $request->input('latitude');
+        $seaview->longtitude = $request->input('longtitude');
+        $seaview->latitude_dms = $request->input('latitude_dms');
+        $seaview->longitude_dms = $request->input('longitude_dms');
+        $seaview->utm_zone = $request->input('utm_zone');
+        $seaview->utm_coordinates = $request->input('utm_coordinates');
+        $seaview->u_id = Auth::user()->id;
+        $seaview->updated_by = Auth::user()->name;
+        $seaview->status = 'pending';
+
 
             // Get the latest req_id
             $latestReqId = Seaview::latest('req_id')->first()->req_id ?? 0;

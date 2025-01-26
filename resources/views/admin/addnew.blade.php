@@ -79,7 +79,7 @@
                             </div>
                             <div class="col-12">
                                 <label for="description" class="form-label">Description</label>
-                                <textarea class="form-control" name="description" rows="3" autocomplete="off" placeholder="Describe the Location"></textarea>
+                                <textarea class="form-control" name="description" rows="3" autocomplete="off" placeholder="Describe the Seagrass and the Location"></textarea>
                             </div>
                             <span></span>
                             <div class="row">
@@ -94,12 +94,12 @@
                               </p>
                             <div class="row mt-3 d-flex align-items-center">
                                 <div class="col-5">
-                                    <label for="latitude" class="form-label">Latitude</label>
+                                    <label for="latitude" class="form-label">Latitude (Decimal)</label>
                                     <input type="text" class="form-control" name="latitude" id="latitude"
                                         autocomplete="off" placeholder="Enter Latitude" required>
                                 </div>
                                 <div class="col-6">
-                                    <label for="longtitude" class="form-label">Longtitude</label>
+                                    <label for="longtitude" class="form-label">Longtitude (Decimal)</label>
                                     <input type="text" class="form-control" name="longtitude" id="longtitude"
                                         autocomplete="off" placeholder="Enter Longtitude" required>
                                 </div>

@@ -10,19 +10,22 @@ class seaview extends Model
 
     use HasFactory;
     protected $fillable = [
-        'name',
         'scientificname1',
         'scientificname2',
         'scientificname3',
         'description',
         'location',
+        'latitude',
+        'longtitude',
+        'latitude_dms',
+        'longitude_dms',
+        'utm_zone',
+        'utm_coordinates',
         'photo',
         'u_id',
+        'updated_by',
         'status',
         'req_id',
-        'updated_by',
-
-
     ];
     public function interaction()
     {

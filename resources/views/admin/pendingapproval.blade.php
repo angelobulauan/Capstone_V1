@@ -7,6 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Pending Approval</title>
     <link rel="shortcut icon" href="{{ asset('storage/favicon.png') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
 </head>
 
 <body>
@@ -62,6 +64,14 @@
                                 <div class="col-sm-6 p-1">
                                     <i class="fa fa-map-marker-alt mr-1 text-warning"></i>Location: {{ $d->location }}
                                 </div>
+                                <div class="col-sm-6 p-1">
+                                    <i class="fa-solid fa-globe mr-1 text-warning"></i> UTM Coordinates: {{ $d->utm_zone }} ,{{ $d->utm_coordinates }}
+                                </div>
+                                <div class="col-sm-6 p-1">
+                                    <i class="fa-solid fa-globe mr-1 text-warning"></i> DMS Coordinates: {{ $d->latitude_dms }}, {{ $d->longitude_dms }}
+                                </div>
+
+
 
                                 <div class="row mt-0">
                                     <div class="col-sm-3 d-flex justify-content-start align-items-center">

@@ -7,6 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Add Sea Grass</title>
     <link rel="shortcut icon" href="{{ asset('storage/favicon.png') }}">
+
+
     <style>
         .container input {
             border-radius: 50px;
@@ -53,6 +55,12 @@
             cursor: pointer;
             font-size: 1.5rem;
         }
+        .title{
+            font-size: 20px;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            color: red;
+            font-weight: 800;
+        }
     </style>
 </head>
 <body>
@@ -79,7 +87,7 @@
                             </div>
                             <div class="col-12">
                                 <label for="description" class="form-label">Description</label>
-                                <textarea class="form-control" name="description" rows="3" autocomplete="off" placeholder="Describe the Location"></textarea>
+                                <textarea class="form-control" name="description" rows="3" autocomplete="off" placeholder="Describe the Seagrass and the Location"></textarea>
                             </div>
                             <span></span>
                             <div class="row">
@@ -93,18 +101,18 @@
                                 <div class="col-12">
                                     <p style="color: red;">
                                         <i class="fas fa-exclamation-circle"></i>
-                                        Note: <i>The system only accepts decimal Coordinates. Click on the map coordinate button and drag the marker to pinpoint the location for the Latitude and Longitude</i>
+                                        Note: <i>Note: Decimal coordinates are the only ones that the system supports. Drag the marker to the exact spot of the latitude and longitude by clicking on the map coordinate button. If your coordinates are not decimal, please input UTM or DMS. The administrator will change it to decimals.</i>
                                       </p>
                                     <div class="row">
                                         <div class="col-6">
-                                            <label for="latitude" class="form-label">Latitude</label>
+                                            <label for="latitude" class="form-label">Latitude (Decimal)</label>
                                             <input type="text" class="form-control" name="latitude" id="latitude"
-                                                autocomplete="off" placeholder="Enter Latitude" required>
+                                                autocomplete="off" placeholder="Enter Latitude" >
                                         </div>
                                         <div class="col-5">
-                                            <label for="longtitude" class="form-label">Longtitude</label>
+                                            <label for="longtitude" class="form-label">Longitude (Decimal)</label>
                                             <input type="text" class="form-control" name="longtitude" id="longtitude"
-                                                autocomplete="off" placeholder="Enter Longtitude" required>
+                                                autocomplete="off" placeholder="Enter Longtitude" >
                                         </div>
                                         <div class="col-1 d-flex align-items-center mt-4">
                                             <button id="openModalMapLocationAdmin" type="button" class="btn btn-primary">
@@ -115,6 +123,38 @@
                                                 </svg>
                                             </button>
                                         </div>
+                                          <!-- DMS Coordinates -->
+                        <div class="mt-4">
+                            <h6 class="title">
+                                DMS (Degrees, Minutes, Seconds)
+                            </h6>
+
+                            <div class="row g-3">
+                                <div class="col-md-4">
+                                    <label for="latitude_dms" class="form-label">Latitude (DMS)</label>
+                                    <input type="text" class="form-control" name="latitude_dms" placeholder="e.g., 18°29'25.8"N">
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="longitude_dms" class="form-label">Longitude (DMS)</label>
+                                    <input type="text" class="form-control" name="longitude_dms" placeholder="e.g., 122°7'42.6"E">
+                                </div>
+                            </div>
+                        </div>
+                         <!-- UTM Coordinates -->
+                         <div class="mt-4">
+                            <h6 class="title">UTM (Universal Transverse Mercator)</h6>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label for="utm_zone" class="form-label">UTM Zone</label>
+                                    <input type="text" class="form-control" name="utm_zone" placeholder="e.g., 51N">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="utm_coordinates" class="form-label">UTM Coordinates</label>
+                                    <input type="text" class="form-control" name="utm_coordinates" placeholder="e.g., 635728 2045284">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                                     </div>
                                 </div>
 
@@ -205,7 +245,7 @@
                             </div>
 
                             {{-- <input type="hidden" id="polygonCoordinates" name="polygon_coordinates"> --}}
-
+<br>
                             <div class="col-12">
                                 <button type="submit" class="btn btn-primary">
                                     <i class="fas fa-save"></i> Save

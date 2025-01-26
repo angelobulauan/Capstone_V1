@@ -173,12 +173,30 @@ body {
                     return $d;
                 });
         @endphp
-<div class="navbar">
-    <a href="/"><i class="fas fa-home"></i> Home</a>
-    <a href="{{ route('map-guest') }}"><i class="fas fa-map"></i> Map</a>
-    <a href="/#article"><i class="fas fa-newspaper"></i> Article</a>
-    <a href="/#contact"><i class="fas fa-envelope"></i> Contact Us</a>
+<!-- Navbar -->
+<div class="navbar d-flex justify-content-between align-items-center">
+    <!-- Navbar Links inside Collapsible Container -->
+    <div class="collapse navbar-collapse d-lg-flex justify-content-center flex-grow-1" id="navbarNav">
+        <a href="#home" class="nav-link">
+            <i class="fas fa-home"></i> Home
+        </a>
+        <a href="{{ route('map-guest') }}" class="nav-link">
+            <i class="fas fa-map"></i> Map
+        </a>
+        <a href="#article" class="nav-link">
+            <i class="fas fa-newspaper"></i> Article
+        </a>
+        <a href="#contact" class="nav-link">
+            <i class="fas fa-envelope"></i> Contact Us
+        </a>
+    </div>
+
+    <!-- Hamburger Menu Button -->
+    <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars"></i>
+    </button>
 </div>
+
 
         <!-- Search Bar -->
                        <div class="container-fluid" style="margin-top: 100px;">
