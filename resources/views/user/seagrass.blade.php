@@ -211,6 +211,10 @@
                                                                     <td><i class="fas fa-user-alt text-dark"></i> <strong>Author:</strong></td>
                                                                     <td>{{ $d->updated_by }}</td>
                                                                 </tr>
+                                                                <tr>
+                                                                    <td><i class="fas fa-calendar text-dark"></i> <strong>Published:</strong></td>
+                                                                    <td>{{ $d->created_at }}</td>
+                                                                </tr>
                                                             </tbody>
                                                         </table>
 

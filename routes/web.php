@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\AdminController\seagrasscontroller;
 use App\Http\Controllers\AdminController\SeapicCtrl;
+use App\Http\Controllers\AdminController\AnnouncementCtrl;
+use App\Http\Controllers\AdminController\ReportsCtrl;
 use App\Http\Controllers\UserController\seagrassview;
 use App\Http\Controllers\UserController\usermap;
 use App\Http\Controllers\UserController\contactCtrl;
@@ -121,8 +123,20 @@ Route::namespace('App\Http\Controllers\AdminController')
 
         Route::get('/report', 'ReportsCtrl@index')->name('report');
         Route::post('/export', 'ReportsCtrl@exportToExcel')->name('export');
+        Route::get('/admin/reports', [ReportsCtrl::class, 'index'])->name('admin.reports');
+
 
         Route::get('/help', 'seagrasscontroller@help')->name('admin.help');
+
+
+
+        Route::get('/announcement', [AnnouncementCtrl::class, 'index']);
+        Route::resource('announcements', AnnouncementCtrl::class);
+        Route::post('/announcement/store', [AnnouncementCtrl::class, 'store'])->name('announcement.store');
+       
+
+
+
     });
 
 //user
@@ -178,5 +192,6 @@ Route::namespace('App\Http\Controllers\SuperadminController')
         Route::get('/users', [AllUserCtrl::class, 'view'])->name('view');
         Route::put('/users/{id}', [AllUserCtrl::class, 'update'])->name('user.update');
         Route::delete('superadmin/users/{user}', [alluserctrl::class, 'destroy'])->name('superadmin.user.destroy');
+
 
     });

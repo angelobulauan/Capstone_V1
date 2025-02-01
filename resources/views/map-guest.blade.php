@@ -177,16 +177,16 @@ body {
 <div class="navbar d-flex justify-content-between align-items-center">
     <!-- Navbar Links inside Collapsible Container -->
     <div class="collapse navbar-collapse d-lg-flex justify-content-center flex-grow-1" id="navbarNav">
-        <a href="#home" class="nav-link">
+        <a href="/#home" class="nav-link">
             <i class="fas fa-home"></i> Home
         </a>
         <a href="{{ route('map-guest') }}" class="nav-link">
             <i class="fas fa-map"></i> Map
         </a>
-        <a href="#article" class="nav-link">
+        <a href="/#article" class="nav-link">
             <i class="fas fa-newspaper"></i> Article
         </a>
-        <a href="#contact" class="nav-link">
+        <a href="/#contact" class="nav-link">
             <i class="fas fa-envelope"></i> Contact Us
         </a>
     </div>

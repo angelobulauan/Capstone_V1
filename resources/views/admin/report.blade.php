@@ -35,7 +35,30 @@
             @csrf
             <button type="submit" class="btn btn-success"><i class="fas fa-file-excel"></i> Export to Excel</button>
         </form>
+
         <br><br>
+
+        <!-- Filter Form -->
+        <form action="{{ route('admin.report') }}" method="GET">
+            <div class="row">
+                <div class="col-md-4">
+                    <select name="filter_type" class="form-control" id="filter_type">
+                        <option value="yearly">Yearly</option>
+                        <option value="monthly">Monthly</option>
+                        <option value="weekly">Weekly</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <input type="date" name="start_date" class="form-control" required>
+                </div>
+                <div class="col-md-4">
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-filter"></i> Apply Filter</button>
+                </div>
+            </div>
+        </form>
+
+        <br>
+
         @if($reports->isEmpty())
             <p class="text-center">No reports available.</p>
         @else
@@ -66,7 +89,6 @@
 
             {{ $reports->links() }}
         @endif
-
     </div>
 
     @endsection

@@ -71,6 +71,8 @@
                 transition: opacity 1s ease-in-out;
             }
 
+
+
             .slide.active {
                 opacity: 1;
             }
@@ -360,6 +362,7 @@
                 font-size: 50px;
             }
 
+
          /* Article Section */
 /* Article Section */
 #article {
@@ -444,6 +447,12 @@
         grid-template-columns: 1fr; /* Single column layout for mobile */
     }
 }
+.announcement-card {
+        transition: transform 0.3s;
+    }
+    .announcement-card:hover {
+        transform: scale(1.05);
+    }
 
 /* Google Font Import */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
@@ -462,6 +471,10 @@
             <a href="{{ route('map-guest') }}" class="nav-link">
                 <i class="fas fa-map"></i> Map
             </a>
+            <a href="#announcement" class="nav-link">
+                <i class="fas fa-bullhorn"></i> Announcement
+            </a>
+
             <a href="#article" class="nav-link">
                 <i class="fas fa-newspaper"></i> Article
             </a>
@@ -485,7 +498,7 @@
             <!-- Slideshow Section -->
             <div class="slideshow">
                 <!-- Background Image -->
-                <div class="slide active" style="background-image: url('{{ asset('img/welcomebgg.png') }}');"></div>
+                <div class="slide active" style="background-image: url('{{ asset('img/welcomebg.png') }}');"></div>
             </div>
 
             <!-- Content Section -->
@@ -513,6 +526,10 @@
                 </a>
             </div>
         </section>
+
+
+
+
 
         <!-- Article Section -->
         <section id="article" class="section" style="background-image: url('{{ asset('img/seagrass_image1.jpeg') }}'); background-size: cover; background-position: center; padding: 50px 0;">

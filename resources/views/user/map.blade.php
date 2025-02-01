@@ -178,6 +178,7 @@
                         "<tr class='table-info'><td><i class='fas fa-map-marker-alt text-warning'></i> <strong>Location:</strong></td><td>" + entry.location + "</td></tr>" +
                         "<tr class='table-light'><td><i class='fas fa-globe text-info'></i> <strong>Latitude & Longitude:</strong></td><td>" + entry.latitude + " : " + entry.longtitude + "</td></tr>" +
                         "<tr class='table-info'><td><i class='fas fa-user text-dark'></i> <strong>Author:</strong></td><td>" + entry.updated_by + "</td></tr>" +
+                        "<tr class='table-info'><td><i class='fas fa-calendar text-dark'></i> <strong>Published:</strong></td><td>" + entry.created_at + "</td></tr>" +
                         "</table>" +
                         "</div>" +
                         "</div>";
