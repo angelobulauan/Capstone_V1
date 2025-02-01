@@ -21,7 +21,7 @@
     <link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         body {
-           background-image: url('img/bg2.jpg');
+           background-image: url('img/loginbg.png');
            background-size: cover;
             min-height: 100vh;
             height: 100%;
@@ -63,16 +63,19 @@
         }
 
         .auth-container form {
-            flex: 1;
-            max-width: 350px;
-            display: flex;
-            flex-direction: column;
-            box-shadow: 0 0 10px #00000033;
-            padding: 1em 2rem;
-            border-radius: .5rem;
-            background: white;
+    flex: 1;
+    max-width: 350px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Softer shadow */
+    padding: 1em 2rem;
+    border-radius: 0.5rem;
+    background: rgba(255, 255, 255, 0.15); /* Semi-transparent white */
+    backdrop-filter: blur(15px); /* Glass blur effect */
+    -webkit-backdrop-filter: blur(15px); /* Safari support */
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Subtle border */
+}
 
-        }
 
 
         .auth-container img {
@@ -184,22 +187,6 @@
                         @enderror
                     </div>
 
-                    {{-- <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">
-                                <i class="fa fa-user-lock"></i>
-                            </span>
-                        </div>
-                        <select id="involvement" class="form-control @error('involvement') is-invalid @enderror" name="involvement">
-                            <option value="viewer">Viewer</option>
-                            <option value="uploader">Contributor</option>
-                        </select>
-                        @error('involvement')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div> --}}
 
 
                     <button type="submit" class="btn btn-info btn-block">
@@ -208,8 +195,8 @@
                     </button>
 
                     <div class="text-center mt-3">
-                        <small>
-                            Already have an account?&nbsp;<a href="{{ route('login') }}"> Log In</a>
+                        <small style="font-size: 15px; font-weight: 500; color: black;"> 
+                            Already have an account?&nbsp;<a href="{{ route('login') }}" style="color: red"> Log In</a>
                         </small>
                     </div>
                 </form>

@@ -50,21 +50,27 @@
     </div>
 
     <div class="row">
-        @foreach($announcements as $announcement)
-            <div class="col-md-4">
-                <div class="card announcement-card p-3 mb-3">
-                    <h5>{{ $announcement->activity_name }}</h5>
-                    <p><strong>Description:</strong> {{ $announcement->description }}</p>
-                    <p><strong>Date:</strong> {{ date('F d, Y', strtotime($announcement->event_date)) }}</p>
-                    <!-- Edit and Delete buttons -->
-                    <button class="btn btn-warning btn-sm mb-2" onclick="openEditModal({{ $announcement->id }}, '{{ $announcement->activity_name }}', '{{ $announcement->event_date }}', '{{ $announcement->description }}')">Edit</button>
-
-                    <button class="btn btn-danger btn-sm" onclick="openDeleteModal({{ $announcement->id }})">Delete</button>
-                </div>
+        @if($announcements->isEmpty())
+            <div class="col-12 text-center">
+                <p class="text-muted font-weight-bold" style="font-size: 18px;">No Announcements Available</p>
             </div>
-        @endforeach
+        @else
+            @foreach($announcements as $announcement)
+                <div class="col-md-4">
+                    <div class="card announcement-card p-3 mb-3">
+                        <h5>{{ $announcement->activity_name }}</h5>
+                        <p><strong>Description:</strong> {{ $announcement->description }}</p>
+                        <p><strong>Date:</strong> {{ date('F d, Y', strtotime($announcement->event_date)) }}</p>
+                        <!-- Edit and Delete buttons -->
+                        <button class="btn btn-warning btn-sm mb-2" onclick="openEditModal({{ $announcement->id }}, '{{ $announcement->activity_name }}', '{{ $announcement->event_date }}', '{{ $announcement->description }}')">Edit</button>
+
+                        <button class="btn btn-danger btn-sm" onclick="openDeleteModal({{ $announcement->id }})">Delete</button>
+                    </div>
+                </div>
+            @endforeach
+        @endif
     </div>
-</div>
+
 
 <!-- Edit Modal -->
 <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">

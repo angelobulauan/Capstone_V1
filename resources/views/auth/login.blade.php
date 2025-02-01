@@ -15,7 +15,7 @@
 
     <style>
         body {
-            background-image: url(img/seagrass_image1.jpeg);
+            background-image: url(img/loginbg.png);
             background-size: cover;
             min-height: 100vh;
             height: 100%;
@@ -23,6 +23,7 @@
             align-items: center;
             justify-content: center;
             flex-direction: column;
+
 
         }
 
@@ -52,16 +53,19 @@
         }
 
         .auth-container form {
-            flex: 1;
-            max-width: 350px;
-            display: flex;
-            flex-direction: column;
-            box-shadow: 0 0 10px #00000033;
-            padding: 3rem 2rem;
-            border-radius: .5rem;
-            background: white;
+    flex: 1;
+    max-width: 350px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Softer shadow */
+    padding: 3rem 2rem;
+    border-radius: .5rem;
+    background: rgba(255, 255, 255, 0.2); /* Transparent white */
+    backdrop-filter: blur(10px); /* Blur effect */
+    -webkit-backdrop-filter: blur(10px); /* Safari support */
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Subtle border */
+}
 
-        }
 
         .auth-container img {
             height: 80px;
@@ -105,7 +109,7 @@
                     </div>
                     <div class="d-flex align-items-center font-weight-normal mb-1">
                         <i class="fa fa-phone mr-2"></i>
-                        <span>(078) 888-0786 / (078) 888-0562</span>
+                        <span>09773654785</span>
                     </div>
                     <div class="d-flex align-items-center font-weight-normal mb-1">
                         <i class="fa fa-map-marker mr-2"></i>
@@ -116,7 +120,7 @@
             <div class="auth-container">
 
                 <form method="POST" action="{{ route('login') }}">
-                    <img src="{{ asset('img/bg1.png') }}" alt="Default Icon" loading="lazy" width="90" height="120" />
+                    <img src="{{ asset('img/bg1.png') }}" alt="Default Icon" loading="lazy" width="100" height="150" />
                     <h1>LOGIN</h1>
                     @csrf
                     <div class="input-group mb-3">
@@ -155,21 +159,29 @@
                     <div class="form-check mb-1" style="text-align:right;">
                     @if (Route::has('password.request'))
 
-                        <a class="btn btn-link" href="{{ route('password.request') }}">
+                        <a class="btn btn-link" href="{{ route('password.request') }}" style="color: black;">
                             <small>{{ __('Forgot Your Password?') }}</small>
                         </a>
 
                     @endif
                     </div>
 
-                    <button type="submit" class="btn btn-info btn-block">
-                        <i class="fa fa-sign-in-alt mr-1"></i>
-                        {{ __('Login') }}
-                    </button>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-info d-inline-block mx-2">
+                            <i class="fa fa-sign-in-alt mr-1"></i>
+                            {{ __('Login') }}
+                        </button>
+                        <a href="{{ url('/') }}" class="btn btn-danger d-inline-block mx-2">
+                            <i class="fa fa-times mr-1"></i>
+                            {{ __('Cancel') }}
+                        </a>
+                    </div>
+
+
 
                     <div class="text-center mt-3">
-                        <small>
-                            Don't have an account yet?&nbsp;<a href="{{ route('register') }}"> Sign Up</a>
+                        <small style="font-size: 15px; font-weight: 500; color: black;">
+                            Don't have an account yet?&nbsp;<a href="{{ route('register') }}" style="color: red;"> Sign Up</a>
                         </small>
                     </div>
                 </form>
