@@ -1,3 +1,6 @@
+    @php
+        use App\Models\Announcement;
+    @endphp
     <!doctype html>
     <html lang="en">
 
@@ -527,6 +530,29 @@
             </div>
         </section>
 
+        <?php
+        $announcements = Announcement::all();
+        ?>
+
+        <section id="announcement" class="section" style="background-image: url('{{ asset('img/seagrass_image1.jpeg') }}'); background-size: cover; background-position: center; padding: 50px 0;">
+            <div class="content">
+                <div class="container">
+                    <h1 class="Title text-center py-4">ANNOUNCEMENTS</h1>
+                    <section class="mission">
+                        <div class="mission__container d-flex flex-wrap justify-content-center">
+                            @foreach($announcements as $announcement)
+                                <div class="card announcement-card mb-3 mx-2" style="animation: none; width: 300px;">
+                                    <div class="card-body">
+                                        <h2 class="card-title">{{ $announcement->activity_name }}</h2>
+                                        <p class="card-text">{{ $announcement->event_date }}</p>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </section>
 
 
 

@@ -93,6 +93,8 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__ . '/auth.php';
 
+
+
 //admin
 Route::namespace('App\Http\Controllers\AdminController')
     ->prefix('admin')
@@ -133,7 +135,7 @@ Route::namespace('App\Http\Controllers\AdminController')
         Route::get('/announcement', [AnnouncementCtrl::class, 'index']);
         Route::resource('announcements', AnnouncementCtrl::class);
         Route::post('/announcement/store', [AnnouncementCtrl::class, 'store'])->name('announcement.store');
-       
+
 
 
 
